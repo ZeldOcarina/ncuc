@@ -1,27 +1,22 @@
 import React, { useContext } from "react"
 import styled, { css } from "styled-components"
-import { Link } from "gatsby"
+import { graphql, Link, useStaticQuery } from "gatsby"
 import respond from "../styles/abstracts/mediaqueries"
 import { GiHamburgerMenu } from "react-icons/gi"
-import { FaYoutube } from "react-icons/fa"
 
 import AppContext from "../context/AppContext"
 import { LocationContext } from "../context/LocationContext"
 import { createLinkWithParams } from "../utils/utils"
 
-//import giovanniLogo from "../images/giovanni-logo.svg"
-
 const Wrapper = styled.nav`
-  position: ${({ innerLayout }) =>
-    innerLayout ? css`relative` : css`absolute`};
-  top: 2rem;
-  left: 0;
+  position: static;
   width: 100%;
-
-  height: 10rem;
   display: flex;
   align-items: center;
   z-index: 150;
+
+  height: 7rem;
+  font-size: 1.6rem;
 
   ${respond(
     "tab-land",
@@ -36,7 +31,7 @@ const Wrapper = styled.nav`
       top: 0;
     `
   )}
-  ${respond(
+    ${respond(
     "phone-port",
     css`
       margin-top: 3.5rem;
@@ -44,7 +39,7 @@ const Wrapper = styled.nav`
       height: max-content;
     `
   )}
-  ${respond(
+    ${respond(
     "iphone-5",
     css`
       margin-top: 1.5rem;
@@ -52,11 +47,10 @@ const Wrapper = styled.nav`
       height: max-content;
     `
   )}
-
-  .container {
+    .container {
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
   }
 
@@ -119,7 +113,7 @@ const Wrapper = styled.nav`
   }
 
   .logo {
-    width: 10rem;
+    width: 20rem;
 
     ${respond(
       "iphone-12-pro-land",
@@ -142,29 +136,22 @@ const Wrapper = styled.nav`
   }
 `
 
-const Navbar = ({
-  siteMetadata: {
-    navbarLinks: {
-      social: { youtube },
-      pages,
-    },
-  },
-  innerPage,
-  innerLayout,
-}) => {
+const Navbar = ({ innerPage, innerLayout }) => {
   const { isMobileMenuOpen, setIsMobileMenuOpen } = useContext(AppContext)
   const { params } = useContext(LocationContext)
+
+  const { logo, menu } = useStaticQuery(query)
+
+  console.log()
+
+  const logoUrl = logo.nodes[0].data.logo[0].url
 
   return (
     <Wrapper scrolled={false} innerLayout={innerLayout}>
       <div className="container">
-        {/* <Link to="/">
-          <img
-            src={giovanniLogo}
-            alt="Giovanni Setti Consulting Logo"
-            className="logo"
-          />
-        </Link> */}
+        <Link to={logo?.nodes[0]?.data?.Permalink}>
+          {<img src={logoUrl} alt="NCUC Logo" className="logo" />}
+        </Link>
 
         <div
           className={
@@ -173,18 +160,14 @@ const Navbar = ({
               : "links-container"
           }
         >
-          {pages.map(({ name, link }, i) => {
-            const linkString = createLinkWithParams(link, params)
+          {menu?.nodes.map(({ data, id }) => {
+            const linkString = createLinkWithParams(data?.Permalink, params)
             return (
-              <Link to={linkString} className="nav-link" key={i}>
-                {name}
+              <Link to={linkString} className="nav-link" key={id}>
+                {data.Child}
               </Link>
             )
           })}
-          <a href={youtube} className="nav-link">
-            <FaYoutube color="red" className="social-icon" />{" "}
-            <span className="name">YouTube</span>
-          </a>
         </div>
         <GiHamburgerMenu
           className="mobile-menu-activator"
@@ -196,5 +179,35 @@ const Navbar = ({
     </Wrapper>
   )
 }
+
+const query = graphql`
+  {
+    menu: allAirtable(
+      filter: { table: { eq: "Menu" }, data: { Parent: { regex: "/Navbar/" } } }
+    ) {
+      nodes {
+        id
+        data {
+          Child
+          Permalink
+        }
+      }
+    }
+    logo: allAirtable(
+      filter: { table: { eq: "Menu" }, data: { Parent: { regex: "/Logo/" } } }
+    ) {
+      nodes {
+        id
+        data {
+          Child
+          Permalink
+          logo {
+            url
+          }
+        }
+      }
+    }
+  }
+`
 
 export default Navbar

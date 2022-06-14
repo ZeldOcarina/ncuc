@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
 import AppContext from "../context/AppContext"
+import LocationBanner from "./LocationBanner"
 import Navbar from "./Navbar"
 import MobileNavbar from "./MobileNavbar"
 import Footer from "./Footer"
@@ -17,6 +18,7 @@ const Layout = ({ children, salesLetter, innerLayout }) => {
 
   return (
     <>
+      <LocationBanner />
       {salesLetter ? (
         <NavLogo />
       ) : (

@@ -4,18 +4,20 @@ export default createGlobalStyle`
   :root {
       // COLORS
     --body-background: #FFFFFF;
-    --body-color: #3D4C55;
-    --color-primary: #0074FF;
-    --color-primary-dark: #111251;
-    --color-secondary: #FEAF03;
-    --color-tertiary: ##FD5E01;
+    --background-dark: #EDEFEF;
+    --body-color: #6B6E7E;
+    --color-primary: #2B3990;
+    --color-primary-700: #222741;
+    --color-secondary: #16B0D8;
+    --color-secondary200: #AFDFE4;
+    --color-tertiary: #EF4136;
     --grey: #646C83; /*USED BY BLOCKQUOTE*/
     --black: #000000;
     --white: #ffffff;
 
     //FONT FAMILY
-    --title-font: "Kallisto", sans-serif;
-    --body-font: "Poppins", sans-serif;
+    --title-font: "SF Pro Display", sans-serif;
+    --body-font: "SF Pro Display", sans-serif;
     --bold: 700;
 
     // FONT-SIZES

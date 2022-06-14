@@ -4,20 +4,33 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-const strapiConfig = {
-  apiURL: process.env.STRAPI_API_URL,
-  accessToken: process.env.STRAPI_TOKEN,
-  collectionTypes: ["test"],
-  singleTypes: [],
-};
-
-strapiConfig.accessToken;
-
 const EXCLUDED_PATHS = []
 
 module.exports = {
   siteMetadata,
   plugins: [
+    {
+      resolve: "gatsby-source-airtable",
+      options: {
+        apiKey: process.env.AIRTABLE_API_KEY,
+        concurrency: 5,
+        tables: [
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Config`,
+            mapping: { image: `fileNode` },
+            tableId: `tblSs9vRUTUExiBFJ`
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Menu`,
+            mapping: { image: `fileNode` },
+            tableId: `tblkYTow9AOeR6N4F`
+          },
+          // can be multiple tables, even from different bases
+        ],
+      },
+    },
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
@@ -39,10 +52,6 @@ module.exports = {
           },
         ],
       },
-    },
-    {
-      resolve: `gatsby-source-strapi`,
-      options: strapiConfig,
     },
     {
       resolve: "gatsby-plugin-google-tagmanager",

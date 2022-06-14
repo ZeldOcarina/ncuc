@@ -21,6 +21,7 @@
     "gatsby-plugin-sharp": "^4.14.1",
     "gatsby-plugin-sitemap": "^5.3.0",
     "gatsby-plugin-styled-components": "^5.3.0",
+    "gatsby-source-airtable": "^2.3.0",
     "gatsby-source-filesystem": "^4.14.0",
     "gatsby-source-strapi": "^2.0.0",
     "gatsby-transformer-remark": "^5.14.0",
