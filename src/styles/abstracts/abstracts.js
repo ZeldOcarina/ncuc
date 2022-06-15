@@ -11,7 +11,8 @@ export default createGlobalStyle`
     --color-secondary: #16B0D8;
     --color-secondary200: #AFDFE4;
     --color-tertiary: #EF4136;
-    --grey: #646C83; /*USED BY BLOCKQUOTE*/
+    --grey: #707070; /*USED BY BLOCKQUOTE*/
+    --grey500: #6B6E7E; /*USED BY BLOCKQUOTE*/
     --black: #000000;
     --white: #ffffff;
     

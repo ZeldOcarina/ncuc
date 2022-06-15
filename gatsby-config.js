@@ -10,6 +10,16 @@ module.exports = {
   siteMetadata,
   plugins: [
     {
+      // We need filesystem source plugin to add publicURL function to File nodes
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `placeholder`,
+        // path is required param, so let's just point it to single file to not create
+        // much unnecessary work for it
+        path: `${__dirname}/gatsby-config.js`,
+      },
+    },
+    {
       resolve: "gatsby-source-airtable",
       options: {
         apiKey: process.env.AIRTABLE_API_KEY,
@@ -30,7 +40,7 @@ module.exports = {
           {
             baseId: process.env.AIRTABLE_BASE_ID,
             tableName: `Home`,
-            mapping: { backgroundImage: `fileNode` },
+            mapping: { backgroundImage: `fileNode`, icon: `fileNode` },
             tableId: `tblVGK74b5DB5iphC`
           },
           // can be multiple tables, even from different bases
