@@ -14,6 +14,10 @@ export default createGlobalStyle`
     --grey: #646C83; /*USED BY BLOCKQUOTE*/
     --black: #000000;
     --white: #ffffff;
+    
+    --gutter: 2rem;
+    --small-gutter: 1rem;
+    --section-gutter: 4rem;
 
     //FONT FAMILY
     --title-font: "SF Pro Display", sans-serif;
