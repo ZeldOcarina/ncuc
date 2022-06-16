@@ -14,11 +14,15 @@ const StyledCard = styled.article`
     background-color: var(--background-dark);
     padding: 1rem;
     border-radius: 50%;
-    width: 10rem;
-    height: 10rem;
+    width: 12rem;
+    height: 12rem;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  img {
+    width: 40%;
   }
 
   h5 {
@@ -37,7 +41,6 @@ const StyledCard = styled.article`
 `
 
 const Card = ({ copy, header, icon }) => {
-  console.log(copy, header, icon)
   return (
     <StyledCard>
       <div className="icon-container">

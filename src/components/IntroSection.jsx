@@ -1,10 +1,14 @@
 import React from "react"
 import styled from "styled-components"
+import PropTypes from "prop-types"
 
 const StyledIntroSection = styled.section`
   text-align: center;
   margin: 0 auto var(--section-gutter) auto;
-
+  padding-bottom: ${({ padding }) => {
+    console.log(padding)
+    return padding || padding === 0 ? `${padding}rem` : `var(--section-gutter)`
+  }};
   h3 {
     color: var(--color-secondary);
     text-transform: uppercase;
@@ -38,14 +42,21 @@ const StyledIntroSection = styled.section`
   }
 `
 
-const IntroSection = ({ title, subtitle, intro }) => {
+const IntroSection = ({ title, subtitle, intro, padding }) => {
   return (
-    <StyledIntroSection>
+    <StyledIntroSection padding={padding}>
       <h3>{subtitle}</h3>
       <h2>{title}</h2>
       <p>{intro}</p>
     </StyledIntroSection>
   )
+}
+
+IntroSection.propTypes = {
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string.isRequired,
+  intro: PropTypes.string,
+  padding: PropTypes.number,
 }
 
 export default IntroSection
