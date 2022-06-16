@@ -5,6 +5,8 @@
   "version": "0.1.0",
   "author": "Mattia Rasulo <mattia@rasulomarketingstudio.com>",
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
     "axios": "^0.21.4",
     "babel-plugin-styled-components": "^2.0.2",
     "bootstrap": "^5.1.3",

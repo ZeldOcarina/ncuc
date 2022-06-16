@@ -1,6 +1,7 @@
 import { Link } from "gatsby"
 import React from "react"
 import styled, { css } from "styled-components"
+import PropTypes from "prop-types"
 
 const buttonCss = css`
   display: block;
@@ -8,15 +9,22 @@ const buttonCss = css`
   width: ${({ width }) => (width ? width : css`max-content`)};
   padding: 2rem 0;
   border: none;
+  text-transform: uppercase;
 `
 
 const StyledButton = styled.button`
   ${buttonCss}
-  background-color: ${({ color }) => css`var(--color-${color})`};
+  background-color: ${({ color }) =>
+    css`
+      ${color}
+    `};
 
   .button {
     ${buttonCss}
-    background-color: ${({ color }) => css`var(--color-${color})`};
+    background-color: ${({ color }) =>
+      css`
+        ${color}
+      `};
   }
 `
 
@@ -32,6 +40,14 @@ function setAs(type) {
       return "button"
   }
 }
+
+/*************************
+ * @param {string} type
+ * @param {string} useImperativeHandle(
+ * @param {function} children,
+ * @param {string} color,
+ * @param {string} width,
+ ***********************/
 
 const Button = ({ type, url, children, color, width }) => {
   return (
@@ -61,6 +77,14 @@ const Button = ({ type, url, children, color, width }) => {
       )}
     </StyledButton>
   )
+}
+
+Button.propTypes = {
+  type: PropTypes.oneOf(["button", "link", "internal"]).isRequired,
+  url: PropTypes.string,
+  children: PropTypes.node.isRequired,
+  color: PropTypes.string,
+  width: PropTypes.string,
 }
 
 export default Button

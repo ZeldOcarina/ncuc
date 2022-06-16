@@ -43,7 +43,12 @@ module.exports = {
             mapping: { backgroundImage: `fileNode`, icon: `fileNode` },
             tableId: `tblVGK74b5DB5iphC`
           },
-          // can be multiple tables, even from different bases
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Faqs`,
+            tableId: `tbl9NHDeMO9g1pe7E`
+          },
+
         ],
       },
     },

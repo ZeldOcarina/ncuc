@@ -13,11 +13,11 @@ html {
   font-size: 10px;
 
   ${respond(
-    "4k-tv",
-    css`
+  "4k-tv",
+  css`
       font-size: 20px;
     `
-  )}
+)}
 }
 
 body {
@@ -33,19 +33,19 @@ body {
   color: var(--body-color);
 
   ${respond(
-    "phone-land",
-    css`
+  "phone-land",
+  css`
       font-size: var(--mobile-font-size);
       overflow-wrap: break-word;
     `
-  )}
+)}
   ${respond(
-    "iphone-5",
-    css`
+  "iphone-5",
+  css`
       font-size: var(--mobile-font-size);
       overflow-wrap: anywhere;
     `
-  )}
+)}
 }
 
 h1 {
@@ -63,17 +63,17 @@ h6 {
   color: var(--black);
 
   ${respond(
-    "tab-land",
-    css`
+  "tab-land",
+  css`
       font-size: 3.5rem;
     `
-  )}
+)}
   ${respond(
-    "phone-land",
-    css`
+  "phone-land",
+  css`
       font-size: var(--mobile-title-font-size);
     `
-  )}
+)}
 }
 
 h2,
@@ -84,24 +84,24 @@ h6 {
   font-size: var(--title-font-size);
 
   ${respond(
-    "tab-land",
-    css`
+  "tab-land",
+  css`
       font-size: 3rem;
     `
-  )}
+)}
   ${respond(
-    "phone-port",
-    css`
+  "phone-port",
+  css`
       font-size: 2.5rem;
     `
-  )}
+)}
 }
 
 p {
 }
 
 section {
-  padding: 5rem 0;
+  padding: var(--section-gutter) 0;
 }
 
 a {

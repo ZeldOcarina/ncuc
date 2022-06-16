@@ -36,7 +36,7 @@ const StyledBackgroundImage = styled.div`
 const BackgroundImage = ({ image, alt, overlay }) => {
   return (
     <StyledBackgroundImage background={overlay}>
-      <div className="overlay" />
+      {overlay && <div className="overlay" />}
       <GatsbyImage className="bg-image" image={image} alt={alt} />
     </StyledBackgroundImage>
   )

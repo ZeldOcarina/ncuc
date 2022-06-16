@@ -5,6 +5,7 @@ import styled from "styled-components"
 import BackgroundImage from "../../components/BackgroundImage"
 
 import Button from "../../components/Button"
+import { Colors } from "../../styles/abstracts/abstracts"
 
 const StyledHero = styled.header`
   min-height: 88vh;
@@ -60,10 +61,10 @@ const Hero = () => {
       <div className="content-container">
         <h1 className="title">{header}</h1>
         <div className="buttons-container">
-          <Button type="button" color="secondary" width="30rem">
+          <Button type="button" color={Colors.colorSecondary} width="30rem">
             {btn1Label}
           </Button>
-          <Button type="button" color="primary" width="30rem">
+          <Button type="button" color={Colors.colorPrimary} width="30rem">
             {btn2Label}
           </Button>
         </div>
