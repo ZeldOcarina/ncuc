@@ -6,7 +6,7 @@
   "author": "Mattia Rasulo <mattia@monarchy.io>",
   "engines" : { 
     "npm" : "8.9.0",
-    "node" : "18.2.0"
+    "node" : "16.15.1"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
