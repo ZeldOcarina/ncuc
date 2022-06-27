@@ -32,12 +32,12 @@ const BestClinic = () => {
   const {
     bestClinic: {
       data: {
-        header,
+        superheading,
+        heading,
         subheading,
-        intro,
         copy,
         btn1Label,
-        btn1Link,
+        // btn1Link,
         btn2Label,
         // btn2Link,
         backgroundImage,
@@ -50,9 +50,9 @@ const BestClinic = () => {
     <StyledBestClinic>
       <div className="container">
         <IntroSection
-          title={header}
-          subtitle={subheading}
-          intro={intro}
+          superheading={superheading}
+          heading={heading}
+          subheading={subheading}
           theme="light"
         />
         <CopySection columns={1} theme="light">
@@ -82,9 +82,9 @@ const query = graphql`
       data: { blockName: { eq: "BestClinic" } }
     ) {
       data {
-        header
+        heading
         subheading
-        intro
+        superheading
         copy
         btn1Label
         btn1Link

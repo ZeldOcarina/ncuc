@@ -11,7 +11,7 @@ const StyledUrgentCare = styled.section``
 const UrgentCare = () => {
   const {
     intro: {
-      data: { header, intro, subheading },
+      data: { superheading, heading, subheading },
     },
     items: { listItems },
   } = useStaticQuery(query)
@@ -19,7 +19,11 @@ const UrgentCare = () => {
   return (
     <StyledUrgentCare>
       <div className="container">
-        <IntroSection title={header} subtitle={subheading} intro={intro} />
+        <IntroSection
+          superheading={superheading}
+          heading={heading}
+          subheading={subheading}
+        />
         <List>
           {listItems.map(
             ({
@@ -47,9 +51,9 @@ const query = graphql`
       data: { blockName: { eq: "UrgentCare" } }
     ) {
       data {
-        header
+        superheading
+        heading
         subheading
-        intro
       }
     }
     items: allAirtable(

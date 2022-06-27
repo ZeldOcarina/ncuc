@@ -13,7 +13,7 @@ const StyledServices = styled.section`
 const Services = () => {
   const {
     intro: {
-      data: { header, subheading, copy },
+      data: { superheading, heading, subheading },
     },
     cards,
   } = useStaticQuery(query)
@@ -21,7 +21,11 @@ const Services = () => {
   return (
     <StyledServices>
       <div className="container">
-        <IntroSection title={header} subtitle={subheading} intro={copy} />
+        <IntroSection
+          superheading={superheading}
+          heading={heading}
+          subheading={subheading}
+        />
       </div>
 
       <CardsContainer>
@@ -45,7 +49,8 @@ const query = graphql`
     ) {
       data {
         copy
-        header
+        superheading
+        heading
         subheading
       }
       id
@@ -56,7 +61,9 @@ const query = graphql`
       nodes {
         data {
           copy
-          header
+          superheading
+          heading
+          subheading
           icon {
             localFiles {
               publicURL

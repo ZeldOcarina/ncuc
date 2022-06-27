@@ -10,13 +10,17 @@ const StyledSupport = styled.section``
 const Support = () => {
   const {
     intro: {
-      data: { copy, header, intro, subheading },
+      data: { copy, superheading, heading, subheading },
     },
   } = useStaticQuery(query)
   return (
     <StyledSupport>
       <div className="container">
-        <IntroSection title={header} subtitle={subheading} intro={intro} />
+        <IntroSection
+          superheading={superheading}
+          heading={heading}
+          subheading={subheading}
+        />
         <CopySection>{copy}</CopySection>
       </div>
     </StyledSupport>
@@ -31,8 +35,8 @@ const query = graphql`
     ) {
       data {
         copy
-        header
-        intro
+        superheading
+        heading
         subheading
       }
     }

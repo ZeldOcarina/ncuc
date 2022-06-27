@@ -11,13 +11,13 @@ const StyledVideoSection = styled.section`
 const VideoSection = () => {
   const {
     video: {
-      data: { header, subheading, videoId },
+      data: { superheading, heading, videoId },
     },
   } = useStaticQuery(query)
 
   return (
     <StyledVideoSection>
-      <IntroSection title={header} subtitle={subheading} padding={0} />
+      <IntroSection superheading={superheading} heading={heading} padding={0} />
       <div className="container">
         <YouTubeEmbed id={videoId} />
       </div>
@@ -32,8 +32,8 @@ const query = graphql`
       data: { blockName: { eq: "VideoSection" } }
     ) {
       data {
-        subheading
-        header
+        superheading
+        heading
         videoId
       }
     }

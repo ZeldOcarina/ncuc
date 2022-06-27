@@ -10,6 +10,8 @@ const buttonCss = css`
   padding: 2rem 0;
   border: none;
   text-transform: uppercase;
+  text-align: center;
+  font-weight: 400;
 `
 
 const StyledButton = styled.button`

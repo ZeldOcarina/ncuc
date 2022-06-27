@@ -11,8 +11,8 @@ function Faqs({ faqs }) {
   return (
     <StyledFaqs>
       <IntroSection
-        title="Frequently asked questions"
-        subtitle="Newport Beach Urgent care"
+        superheading="Frequently asked questions"
+        heading="Newport Beach Urgent care"
       ></IntroSection>
       <div className="container">
         {faqs.map(({ id, data: { question, answer } }) => (

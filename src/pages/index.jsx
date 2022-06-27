@@ -18,10 +18,9 @@ const StyledIndex = styled.main``
 
 const IndexPage = ({
   data: {
-    Faqs: { faqs },
+    allAirtable: { faqs },
   },
 }) => {
-  console.log(faqs)
   return (
     <Layout>
       <Seo title="Newport Urgent Care" />
@@ -41,15 +40,16 @@ const IndexPage = ({
 }
 
 export const query = graphql`
-  {
-    Faqs: allAirtable(filter: { table: { eq: "Faqs" } }) {
+  query HomeFAQs {
+    allAirtable(
+      filter: { table: { eq: "Home" }, data: { blockName: { eq: "FaqItem" } } }
+    ) {
       faqs: nodes {
-        id
         data {
-          answer
           question
+          answer
         }
-        table
+        id
       }
     }
   }

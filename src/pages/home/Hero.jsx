@@ -1,5 +1,5 @@
 import { useStaticQuery, graphql } from "gatsby"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { getImage } from "gatsby-plugin-image"
 import React from "react"
 import styled from "styled-components"
 import BackgroundImage from "../../components/BackgroundImage"
@@ -51,7 +51,7 @@ const Hero = () => {
         backgroundImage,
         btn1Label,
         btn2Label,
-        header,
+        heading,
         backgroundImageAlt,
       },
     },
@@ -59,7 +59,7 @@ const Hero = () => {
   return (
     <StyledHero>
       <div className="content-container">
-        <h1 className="title">{header}</h1>
+        <h1 className="title">{heading}</h1>
         <div className="buttons-container">
           <Button type="button" color={Colors.colorSecondary} width="30rem">
             {btn1Label}
@@ -95,7 +95,7 @@ const query = graphql`
         btn1Label
         btn2Label
         btnTarget
-        header
+        heading
       }
     }
   }

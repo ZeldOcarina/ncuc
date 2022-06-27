@@ -40,14 +40,14 @@ const StyledCard = styled.article`
   }
 `
 
-const Card = ({ copy, header, icon }) => {
+const Card = ({ copy, heading, icon }) => {
   return (
     <StyledCard>
       <div className="icon-container">
         <img src={icon.localFiles[0].publicURL} />
       </div>
 
-      <h5>{header}</h5>
+      <h5>{heading}</h5>
       <p>{copy}</p>
     </StyledCard>
   )

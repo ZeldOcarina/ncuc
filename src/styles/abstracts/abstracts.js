@@ -34,7 +34,7 @@ export default createGlobalStyle`
     --gutter: 2rem;
     --small-gutter: 1rem;
     --big-gutter: 4rem;
-    --section-gutter: 8rem;
+    --section-gutter: 6rem;
 
     //FONT FAMILY
     --title-font: "SF Pro Display", sans-serif;

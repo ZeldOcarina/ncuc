@@ -42,20 +42,26 @@ const StyledIntroSection = styled.section`
   }
 `
 
-const IntroSection = ({ title, subtitle, intro, padding, theme }) => {
+const IntroSection = ({
+  superheading,
+  heading,
+  subheading,
+  padding,
+  theme,
+}) => {
   return (
     <StyledIntroSection padding={padding} theme={theme}>
-      <h3>{subtitle}</h3>
-      <h2>{title}</h2>
-      <p>{intro}</p>
+      <h3>{superheading}</h3>
+      <h2>{heading}</h2>
+      <p>{subheading}</p>
     </StyledIntroSection>
   )
 }
 
 IntroSection.propTypes = {
-  title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
-  intro: PropTypes.string,
+  superheading: PropTypes.string.isRequired,
+  heading: PropTypes.string.isRequired,
+  subheading: PropTypes.string,
   padding: PropTypes.number,
   theme: PropTypes.string,
 }

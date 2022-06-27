@@ -28,7 +28,7 @@ module.exports = {
           {
             baseId: process.env.AIRTABLE_BASE_ID,
             tableName: `Config`,
-            mapping: { image: `fileNode` },
+            mapping: { Attachments: `fileNode` },
             tableId: `tblSs9vRUTUExiBFJ`
           },
           {
@@ -48,7 +48,12 @@ module.exports = {
             tableName: `Faqs`,
             tableId: `tbl9NHDeMO9g1pe7E`
           },
-
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Footer (Global)`,
+            tableId: `tblSR7h78XJxd35Uf`,
+            mapping: { Media: `fileNode` }
+          },
         ],
       },
     },
@@ -77,12 +82,12 @@ module.exports = {
     {
       resolve: "gatsby-plugin-google-tagmanager",
       options: {
-        id: "GTM-000000",
+        id: "GTM-N569DMM",
 
         // Include GTM in development.
         //
         // Defaults to false meaning GTM will only be loaded in production.
-        includeInDevelopment: true,
+        includeInDevelopment: false,
 
         // datalayer to be set before GTM is loaded
         // should be an object or a function that is executed in the browser

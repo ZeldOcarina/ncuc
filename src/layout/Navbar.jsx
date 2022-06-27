@@ -136,11 +136,11 @@ const Wrapper = styled.nav`
   }
 `
 
-const Navbar = ({ innerPage, innerLayout }) => {
+const Navbar = ({ innerPage, innerLayout, menu }) => {
   const { isMobileMenuOpen, setIsMobileMenuOpen } = useContext(AppContext)
   const { params } = useContext(LocationContext)
 
-  const { logo, menu } = useStaticQuery(query)
+  const { logo } = useStaticQuery(query)
 
   console.log()
 
@@ -182,17 +182,6 @@ const Navbar = ({ innerPage, innerLayout }) => {
 
 const query = graphql`
   {
-    menu: allAirtable(
-      filter: { table: { eq: "Menu" }, data: { Parent: { regex: "/Navbar/" } } }
-    ) {
-      nodes {
-        id
-        data {
-          Child
-          Permalink
-        }
-      }
-    }
     logo: allAirtable(
       filter: { table: { eq: "Menu" }, data: { Parent: { regex: "/Logo/" } } }
     ) {

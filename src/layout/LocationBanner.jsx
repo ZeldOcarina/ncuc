@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import { useStaticQuery, graphql } from "gatsby"
 
 const StyledLocationBanner = styled.div`
   background-color: var(--color-secondary);
@@ -19,13 +18,11 @@ const StyledLocationBanner = styled.div`
   }
 `
 
-const LocationBanner = () => {
-  const {
-    allAirtable: {
-      nodes: [phone, tel, state, city],
-    },
-  } = useStaticQuery(query)
-
+const LocationBanner = ({
+  locationData: {
+    nodes: [phone, tel, state, city],
+  },
+}) => {
   return (
     <StyledLocationBanner>
       <div className="container">
@@ -37,21 +34,5 @@ const LocationBanner = () => {
     </StyledLocationBanner>
   )
 }
-
-const query = graphql`
-  {
-    allAirtable(
-      filter: { data: { Label: { regex: "/State|City|Phone|Tel:/" } } }
-    ) {
-      nodes {
-        data {
-          Name
-          Value
-          Label
-        }
-      }
-    }
-  }
-`
 
 export default LocationBanner
