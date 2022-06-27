@@ -3,7 +3,11 @@
   "private": true,
   "description": "A new Gatsby website starter with Strapi integration",
   "version": "0.1.0",
-  "author": "Mattia Rasulo <mattia@rasulomarketingstudio.com>",
+  "author": "Mattia Rasulo <mattia@monarchy.io>",
+  "engines" : { 
+    "npm" : "8.9.0",
+    "node" : "18.2.0"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
