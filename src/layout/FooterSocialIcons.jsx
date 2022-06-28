@@ -49,8 +49,6 @@ const FooterSocialIcons = ({ socialLinks: { socialLinks } }) => {
     socialLink => socialLink.data.Label === "Yelp"
   )
 
-  console.log(facebookLink)
-
   function handleMouseEnter({ target }) {
     target.style.color = "var(--color-secondary)"
   }

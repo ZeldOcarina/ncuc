@@ -54,6 +54,25 @@ module.exports = {
             tableId: `tblSR7h78XJxd35Uf`,
             mapping: { Media: `fileNode` }
           },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Sports injuries`,
+            tableId: `tblHcFSu4lxCoucHH`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Splinting and Braces`,
+            tableId: `tblX7WVKszTDF3vDP`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Lacerations and Wound Care`,
+            tableId: `tbldyS29lgFFy1vy4`,
+            mapping: { Media: `fileNode` }
+          },
+
         ],
       },
     },

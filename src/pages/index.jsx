@@ -4,13 +4,13 @@ import { graphql } from "gatsby"
 
 import Layout from "../layout/Layout"
 import Seo from "../components/Seo"
-import Hero from "./home/Hero"
-import Services from "./home/Services"
-import Support from "./home/Support"
-import VideoSection from "./home/VideoSection"
-import UrgentCare from "./home/UrgentCare"
-import BestClinic from "./home/BestClinic"
-import MostTrusted from "./home/MostTrusted"
+import Hero from "../sections/home/Hero"
+import Services from "../sections/home/Services"
+import Support from "../sections/home/Support"
+import VideoSection from "../sections/home/VideoSection"
+import UrgentCare from "../sections/home/UrgentCare"
+import BestClinic from "../sections/home/BestClinic"
+import MostTrusted from "../sections/home/MostTrusted"
 import ButtonsStripe from "../components/ButtonsStripe"
 import Faqs from "../components/Faqs"
 
@@ -33,7 +33,12 @@ const IndexPage = ({
         <BestClinic />
         <MostTrusted />
         <ButtonsStripe />
-        <Faqs faqs={faqs} />
+        <Faqs
+          superheading="Newport Center Urgent Care Emergency Clinic"
+          heading="Frequently Asked Questions"
+          subheading=" Find Out Answers To The Most Commonly Asked Urgent Care Questions to help you and your family get the best possible medical care in Southern, CA"
+          faqs={faqs}
+        />
       </StyledIndex>
     </Layout>
   )

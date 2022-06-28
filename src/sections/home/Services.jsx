@@ -30,11 +30,7 @@ const Services = () => {
 
       <CardsContainer>
         {cards?.nodes?.map(({ id, data }) => {
-          return (
-            <Card key={id} {...data}>
-              Card
-            </Card>
-          )
+          return <Card key={id} {...data} />
         })}
       </CardsContainer>
     </StyledServices>

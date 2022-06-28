@@ -51,7 +51,7 @@ const IntroSection = ({
 }) => {
   return (
     <StyledIntroSection padding={padding} theme={theme}>
-      <h3>{superheading}</h3>
+      {superheading && <h3>{superheading}</h3>}
       <h2>{heading}</h2>
       <p>{subheading}</p>
     </StyledIntroSection>
@@ -59,7 +59,7 @@ const IntroSection = ({
 }
 
 IntroSection.propTypes = {
-  superheading: PropTypes.string.isRequired,
+  superheading: PropTypes.string,
   heading: PropTypes.string.isRequired,
   subheading: PropTypes.string,
   padding: PropTypes.number,

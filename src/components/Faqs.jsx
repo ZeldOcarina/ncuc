@@ -7,14 +7,15 @@ const StyledFaqs = styled.section`
   background-color: var(--background-dark);
 `
 
-function Faqs({ faqs }) {
+function Faqs({ faqs, superheading, heading, subheading }) {
   return (
     <StyledFaqs>
-      <IntroSection
-        superheading="Frequently asked questions"
-        heading="Newport Beach Urgent care"
-      ></IntroSection>
       <div className="container">
+        <IntroSection
+          superheading={superheading}
+          heading={heading}
+          subheading={subheading}
+        ></IntroSection>
         {faqs.map(({ id, data: { question, answer } }) => (
           <FaqItem {...{ question, answer }} key={id} />
         ))}

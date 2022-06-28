@@ -4,9 +4,9 @@
   "description": "A new Gatsby website starter with Strapi integration",
   "version": "0.1.0",
   "author": "Mattia Rasulo <mattia@monarchy.io>",
-  "engines" : { 
-    "npm" : "8.9.0",
-    "node" : "16.15.1"
+  "engines": {
+    "npm": "8.9.0",
+    "node": "16.15.1"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.14.3",
@@ -38,6 +38,7 @@
     "react-helmet": "^6.1.0",
     "react-icons": "^4.4.0",
     "react-intersection-observer": "^9.3.4",
+    "react-markdown": "^8.0.3",
     "react-responsive": "^9.0.0-beta.10",
     "styled-components": "^5.3.5",
     "swiper": "^8.2.5"

@@ -59,10 +59,10 @@ const Footer = ({ siteMetadata, menu, locationData, socialLinks }) => {
   ).data.Value
   const telLink = locationData.nodes.find(item => item.data.Label === "Tel:")
     .data.Value
-  const state = locationData.nodes.find(item => item.data.Label === "State")
-    .data.Value
-  const city = locationData.nodes.find(item => item.data.Label === "City").data
-    .Value
+  // const state = locationData.nodes.find(item => item.data.Label === "State")
+  //   .data.Value
+  // const city = locationData.nodes.find(item => item.data.Label === "City").data
+  //   .Value
   const address = locationData.nodes.find(item => item.data.Label === "Address")
     .data.Value
   const weekdays = locationData.nodes.find(

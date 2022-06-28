@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography"
 import AddIcon from "@material-ui/icons/Add"
 import RemoveIcon from "@material-ui/icons/Remove"
 import { Colors } from "../styles/abstracts/abstracts"
+import ReactMarkdown from "react-markdown"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,7 +25,8 @@ const useStyles = makeStyles(theme => ({
   },
   text: {
     fontSize: theme.typography.pxToRem(25),
-    color: "#93A4B1",
+    fontWeight: 400,
+    color: Colors.bodyColor,
     fontFamily: "var(--body-font)",
 
     "& h5": {
@@ -138,10 +140,8 @@ const FaqItem = ({ question, answer, i }) => {
         ></Typography>
       </AccordionSummary>
       <AccordionDetails className={classes.accordionDetails}>
-        <Typography
-          className={classes.text}
-          dangerouslySetInnerHTML={{ __html: answer }}
-        ></Typography>
+        <ReactMarkdown className={classes.text}>{answer}</ReactMarkdown>
+
         {isAccordionOpen && (
           <RemoveIcon
             htmlColor={Colors.colorTertiary}
