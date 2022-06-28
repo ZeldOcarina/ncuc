@@ -44,7 +44,7 @@ const Card = ({ copy, heading, icon }) => {
   return (
     <StyledCard>
       <div className="icon-container">
-        <img src={icon.localFiles[0].publicURL} alt={heading} />
+        <img src={icon?.localFiles[0]?.publicURL} alt={heading} />
       </div>
 
       <h5>{heading}</h5>
