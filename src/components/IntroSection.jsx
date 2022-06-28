@@ -1,5 +1,6 @@
 import React from "react"
 import styled, { css } from "styled-components"
+import respond from "../styles/abstracts/mediaqueries"
 import PropTypes from "prop-types"
 
 const StyledIntroSection = styled.section`
@@ -13,6 +14,13 @@ const StyledIntroSection = styled.section`
     text-transform: uppercase;
     text-align: center;
     font-size: 2rem;
+
+    ${respond(
+      "big-desktop",
+      css`
+        font-size: 3rem;
+      `
+    )}
   }
 
   h2,
@@ -31,6 +39,13 @@ const StyledIntroSection = styled.section`
 
     margin: var(--gutter) auto;
     width: 85%;
+
+    ${respond(
+      "big-desktop",
+      css`
+        font-size: 6rem;
+      `
+    )}
   }
 
   p {
@@ -39,6 +54,13 @@ const StyledIntroSection = styled.section`
     margin: 0 auto;
     text-align: left;
     width: 84%;
+
+    ${respond(
+      "big-desktop",
+      css`
+        font-size: 2.5rem;
+      `
+    )}
   }
 `
 

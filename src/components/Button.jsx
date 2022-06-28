@@ -2,6 +2,7 @@ import { Link } from "gatsby"
 import React from "react"
 import styled, { css } from "styled-components"
 import PropTypes from "prop-types"
+import respond from "../styles/abstracts/mediaqueries"
 
 const buttonCss = css`
   display: block;
@@ -12,6 +13,15 @@ const buttonCss = css`
   text-transform: uppercase;
   text-align: center;
   font-weight: 400;
+
+  ${respond(
+    "big-desktop",
+    css`
+      font-size: 3.5rem;
+      width: 55rem;
+      padding: 2rem;
+    `
+  )}
 `
 
 const StyledButton = styled.button`

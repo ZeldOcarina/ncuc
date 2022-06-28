@@ -1,10 +1,18 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
+import respond from "../styles/abstracts/mediaqueries"
 
 const StyledCard = styled.article`
   background-color: var(--white);
   padding: 8rem 4rem 4rem 4rem;
   position: relative;
+
+  ${respond(
+    "big-desktop",
+    css`
+      padding: 10rem 6rem 4rem 6rem;
+    `
+  )}
 
   .icon-container {
     position: absolute;
@@ -37,6 +45,13 @@ const StyledCard = styled.article`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    ${respond(
+      "big-desktop",
+      css`
+        font-size: 3.2rem;
+      `
+    )}
   }
 `
 

@@ -47,6 +47,12 @@ const Wrapper = styled.nav`
       height: max-content;
     `
   )}
+  ${respond(
+    "big-desktop",
+    css`
+      height: 12rem;
+    `
+  )}
     .container {
     width: 100%;
     display: flex;
@@ -94,6 +100,13 @@ const Wrapper = styled.nav`
     display: flex;
     align-items: center;
     gap: 0.8rem;
+
+    ${respond(
+      "big-desktop",
+      css`
+        font-size: 2.1rem;
+      `
+    )}
   }
 
   .mobile-menu-activator {
@@ -125,6 +138,12 @@ const Wrapper = styled.nav`
       "iphone-5",
       css`
         width: 5rem;
+      `
+    )}
+    ${respond(
+      "big-desktop",
+      css`
+        width: 40rem;
       `
     )}
   }

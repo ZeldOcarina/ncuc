@@ -46,6 +46,9 @@ body {
       overflow-wrap: anywhere;
     `
 )}
+${respond("big-desktop", css`
+    font-size: 2.8rem;`
+)}
 }
 
 h1 {
@@ -95,6 +98,9 @@ h6 {
       font-size: 2.5rem;
     `
 )}
+${respond("big-desktop", css`
+    font-size: 4rem;`
+)}
 }
 
 p {
@@ -102,6 +108,13 @@ p {
 
 section {
   padding: var(--section-gutter) 0;
+
+  ${respond(
+  "big-desktop",
+  css`
+        padding: 8rem 0 18rem 0;
+      `
+)}
 }
 
 a {

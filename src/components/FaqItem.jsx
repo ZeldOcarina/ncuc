@@ -22,6 +22,9 @@ const useStyles = makeStyles(theme => ({
     fontSize: theme.typography.pxToRem(38),
     fontWeight: 500,
     color: "var(--body-color)",
+    "@media only screen and (min-width: 2500px)": {
+      fontSize: "3rem",
+    },
   },
   text: {
     fontSize: theme.typography.pxToRem(25),
@@ -33,6 +36,10 @@ const useStyles = makeStyles(theme => ({
       fontFamily: "var(--body-font)",
       textAlign: "left",
       fontSize: theme.typography.pxToRem(25),
+    },
+
+    "@media only screen and (min-width: 2500px)": {
+      fontSize: "2.6rem",
     },
   },
   icon: {

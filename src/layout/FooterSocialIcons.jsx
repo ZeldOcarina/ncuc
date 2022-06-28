@@ -1,5 +1,6 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
+import respond from "../styles/abstracts/mediaqueries"
 
 import {
   FaInstagram,
@@ -17,8 +18,23 @@ const StyledFooterSocialIcons = styled.div`
   margin-top: var(--section-gutter);
   gap: var(--gutter);
 
+  ${respond(
+    "big-desktop",
+    css`
+      margin-top: 8rem;
+      gap: 3rem;
+    `
+  )}
+
   .icon {
     font-size: 3rem;
+
+    ${respond(
+      "big-desktop",
+      css`
+        font-size: 5rem;
+      `
+    )}
   }
 
   .active {

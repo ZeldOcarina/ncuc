@@ -1,11 +1,19 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
+import respond from "../styles/abstracts/mediaqueries"
 
 const StyledLocationBanner = styled.div`
   background-color: var(--color-secondary);
   color: var(--white);
   padding: 0.5rem 0;
   font-size: 1.6rem;
+
+  ${respond(
+    "big-desktop",
+    css`
+      font-size: 2.2rem;
+    `
+  )}
 
   .container {
     display: flex;
@@ -18,17 +26,13 @@ const StyledLocationBanner = styled.div`
   }
 `
 
-const LocationBanner = ({
-  locationData: {
-    nodes: [phone, tel, state, city],
-  },
-}) => {
+const LocationBanner = ({ phone, tel, state, city }) => {
   return (
     <StyledLocationBanner>
       <div className="container">
         <p>
-          Conveniently Located in {city.data.Value}, {state.data.Value} - Call
-          Today: <a href={`tel:${tel.data.Value}`}>{phone.data.Value}</a>
+          Conveniently Located in {city}, {state} - Call Today:{" "}
+          <a href={`tel:${tel}`}>{phone}</a>
         </p>
       </div>
     </StyledLocationBanner>

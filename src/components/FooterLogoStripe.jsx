@@ -1,6 +1,7 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
+import respond from "../styles/abstracts/mediaqueries"
 
 import Button from "./Button"
 
@@ -12,10 +13,24 @@ const StyledFooterLogoStripe = styled.div`
     font-weight: 700;
     font-size: 2.6rem;
     margin-top: var(--gutter);
+
+    ${respond(
+      "big-desktop",
+      css`
+        font-size: 5rem;
+      `
+    )}
   }
 
   .logo {
     width: 50rem;
+
+    ${respond(
+      "big-desktop",
+      css`
+        width: 70rem;
+      `
+    )}
   }
 
   .top-part {

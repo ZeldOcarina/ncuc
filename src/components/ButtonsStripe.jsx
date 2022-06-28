@@ -1,10 +1,18 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import Button from "../components/Button"
 import { Colors } from "../styles/abstracts/abstracts"
+import respond from "../styles/abstracts/mediaqueries"
 
 const StyledButtonsStripe = styled.section`
   background-color: var(--color-secondary200);
+
+  ${respond(
+    "big-desktop",
+    css`
+      padding: 12rem 0;
+    `
+  )}
 
   .buttons-container {
     display: grid;

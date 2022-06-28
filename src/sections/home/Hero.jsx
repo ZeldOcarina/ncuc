@@ -1,8 +1,9 @@
 import { useStaticQuery, graphql } from "gatsby"
 import { getImage } from "gatsby-plugin-image"
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import BackgroundImage from "../../components/BackgroundImage"
+import respond from "../../styles/abstracts/mediaqueries"
 
 import Button from "../../components/Button"
 import { Colors } from "../../styles/abstracts/abstracts"
@@ -16,6 +17,13 @@ const StyledHero = styled.header`
   grid-template-columns: 1fr;
   align-items: center;
   justify-items: center;
+
+  ${respond(
+    "big-desktop",
+    css`
+      min-height: 88vh;
+    `
+  )}
 
   .buttons-container {
     display: grid;
@@ -41,6 +49,13 @@ const StyledHero = styled.header`
     font-size: 6rem;
     line-height: 1.2;
     font-weight: 400;
+
+    ${respond(
+      "big-desktop",
+      css`
+        font-size: 7.8rem;
+      `
+    )}
   }
 `
 

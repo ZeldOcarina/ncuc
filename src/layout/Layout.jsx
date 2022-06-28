@@ -15,11 +15,15 @@ import MonarchyStripe from "../components/MonarchyStripe"
 
 const Layout = ({ children, salesLetter, innerLayout }) => {
   const {
-    locationData,
     menu,
+    locationData,
     socialLinks,
     site: { siteMetadata },
     latAndLong: { nodes },
+    phoneData: { phoneData },
+    telData: { telData },
+    stateData: { stateData },
+    cityData: { cityData },
   } = useStaticQuery(query)
 
   const { alertState, setAlertState } = useContext(AppContext)
@@ -30,7 +34,12 @@ const Layout = ({ children, salesLetter, innerLayout }) => {
 
   return (
     <>
-      <LocationBanner locationData={locationData} />
+      <LocationBanner
+        phone={phoneData.Value}
+        tel={telData.Value}
+        state={stateData.Value}
+        city={cityData.Value}
+      />
       {salesLetter ? (
         <NavLogo />
       ) : (
@@ -131,6 +140,38 @@ const query = graphql`
             name
           }
         }
+      }
+    }
+    phoneData: airtable(
+      table: { eq: "Config" }
+      data: { Label: { eq: "Phone" } }
+    ) {
+      phoneData: data {
+        Value
+      }
+    }
+    telData: airtable(
+      table: { eq: "Config" }
+      data: { Label: { eq: "Tel:" } }
+    ) {
+      telData: data {
+        Value
+      }
+    }
+    stateData: airtable(
+      table: { eq: "Config" }
+      data: { Label: { eq: "State" } }
+    ) {
+      stateData: data {
+        Value
+      }
+    }
+    cityData: airtable(
+      table: { eq: "Config" }
+      data: { Label: { eq: "City" } }
+    ) {
+      cityData: data {
+        Value
       }
     }
   }

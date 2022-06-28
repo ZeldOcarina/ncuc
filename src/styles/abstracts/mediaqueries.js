@@ -101,19 +101,19 @@ function respond(breakpoint, css) {
     case "laptop":
       return `@media only screen and (max-width: ${1634 / BASE_PIXELS}em) {
                 ${css}
-              }` // 1634px
+              }`
     case "big-laptop":
       return `@media only screen and (max-width: ${1920 / BASE_PIXELS}em) {
                 ${css}
-              }` // 1920px
+              }`
     case "big-desktop":
       return `@media only screen and (min-width: ${2500 / BASE_PIXELS}em) {
                 ${css}
-              }` // 1740px
+              }`
     case "4k-tv":
       return `@media only screen and (min-width: ${3800 / BASE_PIXELS}em) {
                 ${css}
-              }` // 3800px
+              }`
     default:
       return new Error("Invalid Media Query")
   }

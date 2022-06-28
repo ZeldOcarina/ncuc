@@ -1,5 +1,7 @@
 import React from "react"
 import styled from "styled-components"
+import respond from "../styles/abstracts/mediaqueries"
+import { css } from "styled-components"
 
 const StyledCardsContainer = styled.div`
   display: grid;
@@ -9,6 +11,13 @@ const StyledCardsContainer = styled.div`
   column-gap: var(--gutter);
   row-gap: 8rem;
   justify-content: center;
+
+  ${respond(
+    "big-desktop",
+    css`
+      grid-template-columns: repeat(auto-fit, 600px);
+    `
+  )}
 `
 
 const CardsContainer = ({ children }) => {
