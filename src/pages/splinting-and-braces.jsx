@@ -26,7 +26,7 @@ const SplintingAndBraces = ({
     cardsData: { cardsData },
   },
 }) => {
-  console.log(textData)
+  //console.log(textData)
   return (
     <Layout>
       <Seo title={"NCUC | Splinting and Braces"} />{" "}

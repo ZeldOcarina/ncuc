@@ -28,7 +28,7 @@ const SwiperComponent = ({ images }) => {
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={15}
         slidesPerView={3}
-        onSlideChange={() => console.log("slide change")}
+        // onSlideChange={() => console.log("slide change")}
         // onSwiper={swiper => console.log(swiper)}
         className="swiper-container"
       >

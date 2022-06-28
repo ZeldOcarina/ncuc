@@ -31,7 +31,7 @@ const SportsInjuries = ({
     cardsData: { cardsData },
   },
 }) => {
-  console.log(cardsData)
+  //console.log(cardsData)
   return (
     <Layout>
       <Seo title={pageMetaTitle} />{" "}

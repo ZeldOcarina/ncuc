@@ -98,7 +98,7 @@ const FaqItem = ({ question, answer, i }) => {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false)
   function handleAccordionChange(e, expanded) {
     setIsAccordionOpen(expanded)
-    console.log(expanded)
+    //console.log(expanded)
   }
   function handleCloseIconClick() {
     setIsAccordionOpen(false)

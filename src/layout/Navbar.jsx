@@ -142,7 +142,7 @@ const Navbar = ({ innerPage, innerLayout, menu }) => {
 
   const { logo } = useStaticQuery(query)
 
-  console.log(logo.nodes[0].data.Permalink)
+  //console.log(logo.nodes[0].data.Permalink)
 
   const logoUrl = logo.nodes[0].data.logo[0].url
 
