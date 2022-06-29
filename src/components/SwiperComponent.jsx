@@ -13,6 +13,8 @@ import AppContext from "../context/AppContext"
 import "swiper/css/bundle"
 
 const StyledSwiper = styled.div`
+  position: relative;
+
   ${respond(
     "phone-port",
     css`
@@ -49,10 +51,15 @@ const StyledSwiper = styled.div`
         `
       )}
       ${respond(
+        "ipad-pro-11-port",
+        css`
+          min-height: 70vh;
+        `
+      )}
+      ${respond(
         "phone-port",
         css`
           min-height: 60vh;
-
           margin: 0 auto;
         `
       )}
@@ -70,10 +77,10 @@ const StyledSwiper = styled.div`
 `
 
 const SwiperComponent = ({ images }) => {
-  const { isiPadPro12, isPhonePort } = useContext(AppContext)
+  const { isiPadPro11, isiPadPro12 } = useContext(AppContext)
 
   function setSlidesAmount() {
-    if (isPhonePort) {
+    if (isiPadPro11) {
       return 1
     } else if (isiPadPro12) {
       return 2
@@ -104,7 +111,7 @@ const SwiperComponent = ({ images }) => {
           )
         })}
       </Swiper>
-      {isPhonePort && <MdViewCarousel className="slide-icon" />}
+      {isiPadPro11 && <MdViewCarousel className="slide-icon" />}
     </StyledSwiper>
   )
 }

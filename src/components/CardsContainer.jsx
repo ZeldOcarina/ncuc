@@ -19,7 +19,7 @@ const StyledCardsContainer = styled.div`
     `
   )}
   ${respond(
-    "iphone-12",
+    "iphone-8-plus",
     css`
       grid-template-columns: 100%;
     `

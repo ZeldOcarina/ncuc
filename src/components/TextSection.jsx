@@ -1,11 +1,19 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
 import CopySection from "./CopySection"
 import IntroSection from "./IntroSection"
+import AppContext from "../context/AppContext"
 
 const StyledTextSection = styled.section``
 
 const TextSection = ({ superheading, heading, subheading, copy, columns }) => {
+  const { isPhone12ProMax } = useContext(AppContext)
+
+  function setColumns() {
+    if (columns) return columns
+    if (isPhone12ProMax) return 1
+    else return 2
+  }
   return (
     <StyledTextSection>
       <div className="container">
@@ -14,7 +22,7 @@ const TextSection = ({ superheading, heading, subheading, copy, columns }) => {
           subheading={subheading}
           heading={heading}
         />
-        <CopySection columns={columns || 2}>{copy}</CopySection>
+        <CopySection columns={setColumns()}>{copy}</CopySection>
       </div>
     </StyledTextSection>
   )

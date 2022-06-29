@@ -9,6 +9,7 @@ const StyledIntroSection = styled.section`
   padding-bottom: ${({ padding }) => {
     return padding || padding === 0 ? `${padding}rem` : `var(--gutter)`
   }};
+  ${({ noPaddingTop }) => noPaddingTop && "padding-top: 0;"}
 
   ${respond(
     "iphone-12-mini-land",
@@ -124,9 +125,14 @@ const IntroSection = ({
   subheading,
   padding,
   theme,
+  noPaddingTop,
 }) => {
   return (
-    <StyledIntroSection padding={padding} theme={theme}>
+    <StyledIntroSection
+      padding={padding}
+      theme={theme}
+      noPaddingTop={noPaddingTop}
+    >
       {superheading && <h3>{superheading}</h3>}
       <h2>{heading}</h2>
       <p>{subheading}</p>

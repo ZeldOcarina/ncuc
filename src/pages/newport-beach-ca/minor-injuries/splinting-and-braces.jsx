@@ -1,12 +1,15 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
 import { graphql } from "gatsby"
+
+import AppContext from "../../../context/AppContext"
 
 import Layout from "../../../layout/Layout"
 import Seo from "../../../components/Seo"
 
 import InnerHero from "../../../components/InnerHero"
 import TextSection from "../../../components/TextSection"
+import MobilePingPong from "../../../components/MobilePingPong"
 import PingPong from "../../../components/PingPong"
 import CtaSection from "../../../components/CtaSection"
 import Faqs from "../../../components/Faqs"
@@ -26,6 +29,7 @@ const SplintingAndBraces = ({
     cardsData: { cardsData },
   },
 }) => {
+  const { isiPadPro12 } = useContext(AppContext)
   //console.log(textData)
   return (
     <Layout>
@@ -38,7 +42,12 @@ const SplintingAndBraces = ({
           heading={textData.Heading}
           copy={textData.Copy}
         />
-        <PingPong titleData={pingPongTitle} items={pingPongItems} />
+        {isiPadPro12 ? (
+          <MobilePingPong titleData={pingPongTitle} items={pingPongItems} />
+        ) : (
+          <PingPong titleData={pingPongTitle} items={pingPongItems} />
+        )}
+
         {/* <CtaSection
           heading={ctaSectionData.Heading}
           subheading={ctaSectionData.Subheading}
@@ -62,6 +71,7 @@ const SplintingAndBraces = ({
               data: { question: item.data.Heading, answer: item.data.Copy },
             }
           })}
+          noPaddingTop
         />
         <CardsSection
           superheading={cardsTitleData.Superheader}
@@ -74,6 +84,8 @@ const SplintingAndBraces = ({
                 heading: cardDatum.data.Heading,
                 copy: cardDatum.data.Copy,
                 icon: cardDatum.data.Media,
+                linkLabel: cardDatum.data.Button_Label,
+                link: cardDatum.data.Button_Link,
               },
             }
           })}
@@ -180,13 +192,15 @@ export const query = graphql`
     cardsData: allAirtable(
       filter: {
         table: { eq: "Splinting and Braces" }
-        data: { Block: { eq: "CardItem" } }
+        data: { Block: { eq: "CardsItem" } }
       }
     ) {
       cardsData: nodes {
         data {
           Heading
           Copy
+          Button_Label
+          Button_Link
           Media {
             localFiles {
               publicURL

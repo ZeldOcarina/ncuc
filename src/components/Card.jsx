@@ -5,13 +5,14 @@ import respond from "../styles/abstracts/mediaqueries"
 
 const StyledCard = styled.article`
   background-color: var(--white);
-  padding: 8rem 4rem 10rem 4rem;
+  padding: 8rem 4rem ${({ link }) => (link ? "10rem" : "8rem")} 4rem;
   position: relative;
 
   ${respond(
     "big-desktop",
     css`
       padding: 10rem 6rem 12rem 6rem;
+      padding: 10rem 6rem ${({ link }) => (link ? "12rem" : "10rem")} 4rem;
     `
   )}
 
@@ -81,16 +82,18 @@ const StyledCard = styled.article`
 
 const Card = ({ copy, heading, icon, linkLabel, link }) => {
   return (
-    <StyledCard>
+    <StyledCard link={link}>
       <div className="icon-container">
         <img src={icon?.localFiles[0]?.publicURL} alt={heading} />
       </div>
 
       <h5>{heading}</h5>
       <p>{copy}</p>
-      <Link className="link" to={link}>
-        {linkLabel}
-      </Link>
+      {link && (
+        <Link className="link" to={link}>
+          {linkLabel}
+        </Link>
+      )}
     </StyledCard>
   )
 }

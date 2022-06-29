@@ -1,6 +1,7 @@
 import { getImage } from "gatsby-plugin-image"
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
+import respond from "../styles/abstracts/mediaqueries"
 
 import BackgroundImage from "./BackgroundImage"
 
@@ -14,6 +15,37 @@ const StyledInnerHero = styled.header`
   align-items: center;
   justify-items: center;
 
+  ${respond(
+    "ipad-pro-12.9-land",
+    css`
+      min-height: 90vh;
+    `
+  )}
+  ${respond(
+    "ipad-pro-12-port",
+    css`
+      min-height: 92vh;
+    `
+  )}
+  ${respond(
+    "iphone-12-pro-land",
+    css`
+      min-height: 120vh;
+    `
+  )}
+  ${respond(
+    "iphone-12-pro-max",
+    css`
+      min-height: 85vh;
+    `
+  )}
+  ${respond(
+    "iphone-8-plus",
+    css`
+      min-height: 75vh;
+    `
+  )}
+
   .text-container {
     margin: 0;
     z-index: 10;
@@ -22,14 +54,53 @@ const StyledInnerHero = styled.header`
     left: 20rem;
     text-transform: uppercase;
     max-width: 50%;
+
+    ${respond(
+      "notebook",
+      css`
+        bottom: 15rem;
+        left: 15rem;
+      `
+    )}
+
+    ${respond(
+      "iphone-12-pro-land",
+      css`
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+      `
+    )}
+    ${respond(
+      "iphone-12-pro-max",
+      css`
+        max-width: 100%;
+        width: 90%;
+        bottom: 27rem;
+      `
+    )}
+
+${respond(
+      "iphone-8-plus",
+      css`
+        bottom: 15rem;
+      `
+    )}
   }
 
   h1 {
     color: var(--white);
-    font-size: 6rem;
+    font-size: 4rem;
     line-height: 1.2;
     font-weight: 400;
     margin: 0;
+
+    ${respond(
+      "notebook",
+      css`
+        font-size: 4rem;
+      `
+    )}
   }
 
   p {
