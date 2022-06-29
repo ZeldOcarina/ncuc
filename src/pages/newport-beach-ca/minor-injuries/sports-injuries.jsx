@@ -63,7 +63,7 @@ const SportsInjuries = ({
           heading={faqsTitleData.Heading}
           faqs={faqsData.map(item => {
             return {
-              id: item.id,
+              id: item?.id,
               data: { question: item.data.Heading, answer: item.data.Copy },
             }
           })}
@@ -75,7 +75,7 @@ const SportsInjuries = ({
           cards={cardsData.map(cardDatum => {
             console.log(cardDatum)
             return {
-              id: cardDatum.id,
+              id: cardDatum?.id,
               data: {
                 heading: cardDatum.data.Heading,
                 copy: cardDatum.data.Copy,

@@ -58,7 +58,7 @@ const LacerationsAndWoundCare = ({
           heading={faqsTitleData.Heading}
           faqs={faqsData.map(item => {
             return {
-              id: item.id,
+              id: item?.id,
               data: { question: item.data.Heading, answer: item.data.Copy },
             }
           })}

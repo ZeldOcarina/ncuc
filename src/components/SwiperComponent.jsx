@@ -94,7 +94,7 @@ const SwiperComponent = ({ images }) => {
       >
         {images?.localFiles?.map(image => {
           return (
-            <SwiperSlide key={image.id}>
+            <SwiperSlide key={image?.id}>
               <GatsbyImage
                 image={getImage(image)}
                 className="image"

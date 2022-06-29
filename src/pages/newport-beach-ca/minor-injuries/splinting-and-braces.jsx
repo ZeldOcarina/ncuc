@@ -58,7 +58,7 @@ const SplintingAndBraces = ({
           heading={faqsTitleData.Heading}
           faqs={faqsData.map(item => {
             return {
-              id: item.id,
+              id: item?.id,
               data: { question: item.data.Heading, answer: item.data.Copy },
             }
           })}
@@ -69,7 +69,7 @@ const SplintingAndBraces = ({
           subheading={cardsTitleData.Subheading}
           cards={cardsData.map(cardDatum => {
             return {
-              id: cardDatum.id,
+              id: cardDatum?.id,
               data: {
                 heading: cardDatum.data.Heading,
                 copy: cardDatum.data.Copy,
