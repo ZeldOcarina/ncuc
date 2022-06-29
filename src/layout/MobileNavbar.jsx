@@ -14,9 +14,10 @@ const StyledMobileNavbar = styled.div`
   top: 0;
   left: 0;
   z-index: 200;
-  background-color: rgba(29, 122, 237, 0.96);
+  background-color: rgba(22, 176, 216, 0.96);
   transform: translateX(200vw);
   transition: all 0.3s ease-in-out;
+  overflow: scroll;
 
   ${({ open }) => {
     //console.log(open);
@@ -33,7 +34,7 @@ const StyledMobileNavbar = styled.div`
     position: absolute;
     right: 5rem;
     top: 5rem;
-    width: 10%;
+    width: 5rem;
     height: auto;
     color: var(--white);
 
@@ -46,18 +47,18 @@ const StyledMobileNavbar = styled.div`
   }
 
   .mobile-navbar {
-    color: var(--white);
+    color: var(--color-primary);
+    font-weight: 500;
     text-transform: uppercase;
     font-family: var(--body-font);
     font-size: 3.2rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: static;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8rem;
+    overflow: scroll;
+    margin: 5rem 0;
 
     ${respond(
       "phone-land",
@@ -81,12 +82,28 @@ const StyledMobileNavbar = styled.div`
       font-weight: 400;
     }
   }
+
+  .categories-subitems {
+    list-style: none;
+    color: var(--white);
+    margin-left: 2rem;
+
+    li {
+      color: var(--white);
+    }
+
+    &__link {
+      color: #ffffff;
+      font-size: 2.5rem;
+    }
+  }
 `
 
 const MobileNavbar = ({
   siteMetadata: {
     navbarLinks: { pages, social },
   },
+  menuData: { categories, menuData },
 }) => {
   const { isMobileMenuOpen, setIsMobileMenuOpen } = useContext(AppContext)
 
@@ -94,23 +111,42 @@ const MobileNavbar = ({
     <StyledMobileNavbar open={isMobileMenuOpen}>
       <nav className="mobile-navbar">
         <ul className="mobile-navbar__top-ul">
-          {pages.map(({ link, name }, i) => {
+          {categories.map((category, i) => {
+            const categoryItems = menuData.filter(
+              item => item.data.Parent === category
+            )
             return (
               <li className="mobile-navbar__top-li" key={i}>
-                <Link
+                {/* <Link
                   className="mobile-navbar__top-link"
                   to={link}
                   onClick={() => {
                     setIsMobileMenuOpen(false)
                   }}
-                >
-                  {name}
-                </Link>
+                > */}
+                {category}
+                <ul className="categories-subitems">
+                  {categoryItems.map((item, i) => {
+                    return (
+                      <li className="categories-subitems__item" key={i}>
+                        <Link
+                          className="categories-subitems__link"
+                          to={item.data.Permalink}
+                          onClick={() => {
+                            setIsMobileMenuOpen(false)
+                          }}
+                        >
+                          {item.data.Child}
+                        </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
+                {/* </Link> */}
               </li>
             )
           })}
         </ul>
-        <SocialIcons socialLinks={social} mobileVersion />
       </nav>
       <MdClose
         className="close-icon"

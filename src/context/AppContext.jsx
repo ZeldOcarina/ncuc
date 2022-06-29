@@ -10,6 +10,9 @@ function ContextProvider(props) {
   const isTabPort = useMediaQuery({ query: "(max-width: 56.25em)" })
   const isPhoneLand = useMediaQuery({ query: "(max-height: 400px)" })
   const isPhonePort = useMediaQuery({ query: "(max-width: 28.125em)" })
+  const isiPhone12Land = useMediaQuery({ query: `(max-width: ${844 / 16}em)` })
+  const isiPadPro12 = useMediaQuery({ query: `(max-width: ${1024 / 16}em)` })
+  const isNotebook = useMediaQuery({ query: `(max-width: ${1366 / 16}em)` })
 
   const [alertState, setAlertState] = useState({
     successful: false,
@@ -37,6 +40,9 @@ function ContextProvider(props) {
         isTabPort,
         isPhoneLand,
         isPhonePort,
+        isiPhone12Land,
+        isiPadPro12,
+        isNotebook,
         alertState,
         setAlertState,
         formData,

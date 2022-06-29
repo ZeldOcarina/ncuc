@@ -97,7 +97,7 @@ const Layout = ({ children, salesLetter, innerLayout }) => {
         socialLinks={socialLinks}
       />
       <MonarchyStripe />
-      <MobileNavbar siteMetadata={siteMetadata} />
+      <MobileNavbar siteMetadata={siteMetadata} menuData={menuData} />
 
       <AlertMessage
         message={alertState.message}

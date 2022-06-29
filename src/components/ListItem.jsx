@@ -1,6 +1,7 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import PropTypes from "prop-types"
+import respond from "../styles/abstracts/mediaqueries"
 
 const StyledListItem = styled.li`
   display: grid;
@@ -9,6 +10,15 @@ const StyledListItem = styled.li`
   gap: var(--gutter);
 
   margin-bottom: var(--small-gutter);
+
+  img {
+    ${respond(
+      "iphone-12-mini-land",
+      css`
+        width: 1.8rem;
+      `
+    )}
+  }
 `
 
 /********************

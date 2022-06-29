@@ -1,13 +1,20 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
+import AppContext from "../../context/AppContext"
 
 import IntroSection from "../../components/IntroSection"
 import CopySection from "../../components/CopySection"
 
-const StyledSupport = styled.section``
+const StyledSupport = styled.section`
+  .phone-container {
+    width: 90%;
+    margin: 0 auto;
+  }
+`
 
 const Support = () => {
+  const { isiPhone12Land } = useContext(AppContext)
   const {
     intro: {
       data: { copy, superheading, heading, subheading },
@@ -15,7 +22,7 @@ const Support = () => {
   } = useStaticQuery(query)
   return (
     <StyledSupport>
-      <div className="container">
+      <div className={isiPhone12Land ? "phone-container" : "container"}>
         <IntroSection
           superheading={superheading}
           heading={heading}

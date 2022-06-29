@@ -1,9 +1,18 @@
 import React, { useEffect, useRef } from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { Loader } from "@googlemaps/js-api-loader"
+import respond from "../styles/abstracts/mediaqueries"
 
 const StyledMap = styled.div`
   height: 50vh;
+
+  ${respond(
+    "phone-land",
+    css`
+      height: 100vh;
+    `
+  )}
+
   &:not(:last-child) {
     margin-bottom: var(--gutter);
   }

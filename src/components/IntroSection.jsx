@@ -9,12 +9,26 @@ const StyledIntroSection = styled.section`
   padding-bottom: ${({ padding }) => {
     return padding || padding === 0 ? `${padding}rem` : `var(--gutter)`
   }};
+
+  ${respond(
+    "iphone-12-mini-land",
+    css`
+      margin-bottom: 3rem;
+    `
+  )}
+
   h3 {
     color: var(--color-secondary);
     text-transform: uppercase;
     text-align: center;
     font-size: 2rem;
 
+    ${respond(
+      "iphone-8-plus-land",
+      css`
+        font-size: 1.8rem;
+      `
+    )}
     ${respond(
       "big-desktop",
       css`
@@ -41,6 +55,19 @@ const StyledIntroSection = styled.section`
     width: 85%;
 
     ${respond(
+      "iphone-8-plus-land",
+      css`
+        font-size: 3rem;
+      `
+    )}
+    ${respond(
+      "iphone-12-mini-land",
+      css`
+        width: 95%;
+        font-size: 2.8rem;
+      `
+    )}
+    ${respond(
       "big-desktop",
       css`
         font-size: 6rem;
@@ -55,6 +82,13 @@ const StyledIntroSection = styled.section`
     text-align: left;
     width: 84%;
 
+    ${respond(
+      "iphone-12-mini-land",
+      css`
+        width: 90%;
+        font-size: 1.4rem;
+      `
+    )}
     ${respond(
       "big-desktop",
       css`

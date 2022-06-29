@@ -6,9 +6,9 @@ import { GiHamburgerMenu } from "react-icons/gi"
 
 import AppContext from "../context/AppContext"
 import { LocationContext } from "../context/LocationContext"
-import { createLinkWithParams } from "../utils/utils"
 
-import MenuCategoryItems from "../components/MenuCategoryItems"
+import CategoryItem from "../components/CategoryItem"
+import { createLinkWithParams } from "../utils/utils"
 
 const Wrapper = styled.nav`
   position: static;
@@ -18,10 +18,6 @@ const Wrapper = styled.nav`
   z-index: 150;
   height: 7rem;
   font-size: 1.6rem;
-
-  .container {
-    height: 100%;
-  }
 
   ${respond(
     "tab-land",
@@ -58,8 +54,42 @@ const Wrapper = styled.nav`
       height: 12rem;
     `
   )}
-    .container {
+
+  .navbar-notebook-container {
+    max-width: 1250px;
+    margin: 0 auto;
+
+    ${respond(
+      "laptop-s",
+      css`
+        max-width: 1200px;
+      `
+    )}
+    ${respond(
+      "ipad-pro-11-land",
+      css`
+        max-width: 1000px;
+      `
+    )}
+    ${respond(
+      "tab-land",
+      css`
+        max-width: 800px;
+      `
+    )}
+    ${respond(
+      "iphone-12-pro-land",
+      css`
+        width: 85% !important;
+        margin: 0 auto;
+      `
+    )}
+  }
+
+  .container,
+  .navbar-notebook-container {
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -72,7 +102,7 @@ const Wrapper = styled.nav`
     height: 100%;
 
     ${respond(
-      "tab-port",
+      "ipad-pro-12.9-land",
       css`
         display: none;
       `
@@ -119,13 +149,13 @@ const Wrapper = styled.nav`
     display: none;
 
     ${respond(
-      "tab-port",
+      "ipad-pro-12.9-land",
       css`
         display: block;
         color: var(--color-secondary);
         position: absolute;
         right: 10%;
-        width: 6%;
+        width: 4rem;
         height: auto;
       `
     )}
@@ -138,6 +168,12 @@ const Wrapper = styled.nav`
       "iphone-12-pro-land",
       css`
         width: 8rem;
+      `
+    )}
+    ${respond(
+      "iphone-12-pro-land",
+      css`
+        width: 18rem;
       `
     )}
     ${respond(
@@ -159,20 +195,6 @@ const Wrapper = styled.nav`
     margin: 0;
     padding: 0;
   }
-
-  .category-item {
-    position: relative;
-    height: 100%;
-    display: grid;
-    align-items: center;
-    text-transform: uppercase;
-    cursor: pointer;
-    span {
-      &:hover {
-        color: var(--color-secondary);
-      }
-    }
-  }
 `
 
 const Navbar = ({ innerPage, innerLayout, menuData }) => {
@@ -181,29 +203,16 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
     setIsMobileMenuOpen,
     hoveredCategory,
     setHoveredCategory,
+    isNotebook,
   } = useContext(AppContext)
   const { params } = useContext(LocationContext)
-
   const { logo } = useStaticQuery(query)
 
   const logoUrl = logo.nodes[0].data.logo[0].url
 
-  console.log(menuData)
-
-  function handleMouseEnter(category) {
-    setHoveredCategory(category)
-  }
-  function handleMouseLeave(category) {
-    setHoveredCategory("")
-  }
-
-  useEffect(() => {
-    console.log(hoveredCategory)
-  }, [hoveredCategory])
-
   return (
     <Wrapper scrolled={false} innerLayout={innerLayout}>
-      <div className="container">
+      <div className={isNotebook ? "navbar-notebook-container" : "container"}>
         <Link to={logo?.nodes[0]?.data?.Permalink}>
           {<img src={logoUrl} alt="NCUC Logo" className="logo" />}
         </Link>
@@ -222,25 +231,12 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
             //const linkString = createLinkWithParams(data?.Permalink, params)
             return (
               //<Link to={linkString} className="nav-link" key={id}>
-              <div
-                className="category-item"
-                onMouseEnter={() => handleMouseEnter(category)}
-                onMouseLeave={() => handleMouseLeave(category)}
+              <CategoryItem
+                category={category}
                 key={i}
-              >
-                <span>{category}</span>
-                {hoveredCategory === category && (
-                  <MenuCategoryItems category={category}>
-                    {categoryItems.map((item, i) => {
-                      return (
-                        <Link to={item.data.Permalink} key={i}>
-                          {item.data.Child || ""}
-                        </Link>
-                      )
-                    })}
-                  </MenuCategoryItems>
-                )}
-              </div>
+                categoryItems={categoryItems}
+              />
+
               //</Link>
             )
           })}

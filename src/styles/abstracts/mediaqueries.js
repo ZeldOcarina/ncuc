@@ -34,6 +34,10 @@ function respond(breakpoint, css) {
       return `@media only screen and (max-width: ${667 / BASE_PIXELS}em) {
                 ${css}
               }`
+    case "iphone-8-plus-land":
+      return `@media only screen and (max-width: ${736 / BASE_PIXELS}em) {
+                ${css}
+              }`
     case "ipad-port":
       return `@media only screen and (max-width: ${768 / BASE_PIXELS}em) {
                 ${css}
@@ -76,6 +80,10 @@ function respond(breakpoint, css) {
               }`
     case "ipad-pro-12-port":
       return `@media only screen and (max-width: ${1024 / BASE_PIXELS}em) {
+                ${css}
+              }`
+    case "ipad-pro-10.5-land":
+      return `@media only screen and (max-width: ${1112 / BASE_PIXELS}em) {
                 ${css}
               }`
     case "ipad-pro-11-land":

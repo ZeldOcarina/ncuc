@@ -9,7 +9,7 @@ import Button from "../../components/Button"
 import { Colors } from "../../styles/abstracts/abstracts"
 
 const StyledHero = styled.header`
-  min-height: 88vh;
+  min-height: 90vh;
   background-color: var(--background-dark);
   position: relative;
   z-index: 1;
@@ -18,6 +18,24 @@ const StyledHero = styled.header`
   align-items: center;
   justify-items: center;
 
+  ${respond(
+    "ipad-pro-12-port",
+    css`
+      min-height: 92vh;
+    `
+  )}
+  ${respond(
+    "iphone-12-pro-land",
+    css`
+      min-height: 120vh;
+    `
+  )}
+  ${respond(
+    "iphone-12-mini-land",
+    css`
+      min-height: 140vh;
+    `
+  )}
   ${respond(
     "big-desktop",
     css`
@@ -50,6 +68,19 @@ const StyledHero = styled.header`
     line-height: 1.2;
     font-weight: 400;
 
+    ${respond(
+      "macbook-air",
+      css`
+        font-size: 5rem;
+      `
+    )}
+    ${respond(
+      "iphone-12-pro-land",
+      css`
+        font-size: 4rem;
+        max-width: 80%;
+      `
+    )}
     ${respond(
       "big-desktop",
       css`

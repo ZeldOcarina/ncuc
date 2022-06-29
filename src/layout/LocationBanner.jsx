@@ -9,6 +9,12 @@ const StyledLocationBanner = styled.div`
   font-size: 1.6rem;
 
   ${respond(
+    "iphone-12-land",
+    css`
+      text-align: center;
+    `
+  )}
+  ${respond(
     "big-desktop",
     css`
       font-size: 2.2rem;

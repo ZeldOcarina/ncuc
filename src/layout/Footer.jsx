@@ -1,6 +1,8 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { Link } from "gatsby"
+import respond from "../styles/abstracts/mediaqueries"
+
 import FooterSocialIcons from "./FooterSocialIcons"
 
 import { Colors } from "../styles/abstracts/abstracts"
@@ -20,6 +22,13 @@ const StyledFooter = styled.footer`
     grid-template-columns: max-content max-content;
     align-items: flex-start;
     justify-content: space-around;
+
+    ${respond(
+      "iphone-12-pro-land",
+      css`
+        grid-template-columns: 1fr;
+      `
+    )}
 
     h5 {
       color: var(--grey500);
@@ -43,6 +52,13 @@ const StyledFooter = styled.footer`
       text-transform: uppercase;
       text-align: left;
       font-weight: 500;
+
+      ${respond(
+        "iphone-12-pro-land",
+        css`
+          text-align: center;
+        `
+      )}
     }
   }
 
@@ -50,6 +66,14 @@ const StyledFooter = styled.footer`
     display: grid;
     grid-template-columns: max-content max-content max-content;
     gap: 1rem;
+
+    ${respond(
+      "iphone-12-pro-land",
+      css`
+        margin-top: var(--big-gutter);
+        justify-content: center;
+      `
+    )}
   }
 `
 

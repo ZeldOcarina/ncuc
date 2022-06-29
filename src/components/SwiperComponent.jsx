@@ -1,8 +1,11 @@
-import React from "react"
-import styled from "styled-components"
+import React, { useContext } from "react"
+import styled, { css } from "styled-components"
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import respond from "../styles/abstracts/mediaqueries"
+
+import AppContext from "../context/AppContext"
 
 // Import Swiper styles
 import "swiper/css/bundle"
@@ -10,6 +13,13 @@ import "swiper/css/bundle"
 const StyledSwiper = styled.div`
   .swiper-container {
     max-height: 60vh;
+
+    ${respond(
+      "iphone-12-pro-land",
+      css`
+        max-height: 100vh;
+      `
+    )}
   }
   .image {
     width: 100%;
@@ -17,17 +27,26 @@ const StyledSwiper = styled.div`
 
     img {
       min-height: 70vh;
+
+      ${respond(
+        "iphone-12-pro-land",
+        css`
+          min-height: 90vh;
+        `
+      )}
     }
   }
 `
 
 const SwiperComponent = ({ images }) => {
+  const { isiPadPro12 } = useContext(AppContext)
+
   return (
     <StyledSwiper>
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={15}
-        slidesPerView={3}
+        slidesPerView={isiPadPro12 ? 2 : 3}
         // onSlideChange={() => console.log("slide change")}
         // onSwiper={swiper => console.log(swiper)}
         className="swiper-container"
