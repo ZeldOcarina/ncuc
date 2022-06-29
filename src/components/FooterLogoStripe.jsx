@@ -49,26 +49,14 @@ const StyledFooterLogoStripe = styled.div`
   }
 `
 
-const FooterLogoStripe = () => {
-  const {
-    buttons: {
-      data: { btn1Label, btn2Label },
-    },
-    allAirtable: { nodes },
-  } = useStaticQuery(query)
-
-  const phoneNumber = nodes.find(node => node.data.Label === "Phone").data.Value
-  const telString = nodes.find(node => node.data.Label === "Tel:").data.Value
-  const logo = nodes.find(node => node.data.Label === "Wide").data.Attachments
-    .localFiles[0].publicURL
-
+const FooterLogoStripe = ({ phone, tel, logo }) => {
   return (
     <StyledFooterLogoStripe>
       <div className="container">
         <div className="top-part">
           <img src={logo} alt="logo" className="logo" />
-          <a className="phone" href={telString}>
-            {phoneNumber}
+          <a className="phone" href={tel}>
+            {phone}
           </a>
         </div>
 
@@ -79,7 +67,7 @@ const FooterLogoStripe = () => {
             className="button"
             type="link"
           >
-            {btn1Label}
+            Book in-person visit
           </Button>
           <Button
             type="link"
@@ -87,47 +75,12 @@ const FooterLogoStripe = () => {
             width="30rem"
             className="button"
           >
-            {btn2Label}
+            Book Telemedicine
           </Button>
         </div>
       </div>
     </StyledFooterLogoStripe>
   )
 }
-
-export const query = graphql`
-  query FooterLogoStripe {
-    buttons: airtable(
-      data: { Block: { eq: "FooterLogoStrip" } }
-      table: { eq: "Footer (Global)" }
-    ) {
-      data {
-        btn1Label
-        btn2Label
-      }
-    }
-    allAirtable(
-      filter: {
-        table: { eq: "Config" }
-        data: {
-          Name: { regex: "/Logo|Details/" }
-          Label: { regex: "/Wide|Phone|Tel:/" }
-        }
-      }
-    ) {
-      nodes {
-        data {
-          Attachments {
-            localFiles {
-              publicURL
-            }
-          }
-          Label
-          Value
-        }
-      }
-    }
-  }
-`
 
 export default FooterLogoStripe

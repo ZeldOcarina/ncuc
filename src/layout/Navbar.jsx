@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import styled, { css } from "styled-components"
 import { graphql, Link, useStaticQuery } from "gatsby"
 import respond from "../styles/abstracts/mediaqueries"
@@ -8,15 +8,20 @@ import AppContext from "../context/AppContext"
 import { LocationContext } from "../context/LocationContext"
 import { createLinkWithParams } from "../utils/utils"
 
+import MenuCategoryItems from "../components/MenuCategoryItems"
+
 const Wrapper = styled.nav`
   position: static;
   width: 100%;
   display: flex;
   align-items: center;
   z-index: 150;
-
   height: 7rem;
   font-size: 1.6rem;
+
+  .container {
+    height: 100%;
+  }
 
   ${respond(
     "tab-land",
@@ -64,6 +69,7 @@ const Wrapper = styled.nav`
     display: flex;
     gap: 2.5rem;
     align-items: center;
+    height: 100%;
 
     ${respond(
       "tab-port",
@@ -153,17 +159,47 @@ const Wrapper = styled.nav`
     margin: 0;
     padding: 0;
   }
+
+  .category-item {
+    position: relative;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    span {
+      &:hover {
+        color: var(--color-secondary);
+      }
+    }
+  }
 `
 
-const Navbar = ({ innerPage, innerLayout, menu }) => {
-  const { isMobileMenuOpen, setIsMobileMenuOpen } = useContext(AppContext)
+const Navbar = ({ innerPage, innerLayout, menuData }) => {
+  const {
+    isMobileMenuOpen,
+    setIsMobileMenuOpen,
+    hoveredCategory,
+    setHoveredCategory,
+  } = useContext(AppContext)
   const { params } = useContext(LocationContext)
 
   const { logo } = useStaticQuery(query)
 
-  //console.log(logo.nodes[0].data.Permalink)
-
   const logoUrl = logo.nodes[0].data.logo[0].url
+
+  console.log(menuData)
+
+  function handleMouseEnter(category) {
+    setHoveredCategory(category)
+  }
+  function handleMouseLeave(category) {
+    setHoveredCategory("")
+  }
+
+  useEffect(() => {
+    console.log(hoveredCategory)
+  }, [hoveredCategory])
 
   return (
     <Wrapper scrolled={false} innerLayout={innerLayout}>
@@ -179,12 +215,33 @@ const Navbar = ({ innerPage, innerLayout, menu }) => {
               : "links-container"
           }
         >
-          {menu?.nodes.map(({ data, id }) => {
-            const linkString = createLinkWithParams(data?.Permalink, params)
+          {menuData.categories.map((category, i) => {
+            const categoryItems = menuData.menuData.filter(
+              item => item.data.Parent === category
+            )
+            //const linkString = createLinkWithParams(data?.Permalink, params)
             return (
-              <Link to={linkString} className="nav-link" key={id}>
-                {data.Child}
-              </Link>
+              //<Link to={linkString} className="nav-link" key={id}>
+              <div
+                className="category-item"
+                onMouseEnter={() => handleMouseEnter(category)}
+                onMouseLeave={() => handleMouseLeave(category)}
+                key={i}
+              >
+                <span>{category}</span>
+                {hoveredCategory === category && (
+                  <MenuCategoryItems category={category}>
+                    {categoryItems.map((item, i) => {
+                      return (
+                        <Link to={item.data.Permalink} key={i}>
+                          {item.data.Child || ""}
+                        </Link>
+                      )
+                    })}
+                  </MenuCategoryItems>
+                )}
+              </div>
+              //</Link>
             )
           })}
         </div>

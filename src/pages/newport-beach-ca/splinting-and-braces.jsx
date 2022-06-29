@@ -1,16 +1,16 @@
 import React from "react"
 import styled from "styled-components"
-
-import Layout from "../layout/Layout"
-import Seo from "../components/Seo"
 import { graphql } from "gatsby"
 
-import InnerHero from "../components/InnerHero"
-import TextSection from "../components/TextSection"
-import PingPong from "../components/PingPong"
-import CtaSection from "../components/CtaSection"
-import Faqs from "../components/Faqs"
-import CardsSection from "../components/CardsSection"
+import Layout from "../../layout/Layout"
+import Seo from "../../components/Seo"
+
+import InnerHero from "../../components/InnerHero"
+import TextSection from "../../components/TextSection"
+import PingPong from "../../components/PingPong"
+import CtaSection from "../../components/CtaSection"
+import Faqs from "../../components/Faqs"
+import CardsSection from "../../components/CardsSection"
 
 const StyledSplintingAndBraces = styled.main``
 

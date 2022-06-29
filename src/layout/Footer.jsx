@@ -79,7 +79,7 @@ const Footer = ({ siteMetadata, menu, locationData, socialLinks }) => {
           <h5>QUICK LINKS</h5>
           {menu.nodes.map(menuItem => {
             return (
-              <Link key={menuItem.id} to={menuItem.data.Permalink}>
+              <Link key={menuItem?.id} to={menuItem.data.Permalink}>
                 {menuItem.data.Child}
               </Link>
             )

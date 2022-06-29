@@ -13,6 +13,35 @@ import Map from "../components/Map"
 import FooterLogoStripe from "../components/FooterLogoStripe"
 import MonarchyStripe from "../components/MonarchyStripe"
 
+function organizeMenu(categoriesData) {
+  const categories = new Set()
+  const organizedMenuData = {}
+
+  categoriesData.forEach(category => {
+    if (category.data.Parent === "Logo") return
+    categories.add(category.data.Parent)
+  })
+
+  categories.forEach(category => {
+    organizedMenuData[category] = []
+  })
+
+  categoriesData.forEach(navItem => {
+    if (navItem.data.Parent === "Logo") return
+    organizedMenuData[navItem.data.Parent].push({
+      link: navItem.data.Permalink,
+      name: navItem.data.Child,
+      category: navItem.data.Parent,
+    })
+  })
+
+  const noLogoCategoriesData = categoriesData.filter(
+    item => item.data.Parent !== "Logo"
+  )
+
+  return { categories: [...categories], menuData: noLogoCategoriesData }
+}
+
 const Layout = ({ children, salesLetter, innerLayout }) => {
   const {
     menu,
@@ -24,6 +53,8 @@ const Layout = ({ children, salesLetter, innerLayout }) => {
     telData: { telData },
     stateData: { stateData },
     cityData: { cityData },
+    categoriesData: { categoriesData },
+    logoData: { logoData },
   } = useStaticQuery(query)
 
   const { alertState, setAlertState } = useContext(AppContext)
@@ -31,6 +62,8 @@ const Layout = ({ children, salesLetter, innerLayout }) => {
   const lat = nodes?.find(node => node?.data?.Label === "Latitude")?.data?.Value
   const long = nodes?.find(node => node?.data?.Label === "Longitude")?.data
     ?.Value
+
+  const menuData = organizeMenu(categoriesData)
 
   return (
     <>
@@ -46,13 +79,17 @@ const Layout = ({ children, salesLetter, innerLayout }) => {
         <Navbar
           siteMetadata={siteMetadata}
           innerLayout={innerLayout}
-          menu={menu}
+          menuData={menuData}
         />
       )}
       {children}
       <GallerySection />
       <Map lat={lat} long={long} mapName="map" />
-      <FooterLogoStripe />
+      <FooterLogoStripe
+        phone={phoneData.Value}
+        tel={telData.Value}
+        logo={logoData.Attachments.localFiles[0].publicURL}
+      />
       <Footer
         siteMetadata={siteMetadata}
         menu={menu}
@@ -74,6 +111,15 @@ const Layout = ({ children, salesLetter, innerLayout }) => {
 
 const query = graphql`
   {
+    categoriesData: allAirtable(filter: { table: { eq: "Menu" }, data: {} }) {
+      categoriesData: nodes {
+        data {
+          Parent
+          Child
+          Permalink
+        }
+      }
+    }
     socialLinks: allAirtable(
       filter: {
         table: { eq: "Config" }
@@ -172,6 +218,20 @@ const query = graphql`
     ) {
       cityData: data {
         Value
+      }
+    }
+    logoData: airtable(
+      data: { Label: { eq: "Wide" }, Name: { eq: "Logo" } }
+      table: { eq: "Config" }
+    ) {
+      logoData: data {
+        Attachments {
+          localFiles {
+            publicURL
+          }
+        }
+        Name
+        Label
       }
     }
   }

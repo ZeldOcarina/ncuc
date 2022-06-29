@@ -28,6 +28,7 @@ function ContextProvider(props) {
 
   const [isFormSubmitting, setIsFormSubmitting] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [hoveredCategory, setHoveredCategory] = useState("")
 
   return (
     <AppContext.Provider
@@ -45,6 +46,8 @@ function ContextProvider(props) {
         isMobileMenuOpen,
         setIsMobileMenuOpen,
         isBrowser,
+        hoveredCategory,
+        setHoveredCategory,
       }}
     >
       {props.children}

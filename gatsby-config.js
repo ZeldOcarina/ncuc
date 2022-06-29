@@ -45,11 +45,6 @@ module.exports = {
           },
           {
             baseId: process.env.AIRTABLE_BASE_ID,
-            tableName: `Faqs`,
-            tableId: `tbl9NHDeMO9g1pe7E`
-          },
-          {
-            baseId: process.env.AIRTABLE_BASE_ID,
             tableName: `Footer (Global)`,
             tableId: `tblSR7h78XJxd35Uf`,
             mapping: { Media: `fileNode` }

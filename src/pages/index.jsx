@@ -22,7 +22,7 @@ const IndexPage = ({
     faqsData: { faqsData },
   },
 }) => {
-  console.log(faqsData)
+  //console.log(faqsData)
   return (
     <Layout>
       <Seo title="Newport Urgent Care" />
@@ -41,7 +41,7 @@ const IndexPage = ({
           subheading={faqsTitle.subheading}
           faqs={faqsData.map(item => {
             return {
-              id: item.id,
+              id: item?.id,
               data: { question: item.data.heading, answer: item.data.copy },
             }
           })}
