@@ -35,9 +35,9 @@ const Wrapper = styled.nav`
     ${respond(
     "phone-port",
     css`
-      margin-top: 3.5rem;
+      margin-top: 0;
       top: 1rem;
-      height: max-content;
+      height: 8rem;
     `
   )}
     ${respond(
@@ -174,6 +174,12 @@ const Wrapper = styled.nav`
       "iphone-12-pro-land",
       css`
         width: 18rem;
+      `
+    )}
+    ${respond(
+      "phone-port",
+      css`
+        width: 22rem;
       `
     )}
     ${respond(

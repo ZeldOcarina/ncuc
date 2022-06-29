@@ -5,12 +5,20 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import respond from "../styles/abstracts/mediaqueries"
 
+import { MdViewCarousel } from "react-icons/md"
+
 import AppContext from "../context/AppContext"
 
 // Import Swiper styles
 import "swiper/css/bundle"
 
 const StyledSwiper = styled.div`
+  ${respond(
+    "phone-port",
+    css`
+      position: relative;
+    `
+  )}
   .swiper-container {
     max-height: 60vh;
 
@@ -18,6 +26,12 @@ const StyledSwiper = styled.div`
       "iphone-12-pro-land",
       css`
         max-height: 100vh;
+      `
+    )}
+    ${respond(
+      "phone-port",
+      css`
+        max-height: 60vh;
       `
     )}
   }
@@ -34,19 +48,46 @@ const StyledSwiper = styled.div`
           min-height: 90vh;
         `
       )}
+      ${respond(
+        "phone-port",
+        css`
+          min-height: 60vh;
+
+          margin: 0 auto;
+        `
+      )}
     }
+  }
+
+  .slide-icon {
+    color: var(--color-secondary);
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 4rem;
+    z-index: 500;
   }
 `
 
 const SwiperComponent = ({ images }) => {
-  const { isiPadPro12 } = useContext(AppContext)
+  const { isiPadPro12, isPhonePort } = useContext(AppContext)
+
+  function setSlidesAmount() {
+    if (isPhonePort) {
+      return 1
+    } else if (isiPadPro12) {
+      return 2
+    } else {
+      return 3
+    }
+  }
 
   return (
     <StyledSwiper>
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={15}
-        slidesPerView={isiPadPro12 ? 2 : 3}
+        slidesPerView={setSlidesAmount()}
         // onSlideChange={() => console.log("slide change")}
         // onSwiper={swiper => console.log(swiper)}
         className="swiper-container"
@@ -63,6 +104,7 @@ const SwiperComponent = ({ images }) => {
           )
         })}
       </Swiper>
+      {isPhonePort && <MdViewCarousel className="slide-icon" />}
     </StyledSwiper>
   )
 }

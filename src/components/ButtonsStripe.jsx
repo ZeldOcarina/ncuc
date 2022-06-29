@@ -21,6 +21,13 @@ const StyledButtonsStripe = styled.section`
     width: max-content;
     margin: 0 auto;
     gap: var(--gutter);
+
+    ${respond(
+      "phone-port",
+      css`
+        grid-template-columns: 1fr;
+      `
+    )}
   }
 `
 

@@ -30,6 +30,12 @@ const StyledIntroSection = styled.section`
       `
     )}
     ${respond(
+      "phone-port",
+      css`
+        font-size: 1.6rem;
+      `
+    )}
+    ${respond(
       "big-desktop",
       css`
         font-size: 3rem;
@@ -68,6 +74,14 @@ const StyledIntroSection = styled.section`
       `
     )}
     ${respond(
+      "phone-port",
+      css`
+        width: 100%;
+        font-size: 2.5rem;
+        margin-top: 1rem;
+      `
+    )}
+    ${respond(
       "big-desktop",
       css`
         font-size: 6rem;
@@ -87,6 +101,12 @@ const StyledIntroSection = styled.section`
       css`
         width: 90%;
         font-size: 1.4rem;
+      `
+    )}
+    ${respond(
+      "phone-port",
+      css`
+        font-size: 1.3rem;
       `
     )}
     ${respond(

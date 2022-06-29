@@ -13,6 +13,12 @@ const StyledCardsContainer = styled.div`
   justify-content: center;
 
   ${respond(
+    "phone-port",
+    css`
+      grid-template-columns: repeat(auto-fit, 400px);
+    `
+  )}
+  ${respond(
     "big-desktop",
     css`
       grid-template-columns: repeat(auto-fit, 600px);

@@ -44,6 +44,12 @@ const StyledMobileNavbar = styled.div`
         width: 5%;
       `
     )}
+    ${respond(
+      "phone-port",
+      css`
+        width: 3rem;
+      `
+    )}
   }
 
   .mobile-navbar {
@@ -65,6 +71,15 @@ const StyledMobileNavbar = styled.div`
       css`
         font-size: 2.5rem;
         gap: 4rem;
+      `
+    )}
+    ${respond(
+      "phone-port",
+      css`
+        font-size: 2.3rem;
+        width: 85%;
+
+        margin: 4rem auto;
       `
     )}
 
@@ -95,6 +110,13 @@ const StyledMobileNavbar = styled.div`
     &__link {
       color: #ffffff;
       font-size: 2.5rem;
+
+      ${respond(
+        "phone-port",
+        css`
+          font-size: 2rem;
+        `
+      )}
     }
   }
 `

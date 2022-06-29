@@ -1,11 +1,13 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { getImage } from "gatsby-plugin-image"
+import respond from "../styles/abstracts/mediaqueries"
 
 import IntroSection from "./IntroSection"
 import CopySection from "./CopySection"
 import BackgroundImage from "./BackgroundImage"
 import Button from "./Button"
+
 import { Colors } from "../styles/abstracts/abstracts"
 
 const StyledCtaSection = styled.section`
@@ -19,6 +21,14 @@ const StyledCtaSection = styled.section`
     margin: 0 auto;
     gap: var(--gutter);
     margin-top: 7rem;
+
+    ${respond(
+      "phone-port",
+      css`
+        grid-template-columns: 1fr;
+        background-color: orange;
+      `
+    )}
   }
 
   .container {

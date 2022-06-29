@@ -14,6 +14,14 @@ const StyledList = styled.ul`
       row-gap: 0;
     `
   )}
+  ${respond(
+    "phone-port",
+    css`
+      column-count: 1;
+      width: 90%;
+      margin: 0 auto;
+    `
+  )}
 `
 
 const List = ({ children }) => {

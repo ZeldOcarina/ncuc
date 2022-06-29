@@ -26,6 +26,12 @@ const StyledFooterLogoStripe = styled.div`
     width: 50rem;
 
     ${respond(
+      "phone-port",
+      css`
+        width: 90%;
+      `
+    )}
+    ${respond(
       "big-desktop",
       css`
         width: 70rem;
@@ -46,6 +52,14 @@ const StyledFooterLogoStripe = styled.div`
     gap: var(--gutter);
     margin-top: var(--big-gutter);
     margin-bottom: var(--big-gutter);
+
+    ${respond(
+      "phone-port",
+      css`
+        grid-template-columns: 1fr;
+        justify-items: center;
+      `
+    )}
   }
 `
 

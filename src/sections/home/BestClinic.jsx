@@ -1,7 +1,8 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
 import { getImage } from "gatsby-plugin-image"
+import respond from "../../styles/abstracts/mediaqueries"
 
 import IntroSection from "../../components/IntroSection"
 import CopySection from "../../components/CopySection"
@@ -20,6 +21,13 @@ const StyledBestClinic = styled.section`
     margin: 0 auto;
     gap: var(--gutter);
     margin-top: 7rem;
+
+    ${respond(
+      "phone-port",
+      css`
+        grid-template-columns: 1fr;
+      `
+    )}
   }
 
   .container {

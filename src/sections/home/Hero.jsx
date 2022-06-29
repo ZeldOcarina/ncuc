@@ -37,6 +37,12 @@ const StyledHero = styled.header`
     `
   )}
   ${respond(
+    "phone-port",
+    css`
+      min-height: 85vh;
+    `
+  )}
+  ${respond(
     "big-desktop",
     css`
       min-height: 88vh;

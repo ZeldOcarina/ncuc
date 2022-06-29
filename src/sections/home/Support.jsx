@@ -20,6 +20,8 @@ const Support = () => {
       data: { copy, superheading, heading, subheading },
     },
   } = useStaticQuery(query)
+
+  const { isPhonePort } = useContext(AppContext)
   return (
     <StyledSupport>
       <div className={isiPhone12Land ? "phone-container" : "container"}>
@@ -28,7 +30,7 @@ const Support = () => {
           heading={heading}
           subheading={subheading}
         />
-        <CopySection>{copy}</CopySection>
+        <CopySection columns={isPhonePort ? 1 : 2}>{copy}</CopySection>
       </div>
     </StyledSupport>
   )

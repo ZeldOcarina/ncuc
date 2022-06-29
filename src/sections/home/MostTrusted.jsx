@@ -1,10 +1,10 @@
 import React, { useContext } from "react"
 import styled from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
+import AppContext from "../../context/AppContext"
 
 import IntroSection from "../../components/IntroSection"
 import CopySection from "../../components/CopySection"
-import AppContext from "../../context/AppContext"
 
 const StyledMostTrusted = styled.section``
 
@@ -15,7 +15,7 @@ const MostTrusted = () => {
     },
   } = useStaticQuery(query)
 
-  const { isiPhone12Land } = useContext(AppContext)
+  const { isPhonePort } = useContext(AppContext)
 
   return (
     <StyledMostTrusted>
@@ -25,7 +25,7 @@ const MostTrusted = () => {
           heading={heading}
           subheading={subheading}
         />
-        <CopySection>{copy}</CopySection>
+        <CopySection columns={isPhonePort ? 1 : 2}>{copy}</CopySection>
       </div>
     </StyledMostTrusted>
   )
