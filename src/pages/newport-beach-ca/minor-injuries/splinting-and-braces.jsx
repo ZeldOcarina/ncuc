@@ -2,15 +2,15 @@ import React from "react"
 import styled from "styled-components"
 import { graphql } from "gatsby"
 
-import Layout from "../../layout/Layout"
-import Seo from "../../components/Seo"
+import Layout from "../../../layout/Layout"
+import Seo from "../../../components/Seo"
 
-import InnerHero from "../../components/InnerHero"
-import TextSection from "../../components/TextSection"
-import PingPong from "../../components/PingPong"
-import CtaSection from "../../components/CtaSection"
-import Faqs from "../../components/Faqs"
-import CardsSection from "../../components/CardsSection"
+import InnerHero from "../../../components/InnerHero"
+import TextSection from "../../../components/TextSection"
+import PingPong from "../../../components/PingPong"
+import CtaSection from "../../../components/CtaSection"
+import Faqs from "../../../components/Faqs"
+import CardsSection from "../../../components/CardsSection"
 
 const StyledSplintingAndBraces = styled.main``
 
