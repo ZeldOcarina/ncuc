@@ -6,7 +6,7 @@
   "author": "Mattia Rasulo <mattia@monarchy.io>",
   "engines": {
     "npm": "8.5.5",
-    "node": "16.15.0"
+    "node": "16"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.14.3",
