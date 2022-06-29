@@ -50,6 +50,13 @@ const StyledMobileNavbar = styled.div`
         width: 3rem;
       `
     )}
+    ${respond(
+      "iphone-12-mini",
+      css`
+        top: 3rem;
+        right: 3rem;
+      `
+    )}
   }
 
   .mobile-navbar {

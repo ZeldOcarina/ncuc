@@ -6,6 +6,8 @@ import respond from "../styles/abstracts/mediaqueries"
 import FooterSocialIcons from "./FooterSocialIcons"
 
 import { Colors } from "../styles/abstracts/abstracts"
+import { useContext } from "react"
+import AppContext from "../context/AppContext"
 
 const StyledFooter = styled.footer`
   background-color: ${Colors.colorPrimary700};
@@ -74,10 +76,18 @@ const StyledFooter = styled.footer`
         justify-content: center;
       `
     )}
+    ${respond(
+      "iphone-12",
+      css`
+        margin-top: var(--big-gutter);
+        grid-template-columns: 1fr;
+      `
+    )}
   }
 `
 
 const Footer = ({ siteMetadata, menu, locationData, socialLinks }) => {
+  const { isiPhone12 } = useContext(AppContext)
   const phoneString = locationData.nodes.find(
     item => item.data.Label === "Phone"
   ).data.Value
@@ -118,7 +128,7 @@ const Footer = ({ siteMetadata, menu, locationData, socialLinks }) => {
           <p>{address.split("107")[1]}</p>
           <p>&copy; {new Date().getFullYear()} NCUC. All Rights Reserved.</p>
           <p className="copyright">
-            <Link to="/privacy">Privacy Policy</Link> |{" "}
+            <Link to="/privacy">Privacy Policy</Link> {isiPhone12 ? "" : " | "}
             <Link to="/terms-and-conditions">Terms and Conditions</Link>
           </p>
         </div>

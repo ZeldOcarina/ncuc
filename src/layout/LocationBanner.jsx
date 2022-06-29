@@ -15,6 +15,12 @@ const StyledLocationBanner = styled.div`
     `
   )}
   ${respond(
+    "iphone-12-mini",
+    css`
+      font-size: 1.4rem;
+    `
+  )}
+  ${respond(
     "big-desktop",
     css`
       font-size: 2.2rem;

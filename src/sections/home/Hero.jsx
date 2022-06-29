@@ -88,6 +88,13 @@ const StyledHero = styled.header`
       `
     )}
     ${respond(
+      "iphone-12",
+      css`
+        font-size: 3.2rem;
+        max-width: 85%;
+      `
+    )}
+    ${respond(
       "big-desktop",
       css`
         font-size: 7.8rem;

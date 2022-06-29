@@ -10,6 +10,10 @@ function respond(breakpoint, css) {
       return `@media only screen and (max-width: ${375 / BASE_PIXELS}em) {
                 ${css}
               }`
+    case "iphone-12-mini":
+      return `@media only screen and (max-width: ${360 / BASE_PIXELS}em) {
+                ${css}
+              }`
     case "iphone-12":
       return `@media only screen and (max-width: ${390 / BASE_PIXELS}em) {
                 ${css}

@@ -204,13 +204,8 @@ const Wrapper = styled.nav`
 `
 
 const Navbar = ({ innerPage, innerLayout, menuData }) => {
-  const {
-    isMobileMenuOpen,
-    setIsMobileMenuOpen,
-    hoveredCategory,
-    setHoveredCategory,
-    isNotebook,
-  } = useContext(AppContext)
+  const { isMobileMenuOpen, setIsMobileMenuOpen, isNotebook } =
+    useContext(AppContext)
   const { params } = useContext(LocationContext)
   const { logo } = useStaticQuery(query)
 

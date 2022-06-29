@@ -19,6 +19,12 @@ const StyledCardsContainer = styled.div`
     `
   )}
   ${respond(
+    "iphone-12",
+    css`
+      grid-template-columns: 100%;
+    `
+  )}
+  ${respond(
     "big-desktop",
     css`
       grid-template-columns: repeat(auto-fit, 600px);
