@@ -27,7 +27,7 @@ const StyledCardsContainer = styled.div`
   ${respond(
     "big-desktop",
     css`
-      grid-template-columns: repeat(auto-fit, 600px);
+      grid-template-columns: repeat(auto-fit, 650px);
     `
   )}
 `

@@ -1,16 +1,17 @@
+import { Link } from "gatsby"
 import React from "react"
 import styled, { css } from "styled-components"
 import respond from "../styles/abstracts/mediaqueries"
 
 const StyledCard = styled.article`
   background-color: var(--white);
-  padding: 8rem 4rem 4rem 4rem;
+  padding: 8rem 4rem 10rem 4rem;
   position: relative;
 
   ${respond(
     "big-desktop",
     css`
-      padding: 10rem 6rem 4rem 6rem;
+      padding: 10rem 6rem 12rem 6rem;
     `
   )}
 
@@ -53,9 +54,32 @@ const StyledCard = styled.article`
       `
     )}
   }
+
+  .link {
+    color: var(--color-secondary);
+    font-weight: 500;
+    text-transform: uppercase;
+    display: block;
+    position: absolute;
+    bottom: 4rem;
+    right: 5rem;
+
+    ${respond(
+      "phone-port",
+      css`
+        right: 7rem;
+      `
+    )}
+    ${respond(
+      "big-desktop",
+      css`
+        right: 8rem;
+      `
+    )}
+  }
 `
 
-const Card = ({ copy, heading, icon }) => {
+const Card = ({ copy, heading, icon, linkLabel, link }) => {
   return (
     <StyledCard>
       <div className="icon-container">
@@ -64,6 +88,9 @@ const Card = ({ copy, heading, icon }) => {
 
       <h5>{heading}</h5>
       <p>{copy}</p>
+      <Link className="link" to={link}>
+        {linkLabel}
+      </Link>
     </StyledCard>
   )
 }

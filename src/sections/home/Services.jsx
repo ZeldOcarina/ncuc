@@ -30,7 +30,13 @@ const Services = () => {
 
       <CardsContainer>
         {cards?.nodes?.map(({ id, data }) => {
-          return <Card key={id} {...data} />
+          return (
+            <Card
+              key={id}
+              {...data}
+              {...{ link: data.btn1Link, linkLabel: data.btn1Label }}
+            />
+          )
         })}
       </CardsContainer>
     </StyledServices>
@@ -59,7 +65,8 @@ const query = graphql`
           copy
           superheading
           heading
-          subheading
+          btn1Label
+          btn1Link
           icon {
             localFiles {
               publicURL

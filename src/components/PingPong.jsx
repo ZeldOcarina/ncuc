@@ -1,6 +1,7 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import respond from "../styles/abstracts/mediaqueries"
 
 import IntroSection from "./IntroSection"
 
@@ -51,6 +52,14 @@ const StyledPingPong = styled.section`
       height: 60vh;
       padding: 5rem;
       transform: translateX(-10rem) translateY(-50%);
+
+      ${respond(
+        "big-desktop",
+        css`
+          transform: translateX(-20rem) translateY(-50%) scale(1.05);
+          max-width: 100rem;
+        `
+      )}
 
       h5 {
         text-transform: uppercase;

@@ -73,6 +73,7 @@ const SportsInjuries = ({
           heading={cardsTitleData.Heading}
           subheading={cardsTitleData.Subheading}
           cards={cardsData.map(cardDatum => {
+            console.log(cardDatum)
             return {
               id: cardDatum.id,
               data: {
@@ -223,7 +224,7 @@ export const query = graphql`
     cardsData: allAirtable(
       filter: {
         table: { eq: "Sports injuries" }
-        data: { Block: { eq: "Card" } }
+        data: { Block: { eq: "CardsItem" } }
       }
     ) {
       cardsData: nodes {
