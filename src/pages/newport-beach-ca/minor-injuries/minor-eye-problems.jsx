@@ -131,7 +131,11 @@ export const query = graphql`
         Media {
           localFiles {
             childImageSharp {
-              gatsbyImageData(layout: FULL_WIDTH, placeholder: TRACED_SVG)
+              gatsbyImageData(
+                layout: FULL_WIDTH
+                placeholder: TRACED_SVG
+                quality: 10
+              )
             }
           }
         }
@@ -191,8 +195,13 @@ export const query = graphql`
         Button_Label
         Media {
           localFiles {
+            publicURL
             childImageSharp {
-              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
+              gatsbyImageData(
+                layout: FULL_WIDTH
+                placeholder: NONE
+                jpgOptions: { quality: 10 }
+              )
             }
           }
         }

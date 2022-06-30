@@ -43,6 +43,12 @@ const StyledCtaSection = styled.section`
     )}
   }
 
+  .bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
   .container {
     position: relative;
     z-index: 100;
@@ -57,19 +63,19 @@ const CtaSection = ({
   buttonLabel,
   backgroundImage,
 }) => {
-  const image = getImage(backgroundImage?.localFiles[0])
+  const realImage = backgroundImage?.localFiles[0]?.publicURL
 
   return (
-    <StyledCtaSection image={image}>
+    <StyledCtaSection image={realImage}>
       <div className="container">
         <IntroSection
           superheading={superheading}
           heading={heading}
           subheading={subheading}
-          theme={image ? "light" : "dark"}
-          noPaddingTop={!!image}
+          theme={realImage ? "light" : "dark"}
+          noPaddingTop={!!realImage}
         />
-        <CopySection columns={1} theme={image ? "light" : "dark"}>
+        <CopySection columns={1} theme={realImage ? "light" : "dark"}>
           {copy}
         </CopySection>
         <div className="buttons-container">
@@ -78,7 +84,9 @@ const CtaSection = ({
           </Button>
         </div>
       </div>
-      {image && <BackgroundImage image={image} alt="" role="decoration" />}
+      {realImage && (
+        <img className="bg-image" src={realImage} alt="" role="decoration" />
+      )}
     </StyledCtaSection>
   )
 }
