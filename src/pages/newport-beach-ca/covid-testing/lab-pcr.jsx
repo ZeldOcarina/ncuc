@@ -15,9 +15,9 @@ import CtaSection from "../../../components/CtaSection"
 import Faqs from "../../../components/Faqs"
 import CardsSection from "../../../components/CardsSection"
 
-const StyledSplintingAndBraces = styled.main``
+const StyledLabPcr = styled.main``
 
-const SplintingAndBraces = ({
+const LabPcr = ({
   data: {
     pageTitleData: { pageTitleData },
     heroData: { heroData },
@@ -33,11 +33,31 @@ const SplintingAndBraces = ({
   },
 }) => {
   const { isiPadPro12 } = useContext(AppContext)
-  //console.log(pageTitleData)
+
+  // console.log(pingPongItems)
+  // console.log(
+  //     pingPongItems.some(item => item.Media && item.Media.localFiles[0])
+  // )
+
+  // console.log(imageTextData)
+
+  function setPingPong() {
+    if (
+      pingPongItems.length === 0 ||
+      !pingPongItems.some(
+        item => item.data.Media && item.data.Media.localFiles[0]
+      )
+    )
+      return ""
+    if (isiPadPro12)
+      return <MobilePingPong titleData={pingPongTitle} items={pingPongItems} />
+    return <PingPong titleData={pingPongTitle} items={pingPongItems} />
+  }
+
   return (
     <Layout>
       <Seo title={`NCUC | ${pageTitleData.Page_Title}`} />
-      <StyledSplintingAndBraces>
+      <StyledLabPcr>
         <InnerHero data={heroData} />
         <TextSection
           superheading={textData.Superheader}
@@ -45,12 +65,7 @@ const SplintingAndBraces = ({
           heading={textData.Heading}
           copy={textData.Copy}
         />
-        {isiPadPro12 ? (
-          <MobilePingPong titleData={pingPongTitle} items={pingPongItems} />
-        ) : (
-          <PingPong titleData={pingPongTitle} items={pingPongItems} />
-        )}
-
+        {setPingPong()}
         <CtaSection
           heading={ctaSectionData.Heading}
           subheading={ctaSectionData.Subheading}
@@ -58,12 +73,15 @@ const SplintingAndBraces = ({
           buttonLabel={ctaSectionData.Button_Label}
           backgroundImage={ctaSectionData.Media}
         />
-        <TextSection
-          superheading={imageTextData.Superheader}
-          subheading={imageTextData.Subheading}
-          heading={imageTextData.Heading}
-          copy={imageTextData.Copy}
-        />
+        {imageTextData?.Heading && imageTextData?.Copy && (
+          <TextSection
+            superheading={imageTextData.Superheader}
+            subheading={imageTextData.Subheading}
+            heading={imageTextData.Heading}
+            copy={imageTextData.Copy}
+          />
+        )}
+
         <Faqs
           superheading={faqsTitleData.Superheader}
           subheading={faqsTitleData.Subheading}
@@ -92,31 +110,28 @@ const SplintingAndBraces = ({
             }
           })}
         />
-      </StyledSplintingAndBraces>
+      </StyledLabPcr>
     </Layout>
   )
 }
 
 export const query = graphql`
-  query SplintingAndBraces {
+  query LabPcr {
     pageTitleData: airtable(
       table: { eq: "Sitemap" }
-      data: {
-        Permalink: {
-          eq: "/newport-beach-ca/minor-injuries/splinting-and-braces/"
-        }
-      }
+      data: { Permalink: { eq: "/newport-beach-ca/covid-testing/lab-pcr/" } }
     ) {
       pageTitleData: data {
         Page_Title
       }
     }
     heroData: airtable(
-      table: { eq: "Splinting and Braces" }
+      table: { eq: "Lab PCR Covid Testing" }
       data: { Block: { eq: "Hero" } }
     ) {
       heroData: data {
         Heading
+        Overlay
         Media {
           localFiles {
             childImageSharp {
@@ -128,7 +143,7 @@ export const query = graphql`
       }
     }
     textData: airtable(
-      table: { eq: "Splinting and Braces" }
+      table: { eq: "Lab PCR Covid Testing" }
       data: { Block: { eq: "Text" } }
     ) {
       textData: data {
@@ -139,7 +154,7 @@ export const query = graphql`
       }
     }
     pingPongTitle: airtable(
-      table: { eq: "Splinting and Braces" }
+      table: { eq: "Lab PCR Covid Testing" }
       data: { Block: { eq: "PingPong" } }
     ) {
       pingPongTitle: data {
@@ -150,7 +165,7 @@ export const query = graphql`
     }
     pingPongItems: allAirtable(
       filter: {
-        table: { eq: "Splinting and Braces" }
+        table: { eq: "Lab PCR Covid Testing" }
         data: { Block: { eq: "PingPongItem" } }
       }
     ) {
@@ -170,7 +185,7 @@ export const query = graphql`
       }
     }
     ctaSectionData: airtable(
-      table: { eq: "Splinting and Braces" }
+      table: { eq: "Lab PCR Covid Testing" }
       data: { Block: { eq: "CTA" } }
     ) {
       ctaSectionData: data {
@@ -188,7 +203,7 @@ export const query = graphql`
       }
     }
     imageTextData: airtable(
-      table: { eq: "Splinting and Braces" }
+      table: { eq: "Lab PCR Covid Testing" }
       data: { Block: { eq: "ImageText" } }
     ) {
       imageTextData: data {
@@ -199,7 +214,7 @@ export const query = graphql`
       }
     }
     faqsTitleData: airtable(
-      table: { eq: "Splinting and Braces" }
+      table: { eq: "Lab PCR Covid Testing" }
       data: { Block: { eq: "FAQ" } }
     ) {
       faqsTitleData: data {
@@ -210,7 +225,7 @@ export const query = graphql`
     }
     faqsData: allAirtable(
       filter: {
-        table: { eq: "Splinting and Braces" }
+        table: { eq: "Lab PCR Covid Testing" }
         data: { Block: { eq: "FaqItem" } }
       }
     ) {
@@ -223,7 +238,7 @@ export const query = graphql`
       }
     }
     cardsTitleData: airtable(
-      table: { eq: "Splinting and Braces" }
+      table: { eq: "Lab PCR Covid Testing" }
       data: { Block: { eq: "Cards" } }
     ) {
       cardsTitleData: data {
@@ -234,7 +249,7 @@ export const query = graphql`
     }
     cardsData: allAirtable(
       filter: {
-        table: { eq: "Splinting and Braces" }
+        table: { eq: "Lab PCR Covid Testing" }
         data: { Block: { eq: "CardsItem" } }
       }
     ) {
@@ -256,4 +271,4 @@ export const query = graphql`
   }
 `
 
-export default SplintingAndBraces
+export default LabPcr

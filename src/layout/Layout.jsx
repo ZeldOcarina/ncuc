@@ -221,7 +221,7 @@ const query = graphql`
       }
     }
     logoData: airtable(
-      data: { Label: { eq: "Wide" }, Name: { eq: "Logo" } }
+      data: { Label: { eq: "Wide" }, Name: { eq: "Media" } }
       table: { eq: "Config" }
     ) {
       logoData: data {

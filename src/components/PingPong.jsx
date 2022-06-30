@@ -124,13 +124,22 @@ const PingPong = ({
           heading={Heading}
         />
         {items.map(({ id, data }) => {
+          const image = getImage(data?.Media?.localFiles[0])
           return (
             <article className="ping-pong-card" key={id}>
-              <GatsbyImage
-                image={getImage(data.Media.localFiles[0])}
-                alt={data.Heading}
-                className="ping-pong-card__image"
-              />
+              {image ? (
+                <GatsbyImage
+                  image={image}
+                  alt={data.Heading}
+                  className="ping-pong-card__image"
+                />
+              ) : (
+                <img
+                  className="ping-pong-card__image"
+                  src="https://via.placeholder.com/400?text=Image+not+available"
+                  alt="Image not found"
+                />
+              )}
               <div className="ping-pong-card__content">
                 <h5>{data.Heading}</h5>
                 <p>{data.Copy}</p>

@@ -193,6 +193,28 @@ module.exports = {
             tableId: `tbl8hDCT1rpDuluIi`,
             mapping: { Media: `fileNode` }
           },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Lab PCR Covid Testing`,
+            tableId: `tblvVyxGsOqSbxY5s`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Antibody Covid Testing`,
+            tableId: `tblSAdgtFPLOh8P3W`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Privacy Policy`,
+            tableId: `tbl5fT8x5mxioxD3g`,
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Terms of Use`,
+            tableId: `tblmiZM0FYdZS7iVz`,
+          },
         ],
       },
     },

@@ -7,6 +7,7 @@ const Seo = ({ title, description, language }) => {
     site: {
       siteMetadata: { siteUrl, title: metaTitle, description: metaDescription },
     },
+    ogImageData: { ogImageData },
   } = useStaticQuery(query)
 
   return (
@@ -21,7 +22,10 @@ const Seo = ({ title, description, language }) => {
         property="og:description"
         content={description || metaDescription}
       />
-      <meta property="og:image" content={`${siteUrl}/screenshot.png`} />
+      <meta
+        property="og:image"
+        content={ogImageData?.Attachments?.localFiles?.publicURL}
+      />
       <meta property="og:url" content={siteUrl} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:width" content="630" />
@@ -66,6 +70,18 @@ const Seo = ({ title, description, language }) => {
 
 const query = graphql`
   {
+    ogImageData: airtable(
+      table: { eq: "Config" }
+      data: { Label: { eq: "ogImage" } }
+    ) {
+      ogImageData: data {
+        Attachments {
+          localFiles {
+            publicURL
+          }
+        }
+      }
+    }
     site {
       siteMetadata {
         siteUrl

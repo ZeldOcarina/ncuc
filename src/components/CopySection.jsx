@@ -17,7 +17,7 @@ const StyledCopySection = styled.article`
 `
 
 const CopySection = ({ children, columns, theme }) => {
-  console.log(children)
+  //console.log(children)
   return (
     <StyledCopySection columns={columns} theme={theme}>
       <ReactMarkdown

@@ -128,8 +128,9 @@ const Footer = ({ siteMetadata, menu, locationData, socialLinks }) => {
           <p>{address.split("107")[1]}</p>
           <p>&copy; {new Date().getFullYear()} NCUC. All Rights Reserved.</p>
           <p className="copyright">
-            <Link to="/privacy">Privacy Policy</Link> {isiPhone12 ? "" : " | "}
-            <Link to="/terms-and-conditions">Terms and Conditions</Link>
+            <Link to="/privacy-policy">Privacy Policy</Link>{" "}
+            {isiPhone12 ? "" : " | "}
+            <Link to="/terms-of-use">Terms of Use</Link>
           </p>
         </div>
       </div>
