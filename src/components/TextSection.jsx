@@ -10,8 +10,8 @@ const TextSection = ({ superheading, heading, subheading, copy, columns }) => {
   const { isPhone12ProMax } = useContext(AppContext)
 
   function setColumns() {
-    if (columns) return columns
     if (isPhone12ProMax) return 1
+    if (columns) return columns
     else return 2
   }
   return (
