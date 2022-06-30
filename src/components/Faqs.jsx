@@ -6,14 +6,11 @@ import IntroSection from "./IntroSection"
 const StyledFaqs = styled.section`
   background-color: var(--background-dark);
   ${({ noPaddingTop }) => {
-    console.log(noPaddingTop)
-
     return noPaddingTop && "padding-top: 0;"
   }}
 `
 
 function Faqs({ faqs, superheading, heading, subheading, noPaddingTop }) {
-  console.log(noPaddingTop)
   return (
     <StyledFaqs noPaddingTop={noPaddingTop}>
       <div className="container">

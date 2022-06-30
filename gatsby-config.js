@@ -33,6 +33,12 @@ module.exports = {
           },
           {
             baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Sitemap`,
+            tableId: `tblktAY5WS8pRtAMw`,
+            mapping: { image: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
             tableName: `Menu`,
             mapping: { image: `fileNode` },
             tableId: `tblkYTow9AOeR6N4F`
@@ -67,7 +73,84 @@ module.exports = {
             tableId: `tbldyS29lgFFy1vy4`,
             mapping: { Media: `fileNode` }
           },
-
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Incision and Drainage`,
+            tableId: `tbl5vJlubqSyT4LmQ`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Minor Burns and Trauma`,
+            tableId: `tblOaKNykgDAAGIcv`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Minor Eye Problems`,
+            tableId: `tblaW6NZ05CQ5rajj`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Insect Bites`,
+            tableId: `tblFY7Z6XzufIth5s`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Viral and Bacterial Infections`,
+            tableId: `tblzZD1GGiCoddxtm`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Allergies and Allergic Reactions`,
+            tableId: `tblcuIxVa9Hb1cY7b`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Sick Visits`,
+            tableId: `tbl36EEOrn5Rboeph`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Rashes`,
+            tableId: `tblMj7ok8DM2jg8dJ`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Migraines and Headaches`,
+            tableId: `tblX4y75oKi95SecD`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Breathing Treatments for Asthma`,
+            tableId: `tblaOhcI3JCS7HQPj`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `STD Testing and Treatment`,
+            tableId: `tblwWBfOcaEGsfMEz`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Urinary Tract Infections`,
+            tableId: `tblnorAhxLDl7NFFV`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Pregnancy Test`,
+            tableId: `tbl9wAdlrpVq18lRh`,
+            mapping: { Media: `fileNode` }
+          },
         ],
       },
     },

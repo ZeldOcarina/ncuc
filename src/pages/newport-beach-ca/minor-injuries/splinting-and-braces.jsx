@@ -19,10 +19,13 @@ const StyledSplintingAndBraces = styled.main``
 
 const SplintingAndBraces = ({
   data: {
+    pageTitleData: { pageTitleData },
     heroData: { heroData },
     textData: { textData },
     pingPongTitle: { pingPongTitle },
     pingPongItems: { pingPongItems },
+    ctaSectionData: { ctaSectionData },
+    imageTextData: { imageTextData },
     faqsTitleData: { faqsTitleData },
     faqsData: { faqsData },
     cardsTitleData: { cardsTitleData },
@@ -30,10 +33,10 @@ const SplintingAndBraces = ({
   },
 }) => {
   const { isiPadPro12 } = useContext(AppContext)
-  //console.log(textData)
+  console.log(pageTitleData)
   return (
     <Layout>
-      <Seo title={"NCUC | Splinting and Braces"} />{" "}
+      <Seo title={`NCUC | ${pageTitleData.Page_Title}`} />
       <StyledSplintingAndBraces>
         <InnerHero data={heroData} />
         <TextSection
@@ -48,7 +51,7 @@ const SplintingAndBraces = ({
           <PingPong titleData={pingPongTitle} items={pingPongItems} />
         )}
 
-        {/* <CtaSection
+        <CtaSection
           heading={ctaSectionData.Heading}
           subheading={ctaSectionData.Subheading}
           copy={ctaSectionData.Copy}
@@ -56,11 +59,11 @@ const SplintingAndBraces = ({
           backgroundImage={ctaSectionData.Media}
         />
         <TextSection
-          superheading={text2Data.Superheader}
-          subheading={text2Data.Subheading}
-          heading={text2Data.Heading}
-          copy={text2Data.Copy}
-        /> */}
+          superheading={imageTextData.Superheader}
+          subheading={imageTextData.Subheading}
+          heading={imageTextData.Heading}
+          copy={imageTextData.Copy}
+        />
         <Faqs
           superheading={faqsTitleData.Superheader}
           subheading={faqsTitleData.Subheading}
@@ -71,7 +74,6 @@ const SplintingAndBraces = ({
               data: { question: item.data.Heading, answer: item.data.Copy },
             }
           })}
-          noPaddingTop
         />
         <CardsSection
           superheading={cardsTitleData.Superheader}
@@ -97,6 +99,18 @@ const SplintingAndBraces = ({
 
 export const query = graphql`
   query SplintingAndBraces {
+    pageTitleData: airtable(
+      table: { eq: "Sitemap" }
+      data: {
+        Permalink: {
+          eq: "/newport-beach-ca/minor-injuries/splinting-and-braces/"
+        }
+      }
+    ) {
+      pageTitleData: data {
+        Page_Title
+      }
+    }
     heroData: airtable(
       table: { eq: "Splinting and Braces" }
       data: { Block: { eq: "Hero" } }
@@ -153,6 +167,35 @@ export const query = graphql`
           }
         }
         id
+      }
+    }
+    ctaSectionData: airtable(
+      table: { eq: "Splinting and Braces" }
+      data: { Block: { eq: "CTA" } }
+    ) {
+      ctaSectionData: data {
+        Subheading
+        Heading
+        Copy
+        Button_Label
+        Media {
+          localFiles {
+            childImageSharp {
+              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
+            }
+          }
+        }
+      }
+    }
+    imageTextData: airtable(
+      table: { eq: "Splinting and Braces" }
+      data: { Block: { eq: "ImageText" } }
+    ) {
+      imageTextData: data {
+        Copy
+        Heading
+        Superheader
+        Subheading
       }
     }
     faqsTitleData: airtable(

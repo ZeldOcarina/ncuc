@@ -28,7 +28,7 @@ const StyledPingPong = styled.section`
     ${("ipad-pro-12.9-land",
     css`
       height: 70vh;
-      margin-bottom: 5rem !important;
+      margin-bottom: 10rem;
     `)}    
 
     &:nth-child(2) {
@@ -58,12 +58,6 @@ const StyledPingPong = styled.section`
     }
 
     &__image {
-      transform: scale(1.07);
-
-      ${("ipad-pro-11-land",
-      css`
-        transform: scale(1.2);
-      `)}
     }
 
     &__content {
@@ -94,8 +88,8 @@ const StyledPingPong = styled.section`
       ${("ipad-pro-11-land",
       css`
         max-height: 60vh;
-        transform: translateX(0) translateY(-50%) scale(1) !important;
-        font-size: 1.6rem !important;
+        transform: translateX(0) translateY(-50%) scale(1);
+        font-size: 1.6rem;
       `)}
       ${respond(
         "big-desktop",

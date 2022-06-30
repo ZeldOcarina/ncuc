@@ -14,7 +14,6 @@ const StyledCardsSection = styled.section`
 `
 
 const CardsSection = ({ superheading, heading, subheading, cards }) => {
-  console.log(cards)
   return (
     <StyledCardsSection>
       <div className="container">

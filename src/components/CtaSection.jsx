@@ -12,6 +12,19 @@ import { Colors } from "../styles/abstracts/abstracts"
 
 const StyledCtaSection = styled.section`
   position: relative;
+  ${({ image }) => {
+    return (
+      !image &&
+      css`
+        background-color: var(--background-color);
+      `
+    )
+  }}
+
+  a {
+    color: ${({ image }) =>
+      image ? css`var(--white)` : css`var(--body-color)`};
+  }
 
   .buttons-container {
     display: grid;
@@ -26,7 +39,6 @@ const StyledCtaSection = styled.section`
       "phone-port",
       css`
         grid-template-columns: 1fr;
-        background-color: orange;
       `
     )}
   }
@@ -45,16 +57,19 @@ const CtaSection = ({
   buttonLabel,
   backgroundImage,
 }) => {
+  const image = getImage(backgroundImage?.localFiles[0])
+
   return (
-    <StyledCtaSection>
+    <StyledCtaSection image={image}>
       <div className="container">
         <IntroSection
           superheading={superheading}
           heading={heading}
           subheading={subheading}
-          theme="light"
+          theme={image ? "light" : "dark"}
+          noPaddingTop={!!image}
         />
-        <CopySection columns={1} theme="light">
+        <CopySection columns={1} theme={image ? "light" : "dark"}>
           {copy}
         </CopySection>
         <div className="buttons-container">
@@ -63,11 +78,7 @@ const CtaSection = ({
           </Button>
         </div>
       </div>
-      <BackgroundImage
-        image={getImage(backgroundImage.localFiles[0])}
-        alt=""
-        role="decoration"
-      />
+      {image && <BackgroundImage image={image} alt="" role="decoration" />}
     </StyledCtaSection>
   )
 }

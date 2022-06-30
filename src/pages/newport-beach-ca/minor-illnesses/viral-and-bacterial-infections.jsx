@@ -1,47 +1,70 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
 import { graphql } from "gatsby"
+
+import AppContext from "../../../context/AppContext"
 
 import Layout from "../../../layout/Layout"
 import Seo from "../../../components/Seo"
 
 import InnerHero from "../../../components/InnerHero"
 import TextSection from "../../../components/TextSection"
+import MobilePingPong from "../../../components/MobilePingPong"
 import PingPong from "../../../components/PingPong"
 import CtaSection from "../../../components/CtaSection"
 import Faqs from "../../../components/Faqs"
 import CardsSection from "../../../components/CardsSection"
 
-const StyledSportsInjuries = styled.main``
+const StyledViralAndBacterialInfections = styled.main``
 
-const SportsInjuries = ({
+const ViralAndBacterialInfections = ({
   data: {
     pageTitleData: { pageTitleData },
     heroData: { heroData },
-    copySection: { copyData },
+    textData: { textData },
     pingPongTitle: { pingPongTitle },
     pingPongItems: { pingPongItems },
     ctaSectionData: { ctaSectionData },
-    text2Data: { text2Data },
+    imageTextData: { imageTextData },
     faqsTitleData: { faqsTitleData },
     faqsData: { faqsData },
     cardsTitleData: { cardsTitleData },
     cardsData: { cardsData },
   },
 }) => {
-  //console.log(cardsData)
+  const { isiPadPro12 } = useContext(AppContext)
+
+  //   console.log(pingPongItems)
+  //   console.log(
+  //     pingPongItems.some(item => item.Media && item.Media.localFiles[0])
+  //   )
+  console.log(imageTextData)
+
+  function setPingPong() {
+    if (
+      pingPongItems.length === 0 ||
+      !pingPongItems.some(
+        item => item.data.Media && item.data.Media.localFiles[0]
+      )
+    )
+      return ""
+    if (isiPadPro12)
+      return <MobilePingPong titleData={pingPongTitle} items={pingPongItems} />
+    return <PingPong titleData={pingPongTitle} items={pingPongItems} />
+  }
+
   return (
     <Layout>
       <Seo title={`NCUC | ${pageTitleData.Page_Title}`} />
-      <StyledSportsInjuries>
+      <StyledViralAndBacterialInfections>
         <InnerHero data={heroData} />
         <TextSection
-          superheading={copyData.Superheader}
-          subheading={copyData.Subheading}
-          heading={copyData.Heading}
-          copy={copyData.Copy}
+          superheading={textData.Superheader}
+          subheading={textData.Subheading}
+          heading={textData.Heading}
+          copy={textData.Copy}
         />
-        <PingPong titleData={pingPongTitle} items={pingPongItems} />
+        {setPingPong()}
         <CtaSection
           heading={ctaSectionData.Heading}
           subheading={ctaSectionData.Subheading}
@@ -49,12 +72,15 @@ const SportsInjuries = ({
           buttonLabel={ctaSectionData.Button_Label}
           backgroundImage={ctaSectionData.Media}
         />
-        <TextSection
-          superheading={text2Data.Superheader}
-          subheading={text2Data.Subheading}
-          heading={text2Data.Heading}
-          copy={text2Data.Copy}
-        />
+        {imageTextData?.Heading && imageTextData?.Copy && (
+          <TextSection
+            superheading={imageTextData.Superheader}
+            subheading={imageTextData.Subheading}
+            heading={imageTextData.Heading}
+            copy={imageTextData.Copy}
+          />
+        )}
+
         <Faqs
           superheading={faqsTitleData.Superheader}
           subheading={faqsTitleData.Subheading}
@@ -71,72 +97,66 @@ const SportsInjuries = ({
           heading={cardsTitleData.Heading}
           subheading={cardsTitleData.Subheading}
           cards={cardsData.map(cardDatum => {
-            console.log(cardDatum)
             return {
               id: cardDatum?.id,
               data: {
                 heading: cardDatum.data.Heading,
                 copy: cardDatum.data.Copy,
                 icon: cardDatum.data.Media,
+                linkLabel: cardDatum.data.Button_Label,
+                link: cardDatum.data.Button_Link,
               },
             }
           })}
         />
-      </StyledSportsInjuries>
+      </StyledViralAndBacterialInfections>
     </Layout>
   )
 }
 
 export const query = graphql`
-  query SportsInjuries {
+  query ViralAndBacterialInfections {
     pageTitleData: airtable(
       table: { eq: "Sitemap" }
       data: {
-        Permalink: { eq: "/newport-beach-ca/minor-injuries/sports-injuries/" }
+        Permalink: {
+          eq: "/newport-beach-ca/minor-illnesses/viral-and-bacterial-infections/"
+        }
       }
     ) {
       pageTitleData: data {
         Page_Title
       }
     }
-    metaTitle: airtable(
-      table: { eq: "Sports injuries" }
-      data: { Block: { eq: "PageMetadata" } }
-    ) {
-      data {
-        pageMetaTitle
-      }
-    }
     heroData: airtable(
-      table: { eq: "Sports injuries" }
+      table: { eq: "Viral and Bacterial Infections" }
       data: { Block: { eq: "Hero" } }
     ) {
       heroData: data {
-        Subheading
         Heading
         Media {
           localFiles {
             childImageSharp {
-              gatsbyImageData(placeholder: TRACED_SVG, layout: FULL_WIDTH)
+              gatsbyImageData(layout: FULL_WIDTH, placeholder: TRACED_SVG)
             }
           }
         }
-        heading
+        Subheading
       }
     }
-    copySection: airtable(
-      table: { eq: "Sports injuries" }
+    textData: airtable(
+      table: { eq: "Viral and Bacterial Infections" }
       data: { Block: { eq: "Text" } }
     ) {
-      copyData: data {
-        Subheading
-        Heading
+      textData: data {
         Superheader
+        Heading
+        Subheading
         Copy
       }
     }
     pingPongTitle: airtable(
-      table: { eq: "Sports injuries" }
+      table: { eq: "Viral and Bacterial Infections" }
       data: { Block: { eq: "PingPong" } }
     ) {
       pingPongTitle: data {
@@ -147,7 +167,7 @@ export const query = graphql`
     }
     pingPongItems: allAirtable(
       filter: {
-        table: { eq: "Sports injuries" }
+        table: { eq: "Viral and Bacterial Infections" }
         data: { Block: { eq: "PingPongItem" } }
       }
     ) {
@@ -167,7 +187,7 @@ export const query = graphql`
       }
     }
     ctaSectionData: airtable(
-      table: { eq: "Sports injuries" }
+      table: { eq: "Viral and Bacterial Infections" }
       data: { Block: { eq: "CTA" } }
     ) {
       ctaSectionData: data {
@@ -184,19 +204,19 @@ export const query = graphql`
         }
       }
     }
-    text2Data: airtable(
-      table: { eq: "Sports injuries" }
-      data: { Block: { eq: "Text2" } }
+    imageTextData: airtable(
+      table: { eq: "Viral and Bacterial Infections" }
+      data: { Block: { eq: "ImageText" } }
     ) {
-      text2Data: data {
+      imageTextData: data {
+        Copy
+        Heading
         Superheader
         Subheading
-        Heading
-        Copy
       }
     }
     faqsTitleData: airtable(
-      table: { eq: "Sports injuries" }
+      table: { eq: "Viral and Bacterial Infections" }
       data: { Block: { eq: "FAQ" } }
     ) {
       faqsTitleData: data {
@@ -207,7 +227,7 @@ export const query = graphql`
     }
     faqsData: allAirtable(
       filter: {
-        table: { eq: "Sports injuries" }
+        table: { eq: "Viral and Bacterial Infections" }
         data: { Block: { eq: "FaqItem" } }
       }
     ) {
@@ -220,7 +240,7 @@ export const query = graphql`
       }
     }
     cardsTitleData: airtable(
-      table: { eq: "Sports injuries" }
+      table: { eq: "Viral and Bacterial Infections" }
       data: { Block: { eq: "Cards" } }
     ) {
       cardsTitleData: data {
@@ -231,7 +251,7 @@ export const query = graphql`
     }
     cardsData: allAirtable(
       filter: {
-        table: { eq: "Sports injuries" }
+        table: { eq: "Viral and Bacterial Infections" }
         data: { Block: { eq: "CardsItem" } }
       }
     ) {
@@ -239,6 +259,8 @@ export const query = graphql`
         data {
           Heading
           Copy
+          Button_Label
+          Button_Link
           Media {
             localFiles {
               publicURL
@@ -251,4 +273,4 @@ export const query = graphql`
   }
 `
 
-export default SportsInjuries
+export default ViralAndBacterialInfections

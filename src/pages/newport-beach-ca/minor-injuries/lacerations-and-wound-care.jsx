@@ -7,7 +7,6 @@ import { graphql } from "gatsby"
 
 import InnerHero from "../../../components/InnerHero"
 import TextSection from "../../../components/TextSection"
-import PingPong from "../../../components/PingPong"
 import CtaSection from "../../../components/CtaSection"
 import Faqs from "../../../components/Faqs"
 import CardsSection from "../../../components/CardsSection"
@@ -16,20 +15,21 @@ const StyledLacerationsAndWoundCare = styled.main``
 
 const LacerationsAndWoundCare = ({
   data: {
+    pageTitleData: { pageTitleData },
     heroData: { heroData },
     textData: { textData },
-    // pingPongTitle: { pingPongTitle },
-    // pingPongItems: { pingPongItems },
+    ctaSectionData: { ctaSectionData },
+    imageTextData: { imageTextData },
     faqsTitleData: { faqsTitleData },
     faqsData: { faqsData },
-    // cardsTitleData: { cardsTitleData },
-    // cardsData: { cardsData },
+    cardsTitleData: { cardsTitleData },
+    cardsData: { cardsData },
   },
 }) => {
   //   console.log(textData)
   return (
     <Layout>
-      <Seo title={"NCUC | Splinting and Braces"} />{" "}
+      <Seo title={`NCUC | ${pageTitleData.Page_Title}`} />
       <StyledLacerationsAndWoundCare>
         <InnerHero data={heroData} />
         <TextSection
@@ -38,8 +38,7 @@ const LacerationsAndWoundCare = ({
           heading={textData.Heading}
           copy={textData.Copy}
         />
-        {/* <PingPong titleData={pingPongTitle} items={pingPongItems} /> */}
-        {/* <CtaSection
+        <CtaSection
           heading={ctaSectionData.Heading}
           subheading={ctaSectionData.Subheading}
           copy={ctaSectionData.Copy}
@@ -47,11 +46,11 @@ const LacerationsAndWoundCare = ({
           backgroundImage={ctaSectionData.Media}
         />
         <TextSection
-          superheading={text2Data.Superheader}
-          subheading={text2Data.Subheading}
-          heading={text2Data.Heading}
-          copy={text2Data.Copy}
-        /> */}
+          superheading={imageTextData.Superheader}
+          subheading={imageTextData.Subheading}
+          heading={imageTextData.Heading}
+          copy={imageTextData.Copy}
+        />
         <Faqs
           superheading={faqsTitleData.Superheader}
           subheading={faqsTitleData.Subheading}
@@ -63,7 +62,7 @@ const LacerationsAndWoundCare = ({
             }
           })}
         />
-        {/* <CardsSection
+        <CardsSection
           superheading={cardsTitleData.Superheader}
           heading={cardsTitleData.Heading}
           subheading={cardsTitleData.Subheading}
@@ -77,7 +76,7 @@ const LacerationsAndWoundCare = ({
               },
             }
           })}
-        /> */}
+        />
       </StyledLacerationsAndWoundCare>
     </Layout>
   )
@@ -85,6 +84,18 @@ const LacerationsAndWoundCare = ({
 
 export const query = graphql`
   query LacerationAndWoundCare {
+    pageTitleData: airtable(
+      table: { eq: "Sitemap" }
+      data: {
+        Permalink: {
+          eq: "/newport-beach-ca/minor-injuries/lacerations-and-wound-care/"
+        }
+      }
+    ) {
+      pageTitleData: data {
+        Page_Title
+      }
+    }
     heroData: airtable(
       table: { eq: "Lacerations and Wound Care" }
       data: { Block: { eq: "Hero" } }
@@ -112,35 +123,22 @@ export const query = graphql`
         Copy
       }
     }
-    pingPongTitle: airtable(
-      table: { eq: "Splinting and Braces" }
-      data: { Block: { eq: "PingPong" } }
+    ctaSectionData: airtable(
+      table: { eq: "Lacerations and Wound Care" }
+      data: { Block: { eq: "CTA" } }
     ) {
-      pingPongTitle: data {
+      ctaSectionData: data {
         Subheading
         Heading
-        Superheader
-      }
-    }
-    pingPongItems: allAirtable(
-      filter: {
-        table: { eq: "Splinting and Braces" }
-        data: { Block: { eq: "PingPongItem" } }
-      }
-    ) {
-      pingPongItems: nodes {
-        data {
-          Heading
-          Copy
-          Media {
-            localFiles {
-              childImageSharp {
-                gatsbyImageData
-              }
+        Copy
+        Button_Label
+        Media {
+          localFiles {
+            childImageSharp {
+              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
             }
           }
         }
-        id
       }
     }
     faqsTitleData: airtable(
@@ -168,7 +166,7 @@ export const query = graphql`
       }
     }
     cardsTitleData: airtable(
-      table: { eq: "Splinting and Braces" }
+      table: { eq: "Lacerations and Wound Care" }
       data: { Block: { eq: "Cards" } }
     ) {
       cardsTitleData: data {
@@ -179,7 +177,7 @@ export const query = graphql`
     }
     cardsData: allAirtable(
       filter: {
-        table: { eq: "Splinting and Braces" }
+        table: { eq: "Lacerations and Wound Care" }
         data: { Block: { eq: "CardItem" } }
       }
     ) {
@@ -194,6 +192,17 @@ export const query = graphql`
           }
         }
         id
+      }
+    }
+    imageTextData: airtable(
+      table: { eq: "Lacerations and Wound Care" }
+      data: { Block: { eq: "ImageText" } }
+    ) {
+      imageTextData: data {
+        Copy
+        Heading
+        Superheader
+        Subheading
       }
     }
   }

@@ -120,8 +120,11 @@ const InnerHero = ({ data }) => {
         <h1>{data.Heading}</h1>
         <p>{data.Subheading}</p>
       </div>
-
-      <BackgroundImage image={image} alt={data.Heading} />
+      <BackgroundImage
+        image={image}
+        alt={data.Heading}
+        overlay={data.Overlay}
+      />
     </StyledInnerHero>
   )
 }
