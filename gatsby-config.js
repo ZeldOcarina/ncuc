@@ -151,6 +151,48 @@ module.exports = {
             tableId: `tbl9wAdlrpVq18lRh`,
             mapping: { Media: `fileNode` }
           },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Covid Test`,
+            tableId: `tblLuyhhGMNQNACl5`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `School Physical Exam`,
+            tableId: `tbluioLwr3DEEt1iP`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Annual Physical Exam`,
+            tableId: `tbl3SRFDD4CtyUjeh`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Pre-Op Clearance`,
+            tableId: `tbla6avMbsQHPjmwM`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Xrays`,
+            tableId: `tblZwmS44tBkynut2`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Rapid Antigen Covid Testing`,
+            tableId: `tblLZQPPXzVYdQRQu`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Rapid PCR Covid Testing`,
+            tableId: `tbl8hDCT1rpDuluIi`,
+            mapping: { Media: `fileNode` }
+          },
         ],
       },
     },

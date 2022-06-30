@@ -119,7 +119,7 @@ export const query = graphql`
   query PregnancyTest {
     pageTitleData: airtable(
       table: { eq: "Sitemap" }
-      data: { Permalink: { eq: "/newport-beach-ca/testing/pregnancy-test/" } }
+      data: { Permalink: { eq: "/newport-beach-ca/testing/pregnancy-tests/" } }
     ) {
       pageTitleData: data {
         Page_Title
