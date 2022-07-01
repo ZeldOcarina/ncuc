@@ -112,7 +112,7 @@ ${respond(
 `
 
 const InnerHero = ({ data }) => {
-  const image = getImage(data.Media.localFiles[0].childImageSharp)
+  const image = data.Media.localFiles[0].publicURL
 
   return (
     <StyledInnerHero>
@@ -124,6 +124,7 @@ const InnerHero = ({ data }) => {
         image={image}
         alt={data.Heading}
         overlay={data.Overlay}
+        isPlainImg
       />
     </StyledInnerHero>
   )

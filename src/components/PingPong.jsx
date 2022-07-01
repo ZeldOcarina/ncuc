@@ -69,6 +69,7 @@ const StyledPingPong = styled.section`
       height: 60vh;
       padding: 5rem;
       transform: translateX(-10rem) translateY(-50%);
+      overflow-y: auto;
 
       ${respond(
         "notebook",
@@ -136,7 +137,7 @@ const PingPong = ({
               ) : (
                 <img
                   className="ping-pong-card__image"
-                  src="https://via.placeholder.com/400?text=Image+not+available"
+                  src="https://via.placeholder.com/700?text=Image+not+available"
                   alt="Image not found"
                 />
               )}

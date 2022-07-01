@@ -24,7 +24,7 @@ const Seo = ({ title, description, language }) => {
       />
       <meta
         property="og:image"
-        content={ogImageData?.Attachments?.localFiles?.publicURL}
+        content={ogImageData?.Attachments?.localFiles[0].publicURL}
       />
       <meta property="og:url" content={siteUrl} />
       <meta property="og:image:width" content="1200" />

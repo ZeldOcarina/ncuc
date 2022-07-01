@@ -1,8 +1,8 @@
 module.exports = {
-  siteUrl: "https://giovannisetticonsulting.com",
-  title: "Gatsby Starter | A Great Starting Point for GatsbyJS",
+  siteUrl: "https://ncuc.monarchy.io",
+  title: "Newport Urgent Care Center",
   description:
-    "A great starting point to make your next beautiful GatsbyJS app.",
+    "Newport Urgent Care Center | Emergency Care",
   author: "Mattia Rasulo",
   navbarLinks: {
     social: {

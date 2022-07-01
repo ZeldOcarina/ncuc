@@ -72,6 +72,7 @@ const StyledMobileNavbar = styled.div`
     gap: 8rem;
     overflow: scroll;
     margin: 5rem 0;
+    padding-bottom: 7rem;
 
     ${respond(
       "phone-land",

@@ -207,6 +207,12 @@ module.exports = {
           },
           {
             baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `About Us`,
+            tableId: `tblj2DnqeoxmoyYIV`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
             tableName: `Privacy Policy`,
             tableId: `tbl5fT8x5mxioxD3g`,
           },

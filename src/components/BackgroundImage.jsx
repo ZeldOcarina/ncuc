@@ -9,6 +9,8 @@ const StyledBackgroundImage = styled.div`
   width: 100%;
   height: 100%;
   z-index: 0;
+  object-fit: cover;
+  object-position: top left;
 
   .overlay {
     ${({ background }) => {
@@ -30,14 +32,20 @@ const StyledBackgroundImage = styled.div`
     height: 100%;
     z-index: -1;
     position: absolute;
+    object-fit: cover;
+    object-position: top left;
   }
 `
 
-const BackgroundImage = ({ image, alt, overlay }) => {
+const BackgroundImage = ({ image, alt, overlay, isPlainImg }) => {
   return (
     <StyledBackgroundImage background={overlay}>
       {overlay && <div className="overlay" />}
-      <GatsbyImage className="bg-image" image={image} alt={alt} />
+      {isPlainImg ? (
+        <img src={image} alt={alt} className="bg-image" />
+      ) : (
+        <GatsbyImage className="bg-image" image={image} alt={alt} />
+      )}
     </StyledBackgroundImage>
   )
 }

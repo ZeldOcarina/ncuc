@@ -136,13 +136,7 @@ export const query = graphql`
         Overlay
         Media {
           localFiles {
-            childImageSharp {
-              gatsbyImageData(
-                layout: FULL_WIDTH
-                placeholder: TRACED_SVG
-                quality: 10
-              )
-            }
+            publicURL
           }
         }
         Subheading
@@ -202,13 +196,6 @@ export const query = graphql`
         Media {
           localFiles {
             publicURL
-            childImageSharp {
-              gatsbyImageData(
-                placeholder: BLURRED
-                layout: FULL_WIDTH
-                quality: 10
-              )
-            }
           }
         }
       }

@@ -7,13 +7,16 @@ import AppContext from "../context/AppContext"
 const StyledTextSection = styled.section``
 
 const TextSection = ({ superheading, heading, subheading, copy, columns }) => {
-  const { isPhone12ProMax } = useContext(AppContext)
+  const { isPhonePort } = useContext(AppContext)
+
+  console.log(isPhonePort)
 
   function setColumns() {
-    if (isPhone12ProMax) return 1
+    if (isPhonePort) return 1
     if (columns) return columns
     else return 2
   }
+
   return (
     <StyledTextSection>
       <div className="container">

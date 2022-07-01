@@ -130,13 +130,7 @@ export const query = graphql`
         Heading
         Media {
           localFiles {
-            childImageSharp {
-              gatsbyImageData(
-                layout: FULL_WIDTH
-                placeholder: TRACED_SVG
-                quality: 10
-              )
-            }
+            publicURL
           }
         }
         Subheading
@@ -196,13 +190,6 @@ export const query = graphql`
         Media {
           localFiles {
             publicURL
-            childImageSharp {
-              gatsbyImageData(
-                layout: FULL_WIDTH
-                placeholder: NONE
-                jpgOptions: { quality: 10 }
-              )
-            }
           }
         }
       }

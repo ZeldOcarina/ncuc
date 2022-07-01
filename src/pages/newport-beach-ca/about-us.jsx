@@ -2,22 +2,20 @@ import React, { useContext } from "react"
 import styled from "styled-components"
 import { graphql } from "gatsby"
 
-import AppContext from "../../../context/AppContext"
+import AppContext from "../../context/AppContext"
 
-import Layout from "../../../layout/Layout"
-import Seo from "../../../components/Seo"
+import Layout from "../../layout/Layout"
+import Seo from "../../components/Seo"
 
-import InnerHero from "../../../components/InnerHero"
-import TextSection from "../../../components/TextSection"
-import MobilePingPong from "../../../components/MobilePingPong"
-import PingPong from "../../../components/PingPong"
-import CtaSection from "../../../components/CtaSection"
-import Faqs from "../../../components/Faqs"
-import CardsSection from "../../../components/CardsSection"
+import InnerHero from "../../components/InnerHero"
+import TextSection from "../../components/TextSection"
+import MobilePingPong from "../../components/MobilePingPong"
+import PingPong from "../../components/PingPong"
+import CtaSection from "../../components/CtaSection"
 
-const StyledRapidPcr = styled.main``
+const StyledAboutUs = styled.main``
 
-const RapidPcr = ({
+const AboutUs = ({
   data: {
     pageTitleData: { pageTitleData },
     heroData: { heroData },
@@ -26,10 +24,6 @@ const RapidPcr = ({
     pingPongItems: { pingPongItems },
     ctaSectionData: { ctaSectionData },
     imageTextData: { imageTextData },
-    faqsTitleData: { faqsTitleData },
-    faqsData: { faqsData },
-    cardsTitleData: { cardsTitleData },
-    cardsData: { cardsData },
   },
 }) => {
   const { isiPadPro12 } = useContext(AppContext)
@@ -48,7 +42,7 @@ const RapidPcr = ({
         item => item.data.Media && item.data.Media.localFiles[0]
       )
     )
-      return ""
+      return <PingPong titleData={pingPongTitle} items={pingPongItems} />
     if (isiPadPro12)
       return <MobilePingPong titleData={pingPongTitle} items={pingPongItems} />
     return <PingPong titleData={pingPongTitle} items={pingPongItems} />
@@ -57,7 +51,7 @@ const RapidPcr = ({
   return (
     <Layout>
       <Seo title={`NCUC | ${pageTitleData.Page_Title}`} />
-      <StyledRapidPcr>
+      <StyledAboutUs>
         <InnerHero data={heroData} />
         <TextSection
           superheading={textData.Superheader}
@@ -81,52 +75,23 @@ const RapidPcr = ({
             copy={imageTextData.Copy}
           />
         )}
-
-        <Faqs
-          superheading={faqsTitleData.Superheader}
-          subheading={faqsTitleData.Subheading}
-          heading={faqsTitleData.Heading}
-          faqs={faqsData.map(item => {
-            return {
-              id: item?.id,
-              data: { question: item.data.Heading, answer: item.data.Copy },
-            }
-          })}
-        />
-        <CardsSection
-          superheading={cardsTitleData.Superheader}
-          heading={cardsTitleData.Heading}
-          subheading={cardsTitleData.Subheading}
-          cards={cardsData.map(cardDatum => {
-            return {
-              id: cardDatum?.id,
-              data: {
-                heading: cardDatum.data.Heading,
-                copy: cardDatum.data.Copy,
-                icon: cardDatum.data.Media,
-                linkLabel: cardDatum.data.Button_Label,
-                link: cardDatum.data.Button_Link,
-              },
-            }
-          })}
-        />
-      </StyledRapidPcr>
+      </StyledAboutUs>
     </Layout>
   )
 }
 
 export const query = graphql`
-  query RapidPcr {
+  query AboutUs {
     pageTitleData: airtable(
       table: { eq: "Sitemap" }
-      data: { Permalink: { eq: "/newport-beach-ca/covid-testing/rapid-pcr/" } }
+      data: { Permalink: { eq: "/newport-beach-ca/about-us/" } }
     ) {
       pageTitleData: data {
         Page_Title
       }
     }
     heroData: airtable(
-      table: { eq: "Rapid PCR Covid Testing" }
+      table: { eq: "About Us" }
       data: { Block: { eq: "Hero" } }
     ) {
       heroData: data {
@@ -134,14 +99,20 @@ export const query = graphql`
         Overlay
         Media {
           localFiles {
-            publicURL
+            childImageSharp {
+              gatsbyImageData(
+                layout: FULL_WIDTH
+                placeholder: TRACED_SVG
+                quality: 10
+              )
+            }
           }
         }
         Subheading
       }
     }
     textData: airtable(
-      table: { eq: "Rapid PCR Covid Testing" }
+      table: { eq: "About Us" }
       data: { Block: { eq: "Text" } }
     ) {
       textData: data {
@@ -152,7 +123,7 @@ export const query = graphql`
       }
     }
     pingPongTitle: airtable(
-      table: { eq: "Rapid PCR Covid Testing" }
+      table: { eq: "About Us" }
       data: { Block: { eq: "PingPong" } }
     ) {
       pingPongTitle: data {
@@ -163,7 +134,7 @@ export const query = graphql`
     }
     pingPongItems: allAirtable(
       filter: {
-        table: { eq: "Rapid PCR Covid Testing" }
+        table: { eq: "About Us" }
         data: { Block: { eq: "PingPongItem" } }
       }
     ) {
@@ -183,7 +154,7 @@ export const query = graphql`
       }
     }
     ctaSectionData: airtable(
-      table: { eq: "Rapid PCR Covid Testing" }
+      table: { eq: "About Us" }
       data: { Block: { eq: "CTA" } }
     ) {
       ctaSectionData: data {
@@ -199,7 +170,7 @@ export const query = graphql`
       }
     }
     imageTextData: airtable(
-      table: { eq: "Rapid PCR Covid Testing" }
+      table: { eq: "About Us" }
       data: { Block: { eq: "ImageText" } }
     ) {
       imageTextData: data {
@@ -209,62 +180,7 @@ export const query = graphql`
         Subheading
       }
     }
-    faqsTitleData: airtable(
-      table: { eq: "Rapid PCR Covid Testing" }
-      data: { Block: { eq: "FAQ" } }
-    ) {
-      faqsTitleData: data {
-        Superheader
-        Subheading
-        Heading
-      }
-    }
-    faqsData: allAirtable(
-      filter: {
-        table: { eq: "Rapid PCR Covid Testing" }
-        data: { Block: { eq: "FaqItem" } }
-      }
-    ) {
-      faqsData: nodes {
-        data {
-          Heading
-          Copy
-        }
-        id
-      }
-    }
-    cardsTitleData: airtable(
-      table: { eq: "Rapid PCR Covid Testing" }
-      data: { Block: { eq: "Cards" } }
-    ) {
-      cardsTitleData: data {
-        Superheader
-        Subheading
-        Heading
-      }
-    }
-    cardsData: allAirtable(
-      filter: {
-        table: { eq: "Rapid PCR Covid Testing" }
-        data: { Block: { eq: "CardsItem" } }
-      }
-    ) {
-      cardsData: nodes {
-        data {
-          Heading
-          Copy
-          Button_Label
-          Button_Link
-          Media {
-            localFiles {
-              publicURL
-            }
-          }
-        }
-        id
-      }
-    }
   }
 `
 
-export default RapidPcr
+export default AboutUs
