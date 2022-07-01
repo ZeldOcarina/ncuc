@@ -24,12 +24,22 @@ const buttonCss = css`
   )}
 `
 
+const navButtonCss = css`
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 75%;
+  width: 21.5rem;
+`
+
 const StyledButton = styled.button`
   ${buttonCss}
   background-color: ${({ color }) =>
     css`
       ${color}
     `};
+  ${({ navButton }) => navButton && navButtonCss};
 
   .button {
     ${buttonCss}
@@ -61,13 +71,14 @@ function setAs(type) {
  * @param {string} width,
  ***********************/
 
-const Button = ({ type, url, children, color, width }) => {
+const Button = ({ type, url, children, color, width, navButton }) => {
   return (
     <StyledButton
       as={setAs(type)}
       href={type !== "internal" ? url : undefined}
       color={color}
       width={width || undefined}
+      navButton={navButton}
     >
       {type === "internal" ? (
         <Link

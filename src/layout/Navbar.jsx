@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import styled, { css } from "styled-components"
 import { graphql, Link, useStaticQuery } from "gatsby"
 import respond from "../styles/abstracts/mediaqueries"
@@ -10,6 +10,8 @@ import { LocationContext } from "../context/LocationContext"
 import CategoryItem from "../components/CategoryItem"
 import { createLinkWithParams } from "../utils/utils"
 
+import Button from "../components/Button"
+
 const Wrapper = styled.nav`
   position: static;
   width: 100%;
@@ -18,6 +20,16 @@ const Wrapper = styled.nav`
   z-index: 150;
   height: 7rem;
   font-size: 1.6rem;
+  transition: all 0.3s ease-in-out;
+
+  ${({ scrolled }) =>
+    scrolled &&
+    css`
+      background-color: var(--background-dark);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+    `}
 
   ${respond(
     "tab-land",
@@ -86,6 +98,10 @@ const Wrapper = styled.nav`
     )}
   }
 
+  .container {
+    max-width: 1700px;
+  }
+
   .container,
   .navbar-notebook-container {
     width: 100%;
@@ -136,6 +152,12 @@ const Wrapper = styled.nav`
     display: flex;
     align-items: center;
     gap: 0.8rem;
+    color: var(--body-color);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--color-secondary);
+    }
 
     ${respond(
       "big-desktop",
@@ -204,6 +226,7 @@ const Wrapper = styled.nav`
 `
 
 const Navbar = ({ innerPage, innerLayout, menuData }) => {
+  const [isNavbarScrolled, setIsNavbarScrolled] = useState(false)
   const { isMobileMenuOpen, setIsMobileMenuOpen, isNotebook } =
     useContext(AppContext)
   const { params } = useContext(LocationContext)
@@ -211,8 +234,17 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
 
   const logoUrl = logo.nodes[0].data.logo[0].url
 
+  useEffect(() => {
+    // Make navbar fixed on scroll
+    document.addEventListener("scroll", () => {
+      window.scrollY === 0
+        ? setIsNavbarScrolled(false)
+        : setIsNavbarScrolled(true)
+    })
+  })
+
   return (
-    <Wrapper scrolled={false} innerLayout={innerLayout}>
+    <Wrapper scrolled={isNavbarScrolled} innerLayout={innerLayout}>
       <div className={isNotebook ? "navbar-notebook-container" : "container"}>
         <Link to={logo?.nodes[0]?.data?.Permalink}>
           {<img src={logoUrl} alt="NCUC Logo" className="logo" />}
@@ -237,10 +269,21 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
                 key={i}
                 categoryItems={categoryItems}
               />
-
               //</Link>
             )
           })}
+          <Link className="nav-link" to="/newport-beach-ca/about-us/">
+            ABOUT US
+          </Link>
+          <Button
+            color="var(--color-tertiary)"
+            width={"2rem"}
+            navButton
+            type="link"
+            url="/"
+          >
+            BOOK COVID TEST
+          </Button>
         </div>
         <GiHamburgerMenu
           className="mobile-menu-activator"

@@ -38,6 +38,8 @@ const CategoryItem = ({ category, categoryItems }) => {
     setHoveredCategory("")
   }
 
+  if (category === "About Us") return ""
+
   return (
     <StyledCategoryItem
       onMouseEnter={() => handleMouseEnter(category)}
