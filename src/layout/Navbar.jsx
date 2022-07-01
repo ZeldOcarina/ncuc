@@ -25,7 +25,7 @@ const Wrapper = styled.nav`
   ${({ scrolled }) =>
     scrolled &&
     css`
-      background-color: var(--background-dark);
+      background-color: var(--white);
       box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
       position: fixed;
       top: 0;
@@ -48,7 +48,11 @@ const Wrapper = styled.nav`
     "phone-port",
     css`
       margin-top: 0;
-      top: 1rem;
+      ${({ scrolled }) =>
+        !scrolled &&
+        css`
+          top: 1rem;
+        `}
       height: 8rem;
     `
   )}

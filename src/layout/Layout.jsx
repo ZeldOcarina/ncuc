@@ -55,6 +55,7 @@ const Layout = ({ children, salesLetter, innerLayout }) => {
     cityData: { cityData },
     categoriesData: { categoriesData },
     logoData: { logoData },
+    quickLinksData: { quickLinksData },
   } = useStaticQuery(query)
 
   const { alertState, setAlertState } = useContext(AppContext)
@@ -92,7 +93,7 @@ const Layout = ({ children, salesLetter, innerLayout }) => {
       />
       <Footer
         siteMetadata={siteMetadata}
-        menu={menu}
+        quickLinks={quickLinksData}
         locationData={locationData}
         socialLinks={socialLinks}
       />
@@ -232,6 +233,19 @@ const query = graphql`
         }
         Name
         Label
+      }
+    }
+    quickLinksData: allAirtable(
+      filter: {
+        table: { eq: "Footer (Global)" }
+        data: { Block: { eq: "QuickLinks" } }
+      }
+    ) {
+      quickLinksData: nodes {
+        data {
+          superheading
+          heading
+        }
       }
     }
   }

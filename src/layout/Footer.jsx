@@ -86,7 +86,7 @@ const StyledFooter = styled.footer`
   }
 `
 
-const Footer = ({ siteMetadata, menu, locationData, socialLinks }) => {
+const Footer = ({ quickLinks, locationData, socialLinks }) => {
   const { isiPhone12 } = useContext(AppContext)
   const phoneString = locationData.nodes.find(
     item => item.data.Label === "Phone"
@@ -111,10 +111,10 @@ const Footer = ({ siteMetadata, menu, locationData, socialLinks }) => {
       <div className="container">
         <div className="col-1">
           <h5>QUICK LINKS</h5>
-          {menu.nodes.map(menuItem => {
+          {quickLinks.map(quickLink => {
             return (
-              <Link key={menuItem?.id} to={menuItem.data.Permalink}>
-                {menuItem.data.Child}
+              <Link key={quickLink?.id} to={quickLink.data.heading}>
+                {quickLink.data.superheading}
               </Link>
             )
           })}
