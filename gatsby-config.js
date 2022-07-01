@@ -9,6 +9,7 @@ const EXCLUDED_PATHS = []
 module.exports = {
   siteMetadata,
   plugins: [
+    `gatsby-plugin-no-sourcemaps`,
     {
       // We need filesystem source plugin to add publicURL function to File nodes
       resolve: `gatsby-source-filesystem`,
