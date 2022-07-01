@@ -5,7 +5,7 @@ import { Link } from "gatsby"
 import respond from "../styles/abstracts/mediaqueries"
 
 import AppContext from "../context/AppContext"
-import SocialIcons from "../components/SocialIcons"
+import Button from "../components/Button"
 
 const StyledMobileNavbar = styled.div`
   width: 100vw;
@@ -32,8 +32,8 @@ const StyledMobileNavbar = styled.div`
 
   .close-icon {
     position: absolute;
-    right: 5rem;
-    top: 5rem;
+    right: 3rem;
+    top: 3rem;
     width: 5rem;
     height: auto;
     color: var(--white);
@@ -141,6 +141,18 @@ const MobileNavbar = ({
     <StyledMobileNavbar open={isMobileMenuOpen}>
       <nav className="mobile-navbar">
         <ul className="mobile-navbar__top-ul">
+          <li className="mobile-navbar__top-li">
+            <Button
+              color="var(--color-tertiary)"
+              width={"2rem"}
+              navButton
+              mobileNavButton
+              type="link"
+              url="/"
+            >
+              BOOK COVID TEST
+            </Button>
+          </li>
           {categories.map((category, i) => {
             const categoryItems = menuData.filter(
               item => item.data.Parent === category

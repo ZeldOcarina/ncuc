@@ -33,6 +33,14 @@ const navButtonCss = css`
   width: 21.5rem;
 `
 
+const mobileNavButtonCss = css`
+  min-width: max-content;
+  margin: 0 auto;
+  height: 5rem;
+  width: 20rem;
+  font-size: 1.6rem;
+`
+
 const StyledButton = styled.button`
   ${buttonCss}
   background-color: ${({ color }) =>
@@ -40,6 +48,7 @@ const StyledButton = styled.button`
       ${color}
     `};
   ${({ navButton }) => navButton && navButtonCss};
+  ${({ mobileNavButton }) => mobileNavButton && mobileNavButtonCss};
 
   .button {
     ${buttonCss}
@@ -71,7 +80,15 @@ function setAs(type) {
  * @param {string} width,
  ***********************/
 
-const Button = ({ type, url, children, color, width, navButton }) => {
+const Button = ({
+  type,
+  url,
+  children,
+  color,
+  width,
+  navButton,
+  mobileNavButton,
+}) => {
   return (
     <StyledButton
       as={setAs(type)}
@@ -79,6 +96,7 @@ const Button = ({ type, url, children, color, width, navButton }) => {
       color={color}
       width={width || undefined}
       navButton={navButton}
+      mobileNavButton={mobileNavButton}
     >
       {type === "internal" ? (
         <Link
