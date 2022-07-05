@@ -4,18 +4,12 @@ import CopySection from "./CopySection"
 import IntroSection from "./IntroSection"
 import AppContext from "../context/AppContext"
 
+import { setColumns } from "../helpers/helpers"
+
 const StyledTextSection = styled.section``
 
 const TextSection = ({ superheading, heading, subheading, copy, columns }) => {
   const { isPhonePort } = useContext(AppContext)
-
-  console.log(isPhonePort)
-
-  function setColumns() {
-    if (isPhonePort) return 1
-    if (columns) return columns
-    else return 2
-  }
 
   return (
     <StyledTextSection>
@@ -25,7 +19,9 @@ const TextSection = ({ superheading, heading, subheading, copy, columns }) => {
           subheading={subheading}
           heading={heading}
         />
-        <CopySection columns={setColumns()}>{copy}</CopySection>
+        <CopySection columns={setColumns(isPhonePort, columns)}>
+          {copy}
+        </CopySection>
       </div>
     </StyledTextSection>
   )

@@ -111,9 +111,9 @@ const Footer = ({ quickLinks, locationData, socialLinks }) => {
       <div className="container">
         <div className="col-1">
           <h5>QUICK LINKS</h5>
-          {quickLinks.map(quickLink => {
+          {quickLinks.map((quickLink, i) => {
             return (
-              <Link key={quickLink?.id} to={quickLink.data.heading}>
+              <Link key={i} to={quickLink.data.heading}>
                 {quickLink.data.superheading}
               </Link>
             )

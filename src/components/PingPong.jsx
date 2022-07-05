@@ -138,7 +138,7 @@ const PingPong = ({
                 <img
                   className="ping-pong-card__image"
                   src="https://via.placeholder.com/700?text=Image+not+available"
-                  alt="Image not found"
+                  alt="Not found"
                 />
               )}
               <div className="ping-pong-card__content">

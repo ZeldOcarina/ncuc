@@ -71,7 +71,7 @@ const SportsInjuries = ({
           heading={cardsTitleData.Heading}
           subheading={cardsTitleData.Subheading}
           cards={cardsData.map(cardDatum => {
-            console.log(cardDatum)
+            //console.log(cardDatum)
             return {
               id: cardDatum?.id,
               data: {

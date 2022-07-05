@@ -1,6 +1,5 @@
 import React from "react"
 import styled, { css } from "styled-components"
-import { graphql, useStaticQuery } from "gatsby"
 import respond from "../styles/abstracts/mediaqueries"
 
 import Button from "./Button"

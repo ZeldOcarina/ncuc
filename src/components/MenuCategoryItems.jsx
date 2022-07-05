@@ -26,7 +26,7 @@ const StyledMenuCategoryItems = styled.div`
 `
 
 const MenuCategoryItems = ({ category, children }) => {
-  const { hoveredCategory, setHoveredCategory } = useContext(AppContext)
+  const { setHoveredCategory } = useContext(AppContext)
 
   function handleMouseEnter() {
     setHoveredCategory(category)

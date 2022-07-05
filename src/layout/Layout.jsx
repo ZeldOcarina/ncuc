@@ -7,7 +7,6 @@ import Navbar from "./Navbar"
 import MobileNavbar from "./MobileNavbar"
 import Footer from "./Footer"
 import AlertMessage from "../components/AlertMessage"
-import NavLogo from "./NavLogo"
 import GallerySection from "./GallerySection"
 import Map from "../components/Map"
 import FooterLogoStripe from "../components/FooterLogoStripe"
@@ -42,9 +41,8 @@ function organizeMenu(categoriesData) {
   return { categories: [...categories], menuData: noLogoCategoriesData }
 }
 
-const Layout = ({ children, salesLetter, innerLayout }) => {
+const Layout = ({ children, innerLayout }) => {
   const {
-    menu,
     locationData,
     socialLinks,
     site: { siteMetadata },
@@ -74,15 +72,13 @@ const Layout = ({ children, salesLetter, innerLayout }) => {
         state={stateData.Value}
         city={cityData.Value}
       />
-      {salesLetter ? (
-        <NavLogo />
-      ) : (
-        <Navbar
-          siteMetadata={siteMetadata}
-          innerLayout={innerLayout}
-          menuData={menuData}
-        />
-      )}
+
+      <Navbar
+        siteMetadata={siteMetadata}
+        innerLayout={innerLayout}
+        menuData={menuData}
+      />
+
       {children}
       <GallerySection />
       <Map lat={lat} long={long} mapName="map" />

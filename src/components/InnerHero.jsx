@@ -1,4 +1,3 @@
-import { getImage } from "gatsby-plugin-image"
 import React from "react"
 import styled, { css } from "styled-components"
 import respond from "../styles/abstracts/mediaqueries"

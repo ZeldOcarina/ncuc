@@ -5,10 +5,9 @@ import respond from "../styles/abstracts/mediaqueries"
 import { GiHamburgerMenu } from "react-icons/gi"
 
 import AppContext from "../context/AppContext"
-import { LocationContext } from "../context/LocationContext"
 
 import CategoryItem from "../components/CategoryItem"
-import { createLinkWithParams } from "../utils/utils"
+//import { createLinkWithParams } from "../utils/utils"
 
 import Button from "../components/Button"
 
@@ -233,7 +232,7 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
   const [isNavbarScrolled, setIsNavbarScrolled] = useState(false)
   const { isMobileMenuOpen, setIsMobileMenuOpen, isNotebook } =
     useContext(AppContext)
-  const { params } = useContext(LocationContext)
+  //const { params } = useContext(LocationContext)
   const { logo } = useStaticQuery(query)
 
   const logoUrl = logo.nodes[0].data.logo[0].url

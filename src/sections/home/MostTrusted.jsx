@@ -6,6 +6,8 @@ import AppContext from "../../context/AppContext"
 import IntroSection from "../../components/IntroSection"
 import CopySection from "../../components/CopySection"
 
+import { setColumns } from "../../helpers/helpers"
+
 const StyledMostTrusted = styled.section``
 
 const MostTrusted = () => {
@@ -25,7 +27,7 @@ const MostTrusted = () => {
           heading={heading}
           subheading={subheading}
         />
-        <CopySection columns={isPhonePort ? 1 : 2}>{copy}</CopySection>
+        <CopySection columns={setColumns(isPhonePort)}>{copy}</CopySection>
       </div>
     </StyledMostTrusted>
   )

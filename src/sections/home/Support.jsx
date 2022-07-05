@@ -5,6 +5,7 @@ import AppContext from "../../context/AppContext"
 
 import IntroSection from "../../components/IntroSection"
 import CopySection from "../../components/CopySection"
+import { setColumns } from "../../helpers/helpers"
 
 const StyledSupport = styled.section`
   .phone-container {
@@ -22,6 +23,7 @@ const Support = () => {
   } = useStaticQuery(query)
 
   const { isPhonePort } = useContext(AppContext)
+
   return (
     <StyledSupport>
       <div className={isiPhone12Land ? "phone-container" : "container"}>
@@ -30,7 +32,7 @@ const Support = () => {
           heading={heading}
           subheading={subheading}
         />
-        <CopySection columns={isPhonePort ? 1 : 2}>{copy}</CopySection>
+        <CopySection columns={setColumns(isPhonePort)}>{copy}</CopySection>
       </div>
     </StyledSupport>
   )

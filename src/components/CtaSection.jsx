@@ -1,11 +1,9 @@
 import React from "react"
 import styled, { css } from "styled-components"
-import { getImage } from "gatsby-plugin-image"
 import respond from "../styles/abstracts/mediaqueries"
 
 import IntroSection from "./IntroSection"
 import CopySection from "./CopySection"
-import BackgroundImage from "./BackgroundImage"
 import Button from "./Button"
 
 import { Colors } from "../styles/abstracts/abstracts"
@@ -88,7 +86,7 @@ const CtaSection = ({
         </div>
       </div>
       {realImage && (
-        <img className="bg-image" src={realImage} alt="" role="decoration" />
+        <img className="bg-image" src={realImage} alt="" role="presentation" />
       )}
     </StyledCtaSection>
   )
