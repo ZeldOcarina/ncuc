@@ -33,7 +33,7 @@ const SplintingAndBraces = ({
   },
 }) => {
   const { isiPadPro12 } = useContext(AppContext)
-  console.log(pageTitleData)
+  //console.log(pageTitleData)
   return (
     <Layout>
       <Seo title={`NCUC | ${pageTitleData.Page_Title}`} />

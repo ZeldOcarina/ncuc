@@ -121,7 +121,7 @@ const Footer = ({ quickLinks, locationData, socialLinks }) => {
         </div>
         <div className="col-2">
           <h5>LOCATION</h5>
-          <a href={telLink}>{phoneString}</a>
+          <a href={`tel:${telLink}`}>{phoneString}</a>
           <p>{weekdays}</p>
           <p>{weekends}</p>
           <p>{address.split("107")[0]}</p>

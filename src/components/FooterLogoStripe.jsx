@@ -68,7 +68,7 @@ const FooterLogoStripe = ({ phone, tel, logo }) => {
       <div className="container">
         <div className="top-part">
           <img src={logo} alt="logo" className="logo" />
-          <a className="phone" href={tel}>
+          <a className="phone" href={`tel:${tel}`}>
             {phone}
           </a>
         </div>

@@ -34,13 +34,6 @@ const XRays = ({
 }) => {
   const { isiPadPro12 } = useContext(AppContext)
 
-  // console.log(pingPongItems)
-  // console.log(
-  //     pingPongItems.some(item => item.Media && item.Media.localFiles[0])
-  // )
-
-  // console.log(imageTextData)
-
   function setPingPong() {
     if (
       pingPongItems.length === 0 ||
@@ -134,13 +127,7 @@ export const query = graphql`
         Overlay
         Media {
           localFiles {
-            childImageSharp {
-              gatsbyImageData(
-                layout: FULL_WIDTH
-                placeholder: TRACED_SVG
-                quality: 10
-              )
-            }
+            publicURL
           }
         }
         Subheading

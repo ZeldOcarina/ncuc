@@ -34,6 +34,19 @@ const SplintingAndBraces = ({
 }) => {
   const { isiPadPro12 } = useContext(AppContext)
   //console.log(pageTitleData)
+  function setPingPong() {
+    if (
+      pingPongItems.length === 0 ||
+      !pingPongItems.some(
+        item => item.data.Media && item.data.Media.localFiles[0]
+      )
+    )
+      return ""
+    if (isiPadPro12)
+      return <MobilePingPong titleData={pingPongTitle} items={pingPongItems} />
+    return <PingPong titleData={pingPongTitle} items={pingPongItems} />
+  }
+
   return (
     <Layout>
       <Seo title={`NCUC | ${pageTitleData.Page_Title}`} />
@@ -45,12 +58,7 @@ const SplintingAndBraces = ({
           heading={textData.Heading}
           copy={textData.Copy}
         />
-        {isiPadPro12 ? (
-          <MobilePingPong titleData={pingPongTitle} items={pingPongItems} />
-        ) : (
-          <PingPong titleData={pingPongTitle} items={pingPongItems} />
-        )}
-
+        {setPingPong()}
         <CtaSection
           heading={ctaSectionData.Heading}
           subheading={ctaSectionData.Subheading}
