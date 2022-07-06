@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "author": "Mattia Rasulo <mattia@monarchy.io>",
   "engines": {
-    "npm": "8.5.5",
+    "npm": "8.11.0",
     "node": "16"
   },
   "dependencies": {
