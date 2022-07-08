@@ -17,6 +17,7 @@ function ContextProvider(props) {
   const isiPadPro11 = useMediaQuery({ query: `(max-width: ${834 / 16}em)` })
   const isiPhone12Land = useMediaQuery({ query: `(max-width: ${844 / 16}em)` })
   const isiPadPro12 = useMediaQuery({ query: `(max-width: ${1024 / 16}em)` })
+  const isBigLaptop = useMediaQuery({ query: `(max-width: ${1920 / 16}em)` })
   const isNotebook = useMediaQuery({ query: `(max-width: ${1366 / 16}em)` })
 
   const [alertState, setAlertState] = useState({
@@ -51,6 +52,7 @@ function ContextProvider(props) {
         isiPhone12ProMax,
         isiPhone12,
         isNotebook,
+        isBigLaptop,
         alertState,
         setAlertState,
         formData,

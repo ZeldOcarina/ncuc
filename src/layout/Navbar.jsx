@@ -17,7 +17,7 @@ const Wrapper = styled.nav`
   display: flex;
   align-items: center;
   z-index: 150;
-  height: 7rem;
+  height: 8rem;
   font-size: 1.6rem;
   transition: all 0.3s ease-in-out;
 
@@ -71,7 +71,7 @@ const Wrapper = styled.nav`
   )}
 
   .navbar-notebook-container {
-    max-width: 1250px;
+    max-width: 95%;
     margin: 0 auto;
 
     ${respond(
@@ -121,7 +121,7 @@ const Wrapper = styled.nav`
     height: 100%;
 
     ${respond(
-      "ipad-pro-12.9-land",
+      "macbook-air",
       css`
         display: none;
       `
@@ -174,27 +174,27 @@ const Wrapper = styled.nav`
     display: none;
 
     ${respond(
-      "ipad-pro-12.9-land",
+      "macbook-air",
       css`
         display: block;
         color: var(--color-secondary);
         position: absolute;
-        right: 10%;
+        right: 5%;
         width: 4rem;
         height: auto;
+      `
+    )}
+    ${respond(
+      "ipad-pro-12-port",
+      css`
+        right: 10%;
       `
     )}
   }
 
   .logo {
-    width: 20rem;
+    width: 25rem;
 
-    ${respond(
-      "iphone-12-pro-land",
-      css`
-        width: 8rem;
-      `
-    )}
     ${respond(
       "iphone-12-pro-land",
       css`
@@ -230,7 +230,7 @@ const Wrapper = styled.nav`
 
 const Navbar = ({ innerPage, innerLayout, menuData }) => {
   const [isNavbarScrolled, setIsNavbarScrolled] = useState(false)
-  const { isMobileMenuOpen, setIsMobileMenuOpen, isNotebook } =
+  const { isMobileMenuOpen, setIsMobileMenuOpen, isBigLaptop } =
     useContext(AppContext)
   //const { params } = useContext(LocationContext)
   const { logo } = useStaticQuery(query)
@@ -248,7 +248,7 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
 
   return (
     <Wrapper scrolled={isNavbarScrolled} innerLayout={innerLayout}>
-      <div className={isNotebook ? "navbar-notebook-container" : "container"}>
+      <div className={isBigLaptop ? "navbar-notebook-container" : "container"}>
         <Link to={logo?.nodes[0]?.data?.Permalink}>
           {<img src={logoUrl} alt="NCUC Logo" className="logo" />}
         </Link>
@@ -280,10 +280,9 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
           </Link>
           <Button
             color="var(--color-tertiary)"
-            width={"2rem"}
             navButton
             type="link"
-            url="/"
+            url="https://occctesting.com/"
           >
             BOOK COVID TEST
           </Button>

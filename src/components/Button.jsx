@@ -29,7 +29,7 @@ const navButtonCss = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 75%;
+  height: 68%;
   width: 21.5rem;
 `
 
