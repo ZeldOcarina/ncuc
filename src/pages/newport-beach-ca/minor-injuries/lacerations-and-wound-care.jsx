@@ -73,6 +73,8 @@ const LacerationsAndWoundCare = ({
                 heading: cardDatum.data.Heading,
                 copy: cardDatum.data.Copy,
                 icon: cardDatum.data.Media,
+                linkLabel: cardDatum.data.Button_Label,
+                link: cardDatum.data.Button_Link,
               },
             }
           })}
@@ -181,6 +183,8 @@ export const query = graphql`
         data {
           Heading
           Copy
+          Button_Label
+          Button_Link
           Media {
             localFiles {
               publicURL
