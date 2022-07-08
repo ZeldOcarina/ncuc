@@ -75,20 +75,12 @@ const FooterLogoStripe = ({ phone, tel, logo }) => {
 
         <div className="buttons">
           <Button
-            color="var(--color-primary)"
-            width="30rem"
+            color="primary"
             className="button"
-            type="link"
+            type="internal"
+            url="/contact-us"
           >
-            Book in-person visit
-          </Button>
-          <Button
-            type="link"
-            color="var(--color-secondary)"
-            width="30rem"
-            className="button"
-          >
-            Book Telemedicine
+            Schedule a Visit
           </Button>
         </div>
       </div>

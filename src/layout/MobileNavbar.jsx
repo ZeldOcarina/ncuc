@@ -129,12 +129,7 @@ const StyledMobileNavbar = styled.div`
   }
 `
 
-const MobileNavbar = ({
-  siteMetadata: {
-    navbarLinks: { pages, social },
-  },
-  menuData: { categories, menuData },
-}) => {
+const MobileNavbar = ({ menuData: { categories, menuData } }) => {
   const { isMobileMenuOpen, setIsMobileMenuOpen } = useContext(AppContext)
 
   return (

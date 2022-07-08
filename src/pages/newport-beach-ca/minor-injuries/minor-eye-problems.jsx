@@ -133,6 +133,7 @@ export const query = graphql`
             publicURL
           }
         }
+        Overlay
         Subheading
       }
     }

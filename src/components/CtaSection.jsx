@@ -6,8 +6,6 @@ import IntroSection from "./IntroSection"
 import CopySection from "./CopySection"
 import Button from "./Button"
 
-import { Colors } from "../styles/abstracts/abstracts"
-
 const StyledCtaSection = styled.section`
   position: relative;
   ${({ image }) => {
@@ -80,7 +78,12 @@ const CtaSection = ({
           {copy}
         </CopySection>
         <div className="buttons-container">
-          <Button color={Colors.colorPrimary} type="button" width="35rem">
+          <Button
+            color="primary"
+            type="internal"
+            width="35rem"
+            url="/contact-us"
+          >
             {buttonLabel}
           </Button>
         </div>

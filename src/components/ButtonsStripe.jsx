@@ -1,7 +1,6 @@
 import React from "react"
 import styled, { css } from "styled-components"
 import Button from "../components/Button"
-import { Colors } from "../styles/abstracts/abstracts"
 import respond from "../styles/abstracts/mediaqueries"
 
 const StyledButtonsStripe = styled.section`
@@ -35,11 +34,8 @@ const ButtonsStripe = () => {
   return (
     <StyledButtonsStripe>
       <div className="buttons-container">
-        <Button type="button" width="30rem" color={Colors.colorPrimary}>
-          Book in-person visit
-        </Button>
-        <Button type="button" width="30rem" color={Colors.colorSecondary}>
-          Book Telemedicine
+        <Button type="internal" url="/contact-us" width="30rem" color="primary">
+          Schedule a Visit
         </Button>
       </div>
     </StyledButtonsStripe>

@@ -45,7 +45,6 @@ const Layout = ({ children, innerLayout }) => {
   const {
     locationData,
     socialLinks,
-    site: { siteMetadata },
     latAndLong: { nodes },
     phoneData: { phoneData },
     telData: { telData },
@@ -73,11 +72,7 @@ const Layout = ({ children, innerLayout }) => {
         city={cityData.Value}
       />
 
-      <Navbar
-        siteMetadata={siteMetadata}
-        innerLayout={innerLayout}
-        menuData={menuData}
-      />
+      <Navbar innerLayout={innerLayout} menuData={menuData} />
 
       {children}
       <GallerySection />
@@ -88,13 +83,12 @@ const Layout = ({ children, innerLayout }) => {
         logo={logoData.Attachments.localFiles[0].publicURL}
       />
       <Footer
-        siteMetadata={siteMetadata}
         quickLinks={quickLinksData}
         locationData={locationData}
         socialLinks={socialLinks}
       />
       <MonarchyStripe />
-      <MobileNavbar siteMetadata={siteMetadata} menuData={menuData} />
+      <MobileNavbar menuData={menuData} />
 
       <AlertMessage
         message={alertState.message}
@@ -169,19 +163,6 @@ const query = graphql`
         data {
           Label
           Value
-        }
-      }
-    }
-    site {
-      siteMetadata {
-        navbarLinks {
-          social {
-            youtube
-          }
-          pages {
-            link
-            name
-          }
         }
       }
     }

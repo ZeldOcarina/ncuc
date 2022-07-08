@@ -7,7 +7,7 @@ import respond from "../styles/abstracts/mediaqueries"
 const buttonCss = css`
   display: block;
   color: var(--white);
-  width: ${({ width }) => (width ? width : css`max-content`)};
+  width: ${({ width }) => (width ? width : css`35rem !important`)};
   padding: 2rem 0;
   border: none;
   text-transform: uppercase;
@@ -15,10 +15,16 @@ const buttonCss = css`
   font-weight: 400;
 
   ${respond(
+    "big-laptop",
+    css`
+      width: 22rem !important;
+    `
+  )}
+  ${respond(
     "big-desktop",
     css`
       font-size: 3.5rem;
-      width: 55rem;
+      width: 53rem !important;
       padding: 2rem;
     `
   )}
@@ -31,6 +37,14 @@ const navButtonCss = css`
   justify-content: center;
   height: 68%;
   width: 21.5rem;
+
+  ${respond(
+    "big-desktop",
+    css`
+      width: 40rem;
+      font-size: 2rem;
+    `
+  )}
 `
 
 const mobileNavButtonCss = css`
@@ -43,6 +57,7 @@ const mobileNavButtonCss = css`
 
 const StyledButton = styled.button`
   ${buttonCss}
+  padding: 0;
   background-color: ${({ color }) =>
     css`
       ${color}

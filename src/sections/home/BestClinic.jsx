@@ -1,14 +1,12 @@
 import React from "react"
 import styled, { css } from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
-import { getImage } from "gatsby-plugin-image"
 import respond from "../../styles/abstracts/mediaqueries"
 
 import IntroSection from "../../components/IntroSection"
 import CopySection from "../../components/CopySection"
 import BackgroundImage from "../../components/BackgroundImage"
 import Button from "../../components/Button"
-import { Colors } from "../../styles/abstracts/abstracts"
 
 const StyledBestClinic = styled.section`
   position: relative;
@@ -45,9 +43,6 @@ const BestClinic = () => {
         subheading,
         copy,
         btn1Label,
-        // btn1Link,
-        btn2Label,
-        // btn2Link,
         backgroundImage,
         backgroundImageAlt,
       },
@@ -67,17 +62,20 @@ const BestClinic = () => {
           {copy}
         </CopySection>
         <div className="buttons-container">
-          <Button color={Colors.colorPrimary} type="button" width="27rem">
+          <Button
+            color="primary"
+            url="/contact-us"
+            type="internal"
+            width="27rem"
+          >
             {btn1Label}
-          </Button>
-          <Button color={Colors.colorSecondary} type="button" width="27rem">
-            {btn2Label}
           </Button>
         </div>
       </div>
       <BackgroundImage
-        image={getImage(backgroundImage.localFiles[0])}
+        image={backgroundImage.localFiles[0].publicURL}
         alt={backgroundImageAlt}
+        isPlainImg
       />
     </StyledBestClinic>
   )
@@ -100,9 +98,7 @@ const query = graphql`
         backgroundImageAlt
         backgroundImage {
           localFiles {
-            childImageSharp {
-              gatsbyImageData(placeholder: BLURRED, quality: 100)
-            }
+            publicURL
           }
         }
       }

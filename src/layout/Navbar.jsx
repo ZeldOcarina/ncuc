@@ -7,7 +7,6 @@ import { GiHamburgerMenu } from "react-icons/gi"
 import AppContext from "../context/AppContext"
 
 import CategoryItem from "../components/CategoryItem"
-//import { createLinkWithParams } from "../utils/utils"
 
 import Button from "../components/Button"
 
@@ -102,7 +101,14 @@ const Wrapper = styled.nav`
   }
 
   .container {
-    max-width: 1700px;
+    max-width: 1900px;
+
+    ${respond(
+      "big-desktop",
+      css`
+        max-width: 2200px;
+      `
+    )}
   }
 
   .container,

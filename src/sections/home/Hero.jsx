@@ -6,7 +6,6 @@ import BackgroundImage from "../../components/BackgroundImage"
 import respond from "../../styles/abstracts/mediaqueries"
 
 import Button from "../../components/Button"
-import { Colors } from "../../styles/abstracts/abstracts"
 
 const StyledHero = styled.header`
   min-height: 90vh;
@@ -106,13 +105,7 @@ const StyledHero = styled.header`
 const Hero = () => {
   const {
     airtable: {
-      data: {
-        backgroundImage,
-        btn1Label,
-        btn2Label,
-        heading,
-        backgroundImageAlt,
-      },
+      data: { backgroundImage, btn1Label, heading, backgroundImageAlt },
     },
   } = useStaticQuery(query)
   return (
@@ -120,11 +113,13 @@ const Hero = () => {
       <div className="content-container">
         <h1 className="title">{heading}</h1>
         <div className="buttons-container">
-          <Button type="button" color={Colors.colorSecondary} width="30rem">
+          <Button
+            type="internal"
+            color="primary"
+            width="30rem"
+            url="/contact-us"
+          >
             {btn1Label}
-          </Button>
-          <Button type="button" color={Colors.colorPrimary} width="30rem">
-            {btn2Label}
           </Button>
         </div>
       </div>
@@ -152,7 +147,6 @@ const query = graphql`
         }
         backgroundImageAlt
         btn1Label
-        btn2Label
         btnTarget
         heading
       }
