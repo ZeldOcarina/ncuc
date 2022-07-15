@@ -5,6 +5,8 @@ import styled, { css } from "styled-components"
 import BackgroundImage from "../../components/BackgroundImage"
 import respond from "../../styles/abstracts/mediaqueries"
 
+import downArrow from "../../images/icons/down-arrow.svg"
+
 import Button from "../../components/Button"
 
 const StyledHero = styled.header`
@@ -16,6 +18,11 @@ const StyledHero = styled.header`
   grid-template-columns: 1fr;
   align-items: center;
   justify-items: center;
+
+  .down-arrow {
+    margin-top: var(--big-gutter);
+    width: 6.5rem;
+  }
 
   ${respond(
     "ipad-pro-12-port",
@@ -122,6 +129,13 @@ const Hero = () => {
             {btn1Label}
           </Button>
         </div>
+        <a href="#video">
+          <img
+            className="down-arrow"
+            src={downArrow}
+            alt="Go to next section"
+          />
+        </a>
       </div>
 
       <BackgroundImage

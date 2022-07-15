@@ -11,6 +11,7 @@ export default createGlobalStyle`
 html {
   overflow-x: hidden;
   font-size: 10px;
+  scroll-behavior: smooth;
 
   ${respond(
   "4k-tv",

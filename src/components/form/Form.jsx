@@ -183,17 +183,24 @@ const Form = ({ title, cta }) => {
           value={formState?.service?.value}
           className={formState?.service?.error ? "error" : ""}
         >
-          <option value="">What service are you interested in?</option>
-          <option value="illness_or_injury">Illness or Injury</option>
-          <option value="physical_testing">Physical Testing</option>
-          <option value="covid_testing">COVID Testing</option>
+          <option value="">
+            What type of appointment are you looking for?
+          </option>
+          <option value="Sick Visit">Sick Visit</option>
+          <option value="Minor Injury">Minor Injury</option>
+          <option value="Wellness Exam or Pre-Op">
+            Wellness Exam or Pre-Op
+          </option>
+          <option value="Testing (COVID, Flu, Pregnancy, UTI, STD)">
+            Testing (COVID, Flu, Pregnancy, UTI, STD)
+          </option>
         </select>
         <span className="error-message">{formState?.service?.error}</span>
       </div>
       <div className="input-container">
         <textarea
           name="message"
-          placeholder="Message"
+          placeholder="Please include any additional details here"
           className={formState?.message?.error ? "error" : ""}
           onChange={handleInputChange}
           value={formState?.message?.value}

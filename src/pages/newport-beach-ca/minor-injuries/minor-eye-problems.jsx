@@ -20,6 +20,7 @@ const StyledMinorEyeProblems = styled.main``
 const MinorEyeProblems = ({
   data: {
     pageTitleData: { pageTitleData },
+    keywordsData: { keywordsData },
     heroData: { heroData },
     textData: { textData },
     pingPongTitle: { pingPongTitle },
@@ -52,7 +53,10 @@ const MinorEyeProblems = ({
 
   return (
     <Layout>
-      <Seo title={`NCUC | ${pageTitleData.Page_Title}`} />
+      <Seo
+        title={`NCUC | ${pageTitleData.Page_Title}`}
+        keywords={`${keywordsData.Main_Keyword} ${keywordsData.Relative_Keywords}`}
+      />
       <StyledMinorEyeProblems>
         <InnerHero data={heroData} />
         <TextSection
@@ -120,6 +124,15 @@ export const query = graphql`
     ) {
       pageTitleData: data {
         Page_Title
+      }
+    }
+    keywordsData: airtable(
+      table: { eq: "Sitemap" }
+      data: { Page_Title: { eq: "Minor Eye Problems" } }
+    ) {
+      keywordsData: data {
+        Main_Keyword
+        Relative_Keywords
       }
     }
     heroData: airtable(

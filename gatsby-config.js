@@ -47,7 +47,7 @@ module.exports = {
           {
             baseId: process.env.AIRTABLE_BASE_ID,
             tableName: `Home`,
-            mapping: { backgroundImage: `fileNode`, icon: `fileNode` },
+            mapping: { backgroundImage: `fileNode`, icon: `fileNode`, mediaDrop: `fileNode` },
             tableId: `tblVGK74b5DB5iphC`
           },
           {
@@ -211,6 +211,10 @@ module.exports = {
             tableName: `About Us`,
             tableId: `tblj2DnqeoxmoyYIV`,
             mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `COVID Locations`,
           },
           {
             baseId: process.env.AIRTABLE_BASE_ID,

@@ -20,6 +20,7 @@ const StyledUrinaryTractInfections = styled.main``
 const UrinaryTractInfections = ({
   data: {
     pageTitleData: { pageTitleData },
+    keywordsData: { keywordsData },
     heroData: { heroData },
     textData: { textData },
     pingPongTitle: { pingPongTitle },
@@ -56,7 +57,10 @@ const UrinaryTractInfections = ({
 
   return (
     <Layout>
-      <Seo title={`NCUC | ${pageTitleData.Page_Title}`} />
+      <Seo
+        title={`NCUC | ${pageTitleData.Page_Title}`}
+        keywords={`${keywordsData.Main_Keyword} ${keywordsData.Relative_Keywords}`}
+      />
       <StyledUrinaryTractInfections>
         <InnerHero data={heroData} />
         <TextSection
@@ -125,6 +129,15 @@ export const query = graphql`
     ) {
       pageTitleData: data {
         Page_Title
+      }
+    }
+    keywordsData: airtable(
+      table: { eq: "Sitemap" }
+      data: { Page_Title: { eq: "Urinary Tract Infections" } }
+    ) {
+      keywordsData: data {
+        Main_Keyword
+        Relative_Keywords
       }
     }
     heroData: airtable(

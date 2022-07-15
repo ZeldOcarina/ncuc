@@ -2,7 +2,7 @@ import React from "react"
 import { Helmet } from "react-helmet"
 import { graphql, useStaticQuery } from "gatsby"
 
-const Seo = ({ title, description, language }) => {
+const Seo = ({ title, description, language, keywords }) => {
   const {
     site: {
       siteMetadata: { siteUrl, title: metaTitle, description: metaDescription },
@@ -31,6 +31,8 @@ const Seo = ({ title, description, language }) => {
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:width" content="630" />
       <meta property="og:image:type" content="image/png" />
+
+      <meta name="keywords" content={keywords} />
 
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       {/* <link

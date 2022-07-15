@@ -49,7 +49,7 @@ export default class FormHandler {
             webhookData[key] = value.value;
         }
 
-        const response = await axios.post("http://localhost:3000/api/submit-form", webhookData);
+        const response = await axios.post(`${window.location.origin}/api/submit-form`, webhookData);
 
         if (response.status === 201) return true;
         throw new Error("Form Submission Failed");

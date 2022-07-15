@@ -96,6 +96,7 @@ const StyledIntroSection = styled.section`
     margin: 0 auto;
     text-align: left;
     width: 84%;
+    ${({ centerSubHeading }) => centerSubHeading && "text-align: center;"}
 
     ${respond(
       "iphone-12-mini-land",
@@ -126,12 +127,14 @@ const IntroSection = ({
   padding,
   theme,
   noPaddingTop,
+  centerSubHeading,
 }) => {
   return (
     <StyledIntroSection
       padding={padding}
       theme={theme}
       noPaddingTop={noPaddingTop}
+      centerSubHeading={centerSubHeading}
     >
       {superheading && <h3>{superheading}</h3>}
       <h2>{heading}</h2>

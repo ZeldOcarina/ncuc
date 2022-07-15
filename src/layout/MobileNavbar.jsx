@@ -73,12 +73,15 @@ const StyledMobileNavbar = styled.div`
     overflow: scroll;
     margin: 5rem 0;
     padding-bottom: 7rem;
+    padding-right: 0;
+    transform: scaleX(1.09);
 
     ${respond(
       "phone-land",
       css`
         font-size: 2.5rem;
         gap: 4rem;
+        transform: scaleX(1);
       `
     )}
     ${respond(
@@ -146,6 +149,8 @@ const MobileNavbar = ({ menuData: { categories, menuData } }) => {
               url="/"
             >
               BOOK COVID TEST
+              <br />
+              <span className="subline">Multiple Locations</span>
             </Button>
           </li>
           {categories.map((category, i) => {

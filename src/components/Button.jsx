@@ -4,6 +4,9 @@ import styled, { css } from "styled-components"
 import PropTypes from "prop-types"
 import respond from "../styles/abstracts/mediaqueries"
 
+import { Colors } from "../styles/abstracts/abstracts"
+import { shadeColor } from "../helpers/helpers"
+
 const buttonCss = css`
   display: block;
   color: var(--white);
@@ -13,6 +16,12 @@ const buttonCss = css`
   text-transform: uppercase;
   text-align: center;
   font-weight: 400;
+  transition: all 0.2s ease-in-out;
+  background-color: var(--color-primary);
+
+  &:hover {
+    background-color: #222b5f;
+  }
 
   ${respond(
     "big-laptop",
@@ -35,8 +44,22 @@ const navButtonCss = css`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   height: 68%;
   width: 21.5rem;
+  line-height: 1.3;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: ${shadeColor(Colors.colorTertiary, -30)} !important;
+  }
+
+  .subline {
+    text-transform: capitalize !important;
+    font-weight: 300;
+    font-size: 1.4rem;
+    display: block;
+  }
 
   ${respond(
     "big-desktop",
@@ -50,9 +73,11 @@ const navButtonCss = css`
 const mobileNavButtonCss = css`
   min-width: max-content;
   margin: 0 auto;
-  height: 5rem;
-  width: 20rem;
+  height: 8rem;
+  width: 40rem;
   font-size: 1.6rem;
+  padding: 0 4rem;
+  margin-bottom: var(--big-gutter);
 `
 
 const StyledButton = styled.button`
@@ -119,10 +144,6 @@ const Button = ({
           className="button"
           href={url}
           style={{
-            backgroundColor:
-              color === "primary"
-                ? "var(--color-primary)"
-                : "var(--color-secondary",
             width: width ? width : "max-content",
           }}
         >

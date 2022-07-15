@@ -20,6 +20,7 @@ const leadSchema = new mongoose.Schema({
         required: true,
         message: "Please provide your last name",
     },
+    phone_number: String,
     visit_type: String,
     service: String,
     message: String,

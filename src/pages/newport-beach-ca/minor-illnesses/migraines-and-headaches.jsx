@@ -20,6 +20,7 @@ const StyledMigrainesAndHeadaches = styled.main``
 const MigrainesAndHeadaches = ({
   data: {
     pageTitleData: { pageTitleData },
+    keywordsData: { keywordsData },
     heroData: { heroData },
     textData: { textData },
     pingPongTitle: { pingPongTitle },
@@ -56,7 +57,10 @@ const MigrainesAndHeadaches = ({
 
   return (
     <Layout>
-      <Seo title={`NCUC | ${pageTitleData.Page_Title}`} />
+      <Seo
+        title={`NCUC | ${pageTitleData.Page_Title}`}
+        keywords={`${keywordsData.Main_Keyword} ${keywordsData.Relative_Keywords}`}
+      />
       <StyledMigrainesAndHeadaches>
         <InnerHero data={heroData} />
         <TextSection
@@ -127,6 +131,15 @@ export const query = graphql`
     ) {
       pageTitleData: data {
         Page_Title
+      }
+    }
+    keywordsData: airtable(
+      table: { eq: "Sitemap" }
+      data: { Page_Title: { eq: "Migraines and Headaches" } }
+    ) {
+      keywordsData: data {
+        Main_Keyword
+        Relative_Keywords
       }
     }
     heroData: airtable(

@@ -27,10 +27,18 @@ const StyledLocationBanner = styled.div`
     `
   )}
 
-  .container {
+  .content-container {
     display: flex;
     justify-content: flex-end;
     font-weight: 500;
+    max-width: 97.5%;
+
+    ${respond(
+      1500,
+      css`
+        max-width: 95%;
+      `
+    )}
   }
 
   a {
@@ -38,13 +46,16 @@ const StyledLocationBanner = styled.div`
   }
 `
 
-const LocationBanner = ({ phone, tel, state, city }) => {
+const LocationBanner = ({ phone, tel, state, city, address }) => {
   return (
     <StyledLocationBanner>
-      <div className="container">
+      <div className="content-container">
         <p>
-          Conveniently Located in {city}, {state} - Call Today:{" "}
-          <a href={`tel:${tel}`}>{phone}</a>
+          Located in{" "}
+          <a href="https://www.google.com/maps/dir//Newport+Center+Urgent+Care+-+Newport+Beach+Urgent+Care,+360+San+Miguel+Dr+%23107,+Newport+Beach,+CA+92660,+United+States/@33.6134912,-117.8718255,20z/data=!4m8!4m7!1m0!1m5!1m1!1s0x80dce08f365b0ab9:0x981ae22279f7dd5!2m2!1d-117.8716033!2d33.6136217">
+            {address}
+          </a>{" "}
+          - Call Today: <a href={`tel:${tel}`}>{phone}</a>
         </p>
       </div>
     </StyledLocationBanner>

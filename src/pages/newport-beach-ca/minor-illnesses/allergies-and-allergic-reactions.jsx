@@ -20,6 +20,7 @@ const StyledAllergiesAndAllergicReactions = styled.main``
 const AllergiesAndAllergicReactions = ({
   data: {
     pageTitleData: { pageTitleData },
+    keywordsData: { keywordsData },
     heroData: { heroData },
     textData: { textData },
     pingPongTitle: { pingPongTitle },
@@ -33,12 +34,6 @@ const AllergiesAndAllergicReactions = ({
   },
 }) => {
   const { isiPadPro12 } = useContext(AppContext)
-
-  //   console.log(pingPongItems)
-  //   console.log(
-  //     pingPongItems.some(item => item.Media && item.Media.localFiles[0])
-  //   )
-  //console.log(imageTextData)
 
   function setPingPong() {
     if (
@@ -55,7 +50,10 @@ const AllergiesAndAllergicReactions = ({
 
   return (
     <Layout>
-      <Seo title={`NCUC | ${pageTitleData.Page_Title}`} />
+      <Seo
+        title={`NCUC | ${pageTitleData.Page_Title}`}
+        keywords={`${keywordsData.Main_Keyword} ${keywordsData.Relative_Keywords}`}
+      />
       <StyledAllergiesAndAllergicReactions>
         <InnerHero data={heroData} />
         <TextSection
@@ -126,6 +124,15 @@ export const query = graphql`
     ) {
       pageTitleData: data {
         Page_Title
+      }
+    }
+    keywordsData: airtable(
+      table: { eq: "Sitemap" }
+      data: { Page_Title: { eq: "Allergies and Allergic Reactions" } }
+    ) {
+      keywordsData: data {
+        Main_Keyword
+        Relative_Keywords
       }
     }
     heroData: airtable(

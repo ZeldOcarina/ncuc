@@ -20,6 +20,7 @@ const StyledInsectBites = styled.main``
 const InsectBites = ({
   data: {
     pageTitleData: { pageTitleData },
+    keywordsData: { keywordsData },
     heroData: { heroData },
     textData: { textData },
     pingPongTitle: { pingPongTitle },
@@ -55,7 +56,10 @@ const InsectBites = ({
 
   return (
     <Layout>
-      <Seo title={`NCUC | ${pageTitleData.Page_Title}`} />
+      <Seo
+        title={`NCUC | ${pageTitleData.Page_Title}`}
+        keywords={`${keywordsData.Main_Keyword} ${keywordsData.Relative_Keywords}`}
+      />
       <StyledInsectBites>
         <InnerHero data={heroData} />
         <TextSection
@@ -124,6 +128,15 @@ export const query = graphql`
     ) {
       pageTitleData: data {
         Page_Title
+      }
+    }
+    keywordsData: airtable(
+      table: { eq: "Sitemap" }
+      data: { Page_Title: { eq: "Insect Bites" } }
+    ) {
+      keywordsData: data {
+        Main_Keyword
+        Relative_Keywords
       }
     }
     heroData: airtable(

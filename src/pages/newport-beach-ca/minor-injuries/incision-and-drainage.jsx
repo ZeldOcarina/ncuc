@@ -20,6 +20,8 @@ const StyledSplintingAndBraces = styled.main``
 const SplintingAndBraces = ({
   data: {
     pageTitleData: { pageTitleData },
+    keywordsData: { keywordsData },
+
     heroData: { heroData },
     textData: { textData },
     pingPongTitle: { pingPongTitle },
@@ -36,7 +38,10 @@ const SplintingAndBraces = ({
   //console.log(pageTitleData)
   return (
     <Layout>
-      <Seo title={`NCUC | ${pageTitleData.Page_Title}`} />
+      <Seo
+        title={`NCUC | ${pageTitleData.Page_Title}`}
+        keywords={`${keywordsData.Main_Keyword} ${keywordsData.Relative_Keywords}`}
+      />
       <StyledSplintingAndBraces>
         <InnerHero data={heroData} />
         <TextSection
@@ -109,6 +114,15 @@ export const query = graphql`
     ) {
       pageTitleData: data {
         Page_Title
+      }
+    }
+    keywordsData: airtable(
+      table: { eq: "Sitemap" }
+      data: { Page_Title: { eq: "Incision and Drainage" } }
+    ) {
+      keywordsData: data {
+        Main_Keyword
+        Relative_Keywords
       }
     }
     heroData: airtable(

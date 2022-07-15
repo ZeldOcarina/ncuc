@@ -7,6 +7,7 @@ import { graphql } from "gatsby"
 
 import InnerHero from "../../../components/InnerHero"
 import TextSection from "../../../components/TextSection"
+import VideoSection from "../../../components/VideoSection"
 import CtaSection from "../../../components/CtaSection"
 import Faqs from "../../../components/Faqs"
 import CardsSection from "../../../components/CardsSection"
@@ -16,9 +17,11 @@ const StyledLacerationsAndWoundCare = styled.main``
 const LacerationsAndWoundCare = ({
   data: {
     pageTitleData: { pageTitleData },
+    keywordsData: { keywordsData },
     heroData: { heroData },
     textData: { textData },
     ctaSectionData: { ctaSectionData },
+    videoData: { videoData },
     imageTextData: { imageTextData },
     faqsTitleData: { faqsTitleData },
     faqsData: { faqsData },
@@ -29,7 +32,10 @@ const LacerationsAndWoundCare = ({
   //   console.log(textData)
   return (
     <Layout>
-      <Seo title={`NCUC | ${pageTitleData.Page_Title}`} />
+      <Seo
+        title={`NCUC | ${pageTitleData.Page_Title}`}
+        keywords={`${keywordsData.Main_Keyword} ${keywordsData.Relative_Keywords}`}
+      />
       <StyledLacerationsAndWoundCare>
         <InnerHero data={heroData} />
         <TextSection
@@ -50,6 +56,12 @@ const LacerationsAndWoundCare = ({
           subheading={imageTextData.Subheading}
           heading={imageTextData.Heading}
           copy={imageTextData.Copy}
+        />
+        <VideoSection
+          heading={videoData.Heading}
+          video={videoData.Media.localFiles[0].publicURL}
+          mimeType={videoData.Media.raw.type}
+          autoplay={false}
         />
         <Faqs
           superheading={faqsTitleData.Superheader}
@@ -98,6 +110,15 @@ export const query = graphql`
         Page_Title
       }
     }
+    keywordsData: airtable(
+      table: { eq: "Sitemap" }
+      data: { Page_Title: { eq: "Lacerations and Wound Care" } }
+    ) {
+      keywordsData: data {
+        Main_Keyword
+        Relative_Keywords
+      }
+    }
     heroData: airtable(
       table: { eq: "Lacerations and Wound Care" }
       data: { Block: { eq: "Hero" } }
@@ -133,6 +154,22 @@ export const query = graphql`
         Copy
         Button_Label
         Media {
+          localFiles {
+            publicURL
+          }
+        }
+      }
+    }
+    videoData: airtable(
+      table: { eq: "Lacerations and Wound Care" }
+      data: { Block: { eq: "Video" } }
+    ) {
+      videoData: data {
+        Heading
+        Media {
+          raw {
+            type
+          }
           localFiles {
             publicURL
           }

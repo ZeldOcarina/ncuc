@@ -131,7 +131,9 @@ function respond(breakpoint, css) {
                 ${css}
               }`
     default:
-      return new Error("Invalid Media Query")
+      return `@media only screen and (max-width: ${breakpoint / BASE_PIXELS}em) {
+                ${css}
+              }`
   }
 }
 

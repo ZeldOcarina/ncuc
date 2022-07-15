@@ -8,6 +8,7 @@ import Seo from "../../../components/Seo"
 
 import InnerHero from "../../../components/InnerHero"
 import TextSection from "../../../components/TextSection"
+import VideoSection from "../../../components/VideoSection"
 import PingPong from "../../../components/PingPong"
 import CtaSection from "../../../components/CtaSection"
 import Faqs from "../../../components/Faqs"
@@ -19,8 +20,10 @@ const StyledSportsInjuries = styled.main``
 const SportsInjuries = ({
   data: {
     pageTitleData: { pageTitleData },
+    keywordsData: { keywordsData },
     heroData: { heroData },
     copySection: { copyData },
+    videoData: { videoData },
     pingPongTitle: { pingPongTitle },
     pingPongItems: { pingPongItems },
     ctaSectionData: { ctaSectionData },
@@ -48,7 +51,10 @@ const SportsInjuries = ({
 
   return (
     <Layout>
-      <Seo title={`NCUC | ${pageTitleData.Page_Title}`} />
+      <Seo
+        title={`NCUC | ${pageTitleData.Page_Title}`}
+        keywords={`${keywordsData.Main_Keyword} ${keywordsData.Relative_Keywords}`}
+      />
       <StyledSportsInjuries>
         <InnerHero data={heroData} />
         <TextSection
@@ -56,6 +62,12 @@ const SportsInjuries = ({
           subheading={copyData.Subheading}
           heading={copyData.Heading}
           copy={copyData.Copy}
+        />
+        <VideoSection
+          heading={videoData.Heading}
+          video={videoData.Media.localFiles[0].publicURL}
+          mimeType={videoData.Media.raw.type}
+          autoplay={false}
         />
         {setPingPong()}
         <CtaSection
@@ -94,6 +106,8 @@ const SportsInjuries = ({
                 heading: cardDatum.data.Heading,
                 copy: cardDatum.data.Copy,
                 icon: cardDatum.data.Media,
+                linkLabel: cardDatum.data.Button_Label,
+                link: cardDatum.data.Button_Link,
               },
             }
           })}
@@ -105,6 +119,15 @@ const SportsInjuries = ({
 
 export const query = graphql`
   query SportsInjuries {
+    keywordsData: airtable(
+      table: { eq: "Sitemap" }
+      data: { Page_Title: { eq: "Sports Injuries" } }
+    ) {
+      keywordsData: data {
+        Main_Keyword
+        Relative_Keywords
+      }
+    }
     pageTitleData: airtable(
       table: { eq: "Sitemap" }
       data: {
@@ -147,6 +170,22 @@ export const query = graphql`
         Heading
         Superheader
         Copy
+      }
+    }
+    videoData: airtable(
+      table: { eq: "Sports injuries" }
+      data: { Block: { eq: "Video" } }
+    ) {
+      videoData: data {
+        Heading
+        Media {
+          raw {
+            type
+          }
+          localFiles {
+            publicURL
+          }
+        }
       }
     }
     pingPongTitle: airtable(
@@ -251,6 +290,8 @@ export const query = graphql`
         data {
           Heading
           Copy
+          Button_Label
+          Button_Link
           Media {
             localFiles {
               publicURL

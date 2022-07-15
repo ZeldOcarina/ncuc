@@ -7,7 +7,7 @@ import Seo from "../components/Seo"
 import Hero from "../sections/home/Hero"
 import Services from "../sections/home/Services"
 import Support from "../sections/home/Support"
-import VideoSection from "../sections/home/VideoSection"
+import VideoSection from "../components/VideoSection"
 import UrgentCare from "../sections/home/UrgentCare"
 import BestClinic from "../sections/home/BestClinic"
 import MostTrusted from "../sections/home/MostTrusted"
@@ -18,19 +18,29 @@ const StyledIndex = styled.main``
 
 const IndexPage = ({
   data: {
+    keywordsData: { keywordsData },
     faqsTitle: { faqsTitle },
     faqsData: { faqsData },
+    videoData: { videoData },
   },
 }) => {
-  //console.log(faqsData)
   return (
     <Layout>
-      <Seo title="Newport Urgent Care" />
+      <Seo
+        title="Newport Urgent Care"
+        keywords={`${keywordsData.Main_Keyword} ${keywordsData.Relative_Keywords}`}
+      />
       <StyledIndex>
         <Hero />
+        <VideoSection
+          superheading={videoData.superheading}
+          heading={videoData.heading}
+          video={videoData.mediaDrop.localFiles[0].publicURL}
+          mimeType={videoData.mediaDrop.raw.type}
+          autoplay={false}
+        />
         <Services />
         <Support />
-        <VideoSection />
         <UrgentCare />
         <BestClinic />
         <MostTrusted />
@@ -52,7 +62,33 @@ const IndexPage = ({
 }
 
 export const query = graphql`
-  query HomeFAQs {
+  query Home {
+    keywordsData: airtable(
+      table: { eq: "Sitemap" }
+      data: { Category: { eq: "Home" } }
+    ) {
+      keywordsData: data {
+        Main_Keyword
+        Relative_Keywords
+      }
+    }
+    videoData: airtable(
+      table: { eq: "Home" }
+      data: { blockName: { eq: "VideoSection" } }
+    ) {
+      videoData: data {
+        superheading
+        heading
+        mediaDrop {
+          localFiles {
+            publicURL
+          }
+          raw {
+            type
+          }
+        }
+      }
+    }
     faqsTitle: airtable(
       table: { eq: "Home" }
       data: { blockName: { eq: "FAQs" } }

@@ -1,0 +1,25 @@
+import React from "react"
+import styled from "styled-components"
+import IntroSection from "./IntroSection"
+import VideoPlayer from "./VideoPlayer"
+
+const StyledVideoSection = styled.section`
+  background-color: var(--background-dark);
+`
+
+const VideoSection = ({ superheading, heading, video, mimeType, autoplay }) => {
+  return (
+    <StyledVideoSection id="video">
+      <IntroSection superheading={superheading} heading={heading} padding={0} />
+      <div className="container">
+        <VideoPlayer
+          video={video}
+          mimeType={mimeType}
+          autoplay={autoplay === false ? false : true}
+        />
+      </div>
+    </StyledVideoSection>
+  )
+}
+
+export default VideoSection

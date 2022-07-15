@@ -103,7 +103,6 @@ position: relative;
     font-family: var(--title-font);
     color: var(--white);
     text-transform: uppercase;
-    border-radius: 60px;
     padding: 2rem 0;
     font-size: 2.3rem;
     font-weight: 200;

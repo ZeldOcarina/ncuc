@@ -20,6 +20,7 @@ const StyledLabPcr = styled.main``
 const LabPcr = ({
   data: {
     pageTitleData: { pageTitleData },
+    keywordsData: { keywordsData },
     heroData: { heroData },
     textData: { textData },
     pingPongTitle: { pingPongTitle },
@@ -33,13 +34,6 @@ const LabPcr = ({
   },
 }) => {
   const { isiPadPro12 } = useContext(AppContext)
-
-  // console.log(pingPongItems)
-  // console.log(
-  //     pingPongItems.some(item => item.Media && item.Media.localFiles[0])
-  // )
-
-  // console.log(imageTextData)
 
   function setPingPong() {
     if (
@@ -56,7 +50,10 @@ const LabPcr = ({
 
   return (
     <Layout>
-      <Seo title={`NCUC | ${pageTitleData.Page_Title}`} />
+      <Seo
+        title={`NCUC | ${pageTitleData.Page_Title}`}
+        keywords={`${keywordsData.Main_Keyword} ${keywordsData.Relative_Keywords}`}
+      />
       <StyledLabPcr>
         <InnerHero data={heroData} />
         <TextSection
@@ -123,6 +120,15 @@ export const query = graphql`
     ) {
       pageTitleData: data {
         Page_Title
+      }
+    }
+    keywordsData: airtable(
+      table: { eq: "Sitemap" }
+      data: { Page_Title: { eq: "Lab PCR" } }
+    ) {
+      keywordsData: data {
+        Main_Keyword
+        Relative_Keywords
       }
     }
     heroData: airtable(
@@ -241,6 +247,8 @@ export const query = graphql`
         Superheader
         Subheading
         Heading
+        Button_Label
+        Button_Link
       }
     }
     cardsData: allAirtable(

@@ -61,6 +61,9 @@ const Layout = ({ children, innerLayout }) => {
   const long = nodes?.find(node => node?.data?.Label === "Longitude")?.data
     ?.Value
 
+  const address = locationData.nodes.find(item => item.data.Label === "Address")
+    ?.data.Value
+
   const menuData = organizeMenu(categoriesData)
 
   return (
@@ -70,6 +73,7 @@ const Layout = ({ children, innerLayout }) => {
         tel={telData.Value}
         state={stateData.Value}
         city={cityData.Value}
+        address={address}
       />
 
       <Navbar innerLayout={innerLayout} menuData={menuData} />

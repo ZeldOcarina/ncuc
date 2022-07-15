@@ -127,7 +127,7 @@ const Wrapper = styled.nav`
     height: 100%;
 
     ${respond(
-      "macbook-air",
+      1500,
       css`
         display: none;
       `
@@ -180,7 +180,7 @@ const Wrapper = styled.nav`
     display: none;
 
     ${respond(
-      "macbook-air",
+      1500,
       css`
         display: block;
         color: var(--color-secondary);
@@ -245,11 +245,17 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
 
   useEffect(() => {
     // Make navbar fixed on scroll
-    document.addEventListener("scroll", () => {
+    const makeNavbarSticky = () => {
       window.scrollY === 0
         ? setIsNavbarScrolled(false)
         : setIsNavbarScrolled(true)
-    })
+    }
+
+    document.addEventListener("scroll", makeNavbarSticky)
+    // cleanup state after component unmount
+    return () => {
+      document.removeEventListener("scroll", makeNavbarSticky)
+    }
   })
 
   return (
@@ -267,9 +273,15 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
           }
         >
           {menuData.categories.map((category, i) => {
+            let locationsPage =
+              category === "COVID Testing" &&
+              menuData.menuData.find(item => item.data.Child === "Locations")
+
             const categoryItems = menuData.menuData.filter(
-              item => item.data.Parent === category
+              item =>
+                item.data.Parent === category && item.data.Child !== "Locations"
             )
+            locationsPage && categoryItems.push(locationsPage)
             //const linkString = createLinkWithParams(data?.Permalink, params)
             return (
               //<Link to={linkString} className="nav-link" key={id}>
@@ -291,6 +303,8 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
             url="https://occctesting.com/"
           >
             BOOK COVID TEST
+            <br />
+            <span className="subline">Multiple Locations</span>
           </Button>
         </div>
         <GiHamburgerMenu
