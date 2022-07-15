@@ -1,8 +1,9 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
+import respond from "../styles/abstracts/mediaqueries"
 
 const StyledCopySection = styled.article`
   column-count: ${({ columns }) => columns || 2};
@@ -14,6 +15,13 @@ const StyledCopySection = styled.article`
   li {
     margin-bottom: 1.3rem;
   }
+
+  ${respond(
+    500,
+    css`
+      column-count: 1;
+    `
+  )}
 `
 
 const CopySection = ({ children, columns, theme }) => {

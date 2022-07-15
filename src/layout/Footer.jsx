@@ -29,6 +29,7 @@ const StyledFooter = styled.footer`
       "iphone-12-pro-land",
       css`
         grid-template-columns: 1fr;
+        gap: var(--gutter);
       `
     )}
 

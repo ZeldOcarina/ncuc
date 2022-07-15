@@ -94,9 +94,9 @@ const StyledHero = styled.header`
       `
     )}
     ${respond(
-      "iphone-12",
+      "phone-port",
       css`
-        font-size: 3.2rem;
+        font-size: 3.5rem;
         max-width: 85%;
       `
     )}
