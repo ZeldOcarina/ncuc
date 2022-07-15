@@ -134,7 +134,7 @@ export const query = graphql`
       }
     }
     heroData: airtable(
-      table: { eq: "School Physical Exam" }
+      table: { eq: "Sports Physical Exam" }
       data: { Block: { eq: "Hero" } }
     ) {
       heroData: data {
@@ -149,7 +149,7 @@ export const query = graphql`
       }
     }
     textData: airtable(
-      table: { eq: "School Physical Exam" }
+      table: { eq: "Sports Physical Exam" }
       data: { Block: { eq: "Text" } }
     ) {
       textData: data {
@@ -160,7 +160,7 @@ export const query = graphql`
       }
     }
     pingPongTitle: airtable(
-      table: { eq: "School Physical Exam" }
+      table: { eq: "Sports Physical Exam" }
       data: { Block: { eq: "PingPong" } }
     ) {
       pingPongTitle: data {
@@ -171,7 +171,7 @@ export const query = graphql`
     }
     pingPongItems: allAirtable(
       filter: {
-        table: { eq: "School Physical Exam" }
+        table: { eq: "Sports Physical Exam" }
         data: { Block: { eq: "PingPongItem" } }
       }
     ) {
@@ -191,7 +191,7 @@ export const query = graphql`
       }
     }
     ctaSectionData: airtable(
-      table: { eq: "School Physical Exam" }
+      table: { eq: "Sports Physical Exam" }
       data: { Block: { eq: "CTA" } }
     ) {
       ctaSectionData: data {
@@ -207,7 +207,7 @@ export const query = graphql`
       }
     }
     imageTextData: airtable(
-      table: { eq: "School Physical Exam" }
+      table: { eq: "Sports Physical Exam" }
       data: { Block: { eq: "ImageText" } }
     ) {
       imageTextData: data {
@@ -218,7 +218,7 @@ export const query = graphql`
       }
     }
     faqsTitleData: airtable(
-      table: { eq: "School Physical Exam" }
+      table: { eq: "Sports Physical Exam" }
       data: { Block: { eq: "FAQ" } }
     ) {
       faqsTitleData: data {
@@ -229,7 +229,7 @@ export const query = graphql`
     }
     faqsData: allAirtable(
       filter: {
-        table: { eq: "School Physical Exam" }
+        table: { eq: "Sports Physical Exam" }
         data: { Block: { eq: "FaqItem" } }
       }
     ) {
@@ -242,7 +242,7 @@ export const query = graphql`
       }
     }
     cardsTitleData: airtable(
-      table: { eq: "School Physical Exam" }
+      table: { eq: "Sports Physical Exam" }
       data: { Block: { eq: "Cards" } }
     ) {
       cardsTitleData: data {
@@ -253,7 +253,7 @@ export const query = graphql`
     }
     cardsData: allAirtable(
       filter: {
-        table: { eq: "School Physical Exam" }
+        table: { eq: "Sports Physical Exam" }
         data: { Block: { eq: "CardsItem" } }
       }
     ) {
