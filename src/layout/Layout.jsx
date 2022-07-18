@@ -7,7 +7,7 @@ import Navbar from "./Navbar"
 import MobileNavbar from "./MobileNavbar"
 import Footer from "./Footer"
 import AlertMessage from "../components/AlertMessage"
-//import GallerySection from "./GallerySection"
+import GallerySection from "./GallerySection"
 import Map from "../components/Map"
 import FooterLogoStripe from "../components/FooterLogoStripe"
 import MonarchyStripe from "../components/MonarchyStripe"
@@ -79,7 +79,7 @@ const Layout = ({ children, innerLayout }) => {
       <Navbar innerLayout={innerLayout} menuData={menuData} />
 
       {children}
-      {/* <GallerySection /> */}
+      <GallerySection />
       <Map lat={lat} long={long} mapName="map" />
       <FooterLogoStripe
         phone={phoneData.Value}
