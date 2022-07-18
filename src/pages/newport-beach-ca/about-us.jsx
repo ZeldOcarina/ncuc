@@ -131,6 +131,7 @@ export const query = graphql`
         table: { eq: "About Us" }
         data: { Block: { eq: "PingPongItem" } }
       }
+      sort: { order: ASC, fields: data___fieldId }
     ) {
       pingPongItems: nodes {
         data {

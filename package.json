@@ -4,6 +4,7 @@
   "description": "A new Gatsby website starter with Strapi integration",
   "version": "0.1.0",
   "author": "Mattia Rasulo <mattia@monarchy.io>",
+  "license": "unlicensed",
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.14.3",
     "@material-ui/core": "^4.12.4",

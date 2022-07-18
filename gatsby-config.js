@@ -166,6 +166,11 @@ module.exports = {
           },
           {
             baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Sports Physical Exam`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
             tableName: `Annual Physical Exam`,
             tableId: `tbl3SRFDD4CtyUjeh`,
             mapping: { Media: `fileNode` }

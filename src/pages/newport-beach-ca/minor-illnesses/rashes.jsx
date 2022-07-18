@@ -39,7 +39,7 @@ const Rashes = ({
   //   console.log(
   //     pingPongItems.some(item => item.Media && item.Media.localFiles[0])
   //   )
-  console.log(imageTextData)
+  //console.log(imageTextData)
 
   function setPingPong() {
     if (
