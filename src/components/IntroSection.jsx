@@ -19,7 +19,8 @@ const StyledIntroSection = styled.section`
   )}
 
   h3 {
-    color: var(--color-secondary);
+    color: ${whiteSuperTitle =>
+      whiteSuperTitle ? css`var(--white)` : css`var(--color-secondary)`};
     text-transform: uppercase;
     text-align: center;
     font-size: 2rem;
@@ -60,6 +61,7 @@ const StyledIntroSection = styled.section`
 
     margin: var(--gutter) auto;
     width: 85%;
+    ${({ noPaddingTop }) => noPaddingTop && "margin-top: 0 !important;"}
 
     ${respond(
       "iphone-8-plus-land",
@@ -128,6 +130,7 @@ const IntroSection = ({
   theme,
   noPaddingTop,
   centerSubHeading,
+  whiteSuperTitle,
 }) => {
   return (
     <StyledIntroSection
@@ -135,6 +138,7 @@ const IntroSection = ({
       theme={theme}
       noPaddingTop={noPaddingTop}
       centerSubHeading={centerSubHeading}
+      whiteSuperTitle={whiteSuperTitle}
     >
       {superheading && <h3>{superheading}</h3>}
       <h2>{heading}</h2>

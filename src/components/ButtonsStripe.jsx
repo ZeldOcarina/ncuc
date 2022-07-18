@@ -35,7 +35,7 @@ const ButtonsStripe = () => {
     <StyledButtonsStripe>
       <div className="buttons-container">
         <Button type="internal" url="/contact-us" width="30rem" color="primary">
-          Schedule a Visit
+          Request a Visit
         </Button>
       </div>
     </StyledButtonsStripe>

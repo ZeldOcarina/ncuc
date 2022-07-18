@@ -80,7 +80,7 @@ const FooterLogoStripe = ({ phone, tel, logo }) => {
             type="internal"
             url="/contact-us"
           >
-            Schedule a Visit
+            Request a Visit
           </Button>
         </div>
       </div>

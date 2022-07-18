@@ -11,6 +11,7 @@ import InnerHero from "../../components/InnerHero"
 import TextSection from "../../components/TextSection"
 import MobilePingPong from "../../components/MobilePingPong"
 import PingPong from "../../components/PingPong"
+import OtherPracticioners from "../../sections/about-us/OtherPracticioners"
 import CtaSection from "../../components/CtaSection"
 
 const StyledAboutUs = styled.main``
@@ -22,18 +23,13 @@ const AboutUs = ({
     textData: { textData },
     pingPongTitle: { pingPongTitle },
     pingPongItems: { pingPongItems },
+    otherPracticionersTitleData: { otherPracticionersTitleData },
+    otherPracticionersData: { otherPracticionersData },
     ctaSectionData: { ctaSectionData },
     imageTextData: { imageTextData },
   },
 }) => {
   const { isiPadPro12 } = useContext(AppContext)
-
-  // console.log(pingPongItems)
-  // console.log(
-  //     pingPongItems.some(item => item.Media && item.Media.localFiles[0])
-  // )
-
-  // console.log(imageTextData)
 
   function setPingPong() {
     if (
@@ -60,6 +56,11 @@ const AboutUs = ({
           copy={textData.Copy}
         />
         {setPingPong()}
+        <OtherPracticioners
+          heading={otherPracticionersTitleData.Heading}
+          subheading={otherPracticionersTitleData.Subheading}
+          practicioners={otherPracticionersData}
+        />
         <CtaSection
           heading={ctaSectionData.Heading}
           subheading={ctaSectionData.Subheading}
@@ -144,6 +145,28 @@ export const query = graphql`
               }
             }
           }
+        }
+        id
+      }
+    }
+    otherPracticionersTitleData: airtable(
+      data: { Block: { eq: "OtherPracticioners" } }
+      table: { eq: "About Us" }
+    ) {
+      otherPracticionersTitleData: data {
+        Heading
+        Subheading
+      }
+    }
+    otherPracticionersData: allAirtable(
+      filter: {
+        table: { eq: "About Us" }
+        data: { Block: { eq: "OtherPracticioner" } }
+      }
+    ) {
+      otherPracticionersData: nodes {
+        data {
+          Heading
         }
         id
       }

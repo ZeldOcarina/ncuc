@@ -36,13 +36,16 @@ const Locations = ({
         keywords={`${keywordsData.Main_Keyword} ${keywordsData.Relative_Keywords}`}
       />
       <Styledlocations>
-        <IntroSection
-          heading="OUR COVID TESTING LOCATIONS"
-          subheading={
-            "Click on any address to get indications on how to get there."
-          }
-          centerSubHeading
-        />
+        <div className="container">
+          <IntroSection
+            heading="OUR COVID TESTING LOCATIONS"
+            subheading={
+              "In addition to our Newport site, we offer drive-thru COVID testing at the following locations. To book a COVID visit at any of these locations, click the red button found at the top right corner of the website"
+            }
+            centerSubHeading
+          />
+        </div>
+
         <div className="locations-container container">
           {locationsData.map(location => {
             return (

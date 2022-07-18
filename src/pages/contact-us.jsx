@@ -43,6 +43,12 @@ const StyledContactUs = styled.main`
     color: var(--body-color);
     text-align: center;
   }
+
+  .disclaimer {
+    margin-top: var(--gutter);
+    text-align: center;
+    font-weight: 700;
+  }
 `
 
 const ContactUs = () => {
@@ -51,8 +57,13 @@ const ContactUs = () => {
       <Seo title="Newport Urgent Care | Contact Us" />
       <StyledContactUs>
         <div className="container">
-          <h1>SCHEDULE A VISIT</h1>
+          <h1>REQUEST A VISIT</h1>
           <Form cta="Submit" />
+          <p className="disclaimer">
+            The appointment requests will be responded to within 24 business
+            hours. <br />
+            If it’s an emergency, please call 911 or go to the nearest ER.
+          </p>
         </div>
       </StyledContactUs>
     </Layout>

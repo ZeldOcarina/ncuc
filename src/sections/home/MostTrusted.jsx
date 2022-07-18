@@ -23,6 +23,7 @@ const MostTrusted = () => {
     <StyledMostTrusted>
       <div className={"container"}>
         <IntroSection
+          whiteSuperTitle
           superheading={superheading}
           heading={heading}
           subheading={subheading}
