@@ -41,8 +41,11 @@
     "react-responsive": "^9.0.0-beta.10",
     "react-spinners": "^0.13.3",
     "remark-gfm": "^3.0.1",
+    "remark-html": "^15.0.1",
+    "remark-rehype": "^10.1.0",
     "styled-components": "^5.3.5",
-    "swiper": "^8.2.5"
+    "swiper": "^8.2.5",
+    "unified": "^10.1.2"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.9.2",

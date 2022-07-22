@@ -49,6 +49,7 @@ const Layout = ({ children, innerLayout }) => {
     phoneData: { phoneData },
     telData: { telData },
     stateData: { stateData },
+    zipData: { zipData },
     cityData: { cityData },
     categoriesData: { categoriesData },
     logoData: { logoData },
@@ -71,9 +72,10 @@ const Layout = ({ children, innerLayout }) => {
       <LocationBanner
         phone={phoneData.Value}
         tel={telData.Value}
-        state={stateData.Value}
-        city={cityData.Value}
         address={address}
+        state={stateData.Value}
+        zip={zipData.Value}
+        city={cityData.Value}
       />
 
       <Navbar innerLayout={innerLayout} menuData={menuData} />
@@ -90,6 +92,9 @@ const Layout = ({ children, innerLayout }) => {
         quickLinks={quickLinksData}
         locationData={locationData}
         socialLinks={socialLinks}
+        state={stateData.Value}
+        zip={zipData.Value}
+        city={cityData.Value}
       />
       <MonarchyStripe />
       <MobileNavbar menuData={menuData} />
@@ -191,6 +196,14 @@ const query = graphql`
       data: { Label: { eq: "State" } }
     ) {
       stateData: data {
+        Value
+      }
+    }
+    zipData: airtable(
+      table: { eq: "Config" }
+      data: { Label: { eq: "ZipCode" } }
+    ) {
+      zipData: data {
         Value
       }
     }

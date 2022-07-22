@@ -7,6 +7,7 @@ import Seo from "../../components/Seo"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import IntroSection from "../../components/IntroSection"
+import Button from "../../components/Button"
 
 const Styledlocations = styled.main`
   .locations-container {
@@ -20,6 +21,12 @@ const Styledlocations = styled.main`
         margin-bottom: var(--big-gutter);
       }
     }
+  }
+
+  .book-button {
+    padding: 2rem 4rem;
+    min-width: max-content;
+    margin: 0 auto 6rem auto;
   }
 `
 
@@ -40,10 +47,19 @@ const Locations = ({
           <IntroSection
             heading="OUR COVID TESTING LOCATIONS"
             subheading={
-              "In addition to our Newport site, we offer drive-thru COVID testing at the following locations. To book a COVID visit at any of these locations, click the red button found at the top right corner of the website"
+              "In addition to our Newport site, we offer drive-thru COVID testing at the following locations."
             }
             centerSubHeading
           />
+          <Button
+            color="var(--color-tertiary)"
+            navButton
+            type="link"
+            url="https://occctesting.com/"
+            className="book-button"
+          >
+            BOOK COVID TEST
+          </Button>
         </div>
 
         <div className="locations-container container">

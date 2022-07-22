@@ -127,7 +127,7 @@ const Wrapper = styled.nav`
     height: 100%;
 
     ${respond(
-      1500,
+      1550,
       css`
         display: none;
       `
@@ -180,7 +180,7 @@ const Wrapper = styled.nav`
     display: none;
 
     ${respond(
-      1500,
+      1550,
       css`
         display: block;
         color: var(--color-secondary);

@@ -5,7 +5,10 @@ import PropTypes from "prop-types"
 
 const StyledIntroSection = styled.section`
   text-align: center;
-  margin: 0 auto var(--section-gutter) auto;
+  margin: 0 auto
+    ${({ subheading }) =>
+      subheading ? css`var(--big-gutter)` : css`var(--gutter)`}
+    auto;
   padding-bottom: ${({ padding }) => {
     return padding || padding === 0 ? `${padding}rem` : `var(--gutter)`
   }};
@@ -19,8 +22,10 @@ const StyledIntroSection = styled.section`
   )}
 
   h3 {
-    color: ${whiteSuperTitle =>
-      whiteSuperTitle ? css`var(--white)` : css`var(--color-secondary)`};
+    color: ${({ whiteSuperTitle }) =>
+      whiteSuperTitle
+        ? css`var(--white) !important`
+        : css`var(--color-secondary)`};
     text-transform: uppercase;
     text-align: center;
     font-size: 2rem;
@@ -131,6 +136,7 @@ const IntroSection = ({
   noPaddingTop,
   centerSubHeading,
   whiteSuperTitle,
+  className,
 }) => {
   return (
     <StyledIntroSection
@@ -139,6 +145,8 @@ const IntroSection = ({
       noPaddingTop={noPaddingTop}
       centerSubHeading={centerSubHeading}
       whiteSuperTitle={whiteSuperTitle}
+      subheading={!!subheading}
+      className={className || ""}
     >
       {superheading && <h3>{superheading}</h3>}
       <h2>{heading}</h2>

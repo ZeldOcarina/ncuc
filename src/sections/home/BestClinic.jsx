@@ -57,6 +57,7 @@ const BestClinic = () => {
           heading={heading}
           subheading={subheading}
           theme="light"
+          whiteSuperTitle
         />
         <CopySection columns={1} theme="light">
           {copy}

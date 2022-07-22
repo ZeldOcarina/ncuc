@@ -129,7 +129,7 @@ const Hero = () => {
             {btn1Label}
           </Button>
         </div>
-        <a href="#video">
+        <a href="#dr-doonan-bio">
           <img
             className="down-arrow"
             src={downArrow}

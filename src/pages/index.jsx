@@ -5,6 +5,7 @@ import { graphql } from "gatsby"
 import Layout from "../layout/Layout"
 import Seo from "../components/Seo"
 import Hero from "../sections/home/Hero"
+import ImageText from "../components/ImageText"
 import Services from "../sections/home/Services"
 import Support from "../sections/home/Support"
 import VideoSection from "../components/VideoSection"
@@ -22,6 +23,7 @@ const IndexPage = ({
     faqsTitle: { faqsTitle },
     faqsData: { faqsData },
     videoData: { videoData },
+    imageTextData: { imageTextData },
   },
 }) => {
   return (
@@ -32,6 +34,7 @@ const IndexPage = ({
       />
       <StyledIndex>
         <Hero />
+        <ImageText {...imageTextData} />
         <VideoSection
           superheading={videoData.superheading}
           heading={videoData.heading}
@@ -41,10 +44,10 @@ const IndexPage = ({
         />
         <Services />
         <Support />
+        <ButtonsStripe />
         <UrgentCare />
         <BestClinic />
         <MostTrusted />
-        <ButtonsStripe />
         <Faqs
           superheading={faqsTitle.superheading}
           heading={faqsTitle.heading}
@@ -108,6 +111,22 @@ export const query = graphql`
           copy
         }
         id
+      }
+    }
+    imageTextData: airtable(
+      table: { eq: "Home" }
+      data: { blockName: { eq: "ImageText" } }
+    ) {
+      imageTextData: data {
+        superheading
+        heading
+        copy
+        AltText
+        mediaDrop {
+          localFiles {
+            publicURL
+          }
+        }
       }
     }
   }

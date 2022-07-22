@@ -1,5 +1,6 @@
 import React from "react"
 import styled, { css } from "styled-components"
+import { graphql } from "gatsby"
 
 import Layout from "../layout/Layout"
 import Seo from "../components/Seo"
@@ -51,7 +52,12 @@ const StyledContactUs = styled.main`
   }
 `
 
-const ContactUs = () => {
+const ContactUs = ({
+  data: {
+    phoneData: { phoneData },
+    telData: { telData },
+  },
+}) => {
   return (
     <Layout>
       <Seo title="Newport Urgent Care | Contact Us" />
@@ -60,14 +66,41 @@ const ContactUs = () => {
           <h1>REQUEST A VISIT</h1>
           <Form cta="Submit" />
           <p className="disclaimer">
-            The appointment requests will be responded to within 24 business
-            hours. <br />
-            If it’s an emergency, please call 911 or go to the nearest ER.
+            Appointment Requests are typically responded to within 24 business
+            hours. This request is for non-urgent appointments only. If you are
+            experiencing a medical emergency, please call 911 immediately or
+            head to your nearest emergency room. If you'd like to talk to
+            someone directly, please call our office at{" "}
+            <a className="phone" href={`tel:${telData.Value}`}>
+              {phoneData.Value}
+            </a>
+            .
           </p>
         </div>
       </StyledContactUs>
     </Layout>
   )
 }
+
+export const query = graphql`
+  query ContactUs {
+    phoneData: airtable(
+      table: { eq: "Config" }
+      data: { Label: { eq: "Phone" } }
+    ) {
+      phoneData: data {
+        Value
+      }
+    }
+    telData: airtable(
+      table: { eq: "Config" }
+      data: { Label: { eq: "Tel:" } }
+    ) {
+      telData: data {
+        Value
+      }
+    }
+  }
+`
 
 export default ContactUs

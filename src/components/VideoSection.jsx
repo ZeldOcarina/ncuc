@@ -11,7 +11,7 @@ const VideoSection = ({ superheading, heading, video, mimeType, autoplay }) => {
   return (
     <StyledVideoSection id="video">
       <IntroSection superheading={superheading} heading={heading} padding={0} />
-      <div className="container">
+      <div className="container mt-5">
         <VideoPlayer
           video={video}
           mimeType={mimeType}

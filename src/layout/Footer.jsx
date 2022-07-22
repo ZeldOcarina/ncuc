@@ -87,17 +87,20 @@ const StyledFooter = styled.footer`
   }
 `
 
-const Footer = ({ quickLinks, locationData, socialLinks }) => {
+const Footer = ({
+  quickLinks,
+  locationData,
+  socialLinks,
+  state,
+  zip,
+  city,
+}) => {
   const { isiPhone12 } = useContext(AppContext)
   const phoneString = locationData.nodes.find(
     item => item.data.Label === "Phone"
   ).data.Value
   const telLink = locationData.nodes.find(item => item.data.Label === "Tel:")
     .data.Value
-  // const state = locationData.nodes.find(item => item.data.Label === "State")
-  //   .data.Value
-  // const city = locationData.nodes.find(item => item.data.Label === "City").data
-  //   .Value
   const address = locationData.nodes.find(item => item.data.Label === "Address")
     .data.Value
   const weekdays = locationData.nodes.find(
@@ -125,8 +128,11 @@ const Footer = ({ quickLinks, locationData, socialLinks }) => {
           <a href={`tel:${telLink}`}>{phoneString}</a>
           <p>{weekdays}</p>
           <p>{weekends}</p>
-          <p>{address.split("107")[0]}</p>
-          <p>{address.split("107")[1]}</p>
+          <p>
+            {address}
+            <br />
+            {city}, {state} {zip}
+          </p>
           <p>&copy; {new Date().getFullYear()} NCUC. All Rights Reserved.</p>
           <p className="copyright">
             <Link to="/privacy-policy">Privacy Policy</Link>{" "}

@@ -118,6 +118,7 @@ function setAs(type) {
  * @param {function} children,
  * @param {string} color,
  * @param {string} width,
+ * @param {string} className,
  ***********************/
 
 const Button = ({
@@ -128,6 +129,7 @@ const Button = ({
   width,
   navButton,
   mobileNavButton,
+  className,
 }) => {
   return (
     <StyledButton
@@ -137,11 +139,12 @@ const Button = ({
       width={width || undefined}
       navButton={navButton}
       mobileNavButton={mobileNavButton}
+      className={className ? `button ${className}` : "button"}
     >
       {type === "internal" ? (
         <Link
           to={url}
-          className="button"
+          className={className ? `button ${className}` : "button"}
           href={url}
           style={{
             width: width ? width : "max-content",
@@ -162,6 +165,7 @@ Button.propTypes = {
   children: PropTypes.node.isRequired,
   color: PropTypes.string,
   width: PropTypes.string,
+  className: PropTypes.string,
 }
 
 export default Button

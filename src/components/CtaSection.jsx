@@ -73,6 +73,7 @@ const CtaSection = ({
           subheading={subheading}
           theme={realImage ? "light" : "dark"}
           noPaddingTop={!!realImage}
+          whiteSuperTitle
         />
         <CopySection columns={1} theme={realImage ? "light" : "dark"}>
           {copy}
