@@ -146,7 +146,7 @@ const MobileNavbar = ({ menuData: { categories, menuData } }) => {
               navButton
               mobileNavButton
               type="link"
-              url="/"
+              url="https://occctesting.com/"
             >
               BOOK COVID TEST
               <br />
