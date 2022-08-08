@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: "https://ncuc.monarchy.io",
+  siteUrl: "https://newportbeachuc.com/",
   title: "Newport Urgent Care Center",
   description:
     "Newport Urgent Care Center | Emergency Care",
