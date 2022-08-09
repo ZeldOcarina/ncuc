@@ -26,10 +26,6 @@ const Form = ({ title, cta }) => {
   const [loading, setLoading] = useState(false)
   const [formState, setFormState] = useState(initialState)
 
-  // useEffect(() => {
-  //   console.log(formState)
-  // }, [formState])
-
   function handleInputChange(e, type) {
     if (type) {
       return setFormState(formState => {
@@ -61,8 +57,17 @@ const Form = ({ title, cta }) => {
 
   async function handleSubmit(e) {
     e.preventDefault()
+
+    const searchParams = new URLSearchParams(window.location.search)
+
     const formHandler = new FormHandler({
       formData: formState,
+      utm_source: searchParams.get("utm_source"),
+      utm_medium: searchParams.get("utm_medium"),
+      utm_campaign: searchParams.get("utm_campaign"),
+      utm_term: searchParams.get("utm_term"),
+      utm_content: searchParams.get("utm_content"),
+      utm_id: searchParams.get("utm_id"),
       isContactForm: true,
     })
     const validationErrors = formHandler.validateForm()
@@ -83,6 +88,10 @@ const Form = ({ title, cta }) => {
     setLoading(true)
 
     try {
+      if (formState.service.value === "COVID Testing") {
+        await formHandler.submitForm(formState, true)
+        return window.location.assign("https://occctesting.com/")
+      }
       await formHandler.submitForm(formState)
 
       setIsSubmitted(true)
@@ -191,8 +200,9 @@ const Form = ({ title, cta }) => {
           <option value="Wellness Exam or Pre-Op">
             Wellness Exam or Pre-Op
           </option>
+          <option value="COVID Testing">COVID Testing</option>
           <option value="Testing (COVID, Flu, Pregnancy, UTI, STD)">
-            Testing (COVID, Flu, Pregnancy, UTI, STD)
+            Testing (Flu, Pregnancy, UTI, STD)
           </option>
         </select>
         <span className="error-message">{formState?.service?.error}</span>

@@ -7,6 +7,8 @@ const Lead = require("./models/lead");
 const { sendEmail } = require("./config/emailConfig");
 const leadHtml = require("./views/leadEmail");
 
+const SalesJetConnector = require("./helpers/SalesJetConnector");
+
 const app = express();
 
 app.use(cors({
@@ -19,15 +21,32 @@ app.post("/api/submit-form", async (req, res) => {
     try {
         const lead = await Lead.create(req.body);
 
-        console.log(lead);
+        console.log(lead)
 
-        await sendEmail({
+        const salesJetConnector = new SalesJetConnector({
+            salesJetApiKey: process.env.SALESJET_API_KEY,
+            eventName: "ncuc_form_submittion",
+            lead
+        });
+
+        if (req.body.salesJetOnly) {
+            await salesJetConnector.connectLeadWithSalesJet();
+            return res.status(201).send("Lead Successfully Created");
+        }
+
+        const promises = [];
+
+        promises.push(sendEmail({
             to: "frontdesk@newportbeachuc.com",
             cc: "mattia@monarchy.io",
             subject: "We have a new contact request from the website!",
             text: `Contact request incoming.\n\n${JSON.stringify(req.body)}`,
             html: leadHtml(lead)
-        })
+        }));
+
+        promises.push(salesJetConnector.connectLeadWithSalesJet());
+
+        await Promise.all(promises);
 
         res.status(201).send("Lead Successfully Created");
     } catch (err) {

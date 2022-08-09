@@ -2,9 +2,17 @@ import { PhoneNumberUtil } from "google-libphonenumber";
 import axios from "axios";
 
 export default class FormHandler {
-    constructor({ formData, isContactForm }) {
+    constructor({ formData, isContactForm, utm_source, utm_medium, utm_campaign, utm_term, utm_content, utm_id }) {
         this.isContactForm = isContactForm;
         this.formData = formData;
+
+        this.utm_source = utm_source;
+        this.utm_medium = utm_medium;
+        this.utm_campaign = utm_campaign;
+        this.utm_term = utm_term;
+        this.utm_content = utm_content;
+        this.utm_id = utm_id;
+
         this.errors = {};
     }
 
@@ -42,14 +50,24 @@ export default class FormHandler {
         return isPhoneValid;
     }
 
-    async submitForm(data) {
+    async submitForm(data, salesJetOnly) {
         const webhookData = {};
 
         for (const [key, value] of Object.entries(data)) {
             webhookData[key] = value.value;
         }
 
-        const response = await axios.post(`${window.location.origin}/api/submit-form`, webhookData);
+        webhookData.utm_campaign = this.utm_campaign;
+        webhookData.utm_content = this.utm_content;
+        webhookData.utm_id = this.utm_id;
+        webhookData.utm_medium = this.utm_medium;
+        webhookData.utm_source = this.utm_source;
+        webhookData.utm_term = this.utm_term;
+
+        if (salesJetOnly) webhookData.salesJetOnly = true;
+
+        const webhookEndpoint = process.env.NODE_ENV === "production" ? `${window.location.origin}/api/submit-form` : "http://localhost:3001/api/submit-form";
+        const response = await axios.post(webhookEndpoint, webhookData);
 
         if (response.status === 201) return true;
         throw new Error("Form Submission Failed");

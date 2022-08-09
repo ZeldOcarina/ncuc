@@ -24,6 +24,12 @@ const leadSchema = new mongoose.Schema({
     visit_type: String,
     service: String,
     message: String,
+    utm_campaign: String,
+    utm_content: String,
+    utm_id: String,
+    utm_medium: String,
+    utm_source: String,
+    utm_term: String,
     privacy_accepted: {
         type: Boolean,
         required: true,
