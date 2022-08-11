@@ -16,6 +16,7 @@ const Form = ({ title, cta }) => {
     email: { value: "", error: "" },
     phone_number: { value: "", country_code: "", error: "" },
     visit_type: { value: "", error: "" },
+    preferred_appointment_date: { value: "", error: "" },
     service: { value: "", error: "" },
     message: { value: "", error: "" },
     privacy_accepted: { value: false, error: "" },
@@ -85,11 +86,22 @@ const Form = ({ title, cta }) => {
 
     if (validationErrorKeys.length !== 0) return
 
+    const date = formHandler.parseDate(
+      formState.preferred_appointment_date.value
+    )
+    const newFormState = {
+      ...formState,
+      preferred_appointment_date: {
+        ...formState.preferred_appointment_date,
+        value: date,
+      },
+    }
+
     setLoading(true)
 
     try {
       if (formState.service.value === "COVID Testing") {
-        await formHandler.submitForm(formState, true)
+        await formHandler.submitForm(newFormState, true)
         return window.location.assign("https://occctesting.com/")
       }
       await formHandler.submitForm(formState)
@@ -206,6 +218,26 @@ const Form = ({ title, cta }) => {
           </option>
         </select>
         <span className="error-message">{formState?.service?.error}</span>
+      </div>
+      <div className="input-container">
+        <label className="form-label" htmlFor="preferred_appointment_date">
+          Preferred Appointment Date
+        </label>
+        <input
+          type="date"
+          name="preferred_appointment_date"
+          id="preferred_appointment_date"
+          onChange={handleInputChange}
+          value={formState?.preferred_appointment_date?.value}
+          className={
+            formState?.preferred_appointment_date?.error ? "error" : ""
+          }
+        />
+        {formState.preferred_appointment_date.error && (
+          <span className="error-message">
+            {formState?.preferred_appointment_date?.error}
+          </span>
+        )}
       </div>
       <div className="input-container">
         <textarea

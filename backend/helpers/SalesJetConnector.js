@@ -27,6 +27,7 @@ class SalesJetConnector {
                     "58feee61-d017-ed11-a9ab-ff1d79b08822": this.lead.utm_medium,
                     "01b27a6e-d017-ed11-a9ab-ff1d79b08822": this.lead.utm_source,
                     "b75cf17c-d017-ed11-a9ab-ff1d79b08822": this.lead.utm_term,
+                    "935f965d-b219-ed11-a9ab-ff1d79b08822": this.lead.preferred_appointment_date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
                 }
             }
         };

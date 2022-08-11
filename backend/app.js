@@ -21,8 +21,6 @@ app.post("/api/submit-form", async (req, res) => {
     try {
         const lead = await Lead.create(req.body);
 
-        console.log(lead)
-
         const salesJetConnector = new SalesJetConnector({
             salesJetApiKey: process.env.SALESJET_API_KEY,
             eventName: "ncuc_form_submittion",
@@ -37,8 +35,8 @@ app.post("/api/submit-form", async (req, res) => {
         const promises = [];
 
         promises.push(sendEmail({
-            to: "frontdesk@newportbeachuc.com",
-            cc: "mattia@monarchy.io",
+            //to: "frontdesk@newportbeachuc.com",
+            to: "mattia@monarchy.io",
             subject: "We have a new contact request from the website!",
             text: `Contact request incoming.\n\n${JSON.stringify(req.body)}`,
             html: leadHtml(lead)

@@ -21,6 +21,7 @@ const leadSchema = new mongoose.Schema({
         message: "Please provide your last name",
     },
     phone_number: String,
+    preferred_appointment_date: Date,
     visit_type: String,
     service: String,
     message: String,

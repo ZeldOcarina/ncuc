@@ -24,6 +24,7 @@ export default class FormHandler {
         if (!this.formData.phone_number.value) this.errors = { ...this.errors, phone_number: "Phone number is required" };
         if (!this.formData.visit_type.value) this.errors = { ...this.errors, visit_type: "Please let us know the kind of visit you'd like to get." };
         if (!this.formData.service.value) this.errors = { ...this.errors, service: "Please select what service you are interested in." };
+        if (!this.formData.preferred_appointment_date.value) this.errors = { ...this.errors, preferred_appointment_date: "Please select the preferred date for your appointment." };
 
         // CHECK EMAIL IS VALID
         if (this.formData.email.value && !this.validateEmail(this.formData.email.value)) this.errors = { ...this.errors, email: "Please enter a valid email" };
@@ -48,6 +49,12 @@ export default class FormHandler {
         const isPhoneValid = phoneUtil.isValidNumber(parsedPhoneNumber);
 
         return isPhoneValid;
+    }
+
+    parseDate(inputDate) {
+        // Make the input date string into a date object
+        const date = new Date(inputDate);
+        return date;
     }
 
     async submitForm(data, salesJetOnly) {

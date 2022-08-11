@@ -3,6 +3,13 @@ import respond from "../../styles/abstracts/mediaqueries";
 
 export default styled.form`
 position: relative;
+  
+  .form-label {
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-left: 1rem;
+  }
+
   .checkbox-label {
       font-size: 1.6rem;
       line-height: 1.3; 
@@ -176,6 +183,8 @@ position: relative;
       font-size: 1.8rem;
     }
   }
+
+
 
   .loader-container {
     position: absolute;

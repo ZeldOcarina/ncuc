@@ -1,5 +1,5 @@
 module.exports = function ({
-    first_name, last_name, email, phone_number, visit_type, service, message
+    first_name, last_name, email, phone_number, visit_type, service, message, preferred_appointment_date
 }) {
     return `<!DOCTYPE html>
     <html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
@@ -163,6 +163,7 @@ module.exports = function ({
                                                                             <p style="margin: 0; mso-line-height-alt: 24px;"><span style="font-size:16px;">First Name:&nbsp;${first_name}</span><br><span style="font-size:16px;">Last Name:&nbsp;${last_name}</span><br><span style="font-size:16px;">Email:&nbsp;${email}</span><br><span style="font-size:16px;">Phone Number:&nbsp;${phone_number}</span></p>
                                                                             <p style="margin: 0; mso-line-height-alt: 24px;"><span style="font-size:16px;">Service:&nbsp;${service}</span></p>
                                                                             <p style="margin: 0; mso-line-height-alt: 24px;"><span style="font-size:16px;">Visit Type:&nbsp;${visit_type}</span></p>
+                                                                            <p style="margin: 0; mso-line-height-alt: 24px;"><span style="font-size:16px;">Preferred Appointment Date:&nbsp;${preferred_appointment_date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span></p>
                                                                             <p style="margin: 0; mso-line-height-alt: 24px;"><span style="font-size:16px;">Message:&nbsp;${message}</span></p>
                                                                         </div>
                                                                     </div>
