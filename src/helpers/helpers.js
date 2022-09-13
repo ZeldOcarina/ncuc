@@ -1,3 +1,5 @@
+import MarkdownParser from "./MarkdownParser"
+
 export const setColumns = function (isPhonePort, columns) {
     if (isPhonePort) return 1
     if (columns) return columns
@@ -26,4 +28,9 @@ export const shadeColor = function shadeColor(color, percent) {
     var BB = ((B.toString(16).length == 1) ? "0" + B.toString(16) : B.toString(16));
 
     return "#" + RR + GG + BB;
+}
+
+export const parseMarkdown = ({ inputMarkdown, businessName, businessAddress, zipCode, city, state, businessEmail, tel, phone, siteUrl }) => {
+    const markdownParser = new MarkdownParser({ inputMarkdown, businessName, businessAddress, zipCode, city, state, businessEmail, tel, phone, siteUrl });
+    return markdownParser.parseHtml();
 }

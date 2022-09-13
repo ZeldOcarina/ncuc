@@ -219,6 +219,11 @@ module.exports = {
           },
           {
             baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: `Flu Vaccine`,
+            mapping: { Media: `fileNode` }
+          },
+          {
+            baseId: process.env.AIRTABLE_BASE_ID,
             tableName: `COVID Locations`,
           },
           {

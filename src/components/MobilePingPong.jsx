@@ -2,6 +2,7 @@ import React from "react"
 import styled, { css } from "styled-components"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import respond from "../styles/abstracts/mediaqueries"
+import { parseMarkdown } from "../helpers/helpers"
 
 import IntroSection from "./IntroSection"
 
@@ -57,7 +58,9 @@ const MobilePingPong = ({
             />
             <div className="ping-pong-card__content">
               <h5>{data.Heading}</h5>
-              <p>{data.Copy}</p>
+              {parseMarkdown({
+                inputMarkdown: data.Copy,
+              })}
             </div>
           </article>
         )
