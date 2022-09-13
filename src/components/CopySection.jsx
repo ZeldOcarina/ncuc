@@ -1,9 +1,8 @@
 import React from "react"
 import styled, { css } from "styled-components"
 
-import ReactMarkdown from "react-markdown"
-import remarkGfm from "remark-gfm"
 import respond from "../styles/abstracts/mediaqueries"
+import { parseMarkdown } from "../helpers/helpers"
 
 const StyledCopySection = styled.article`
   column-count: ${({ columns }) => columns || 2};
@@ -28,10 +27,7 @@ const CopySection = ({ children, columns, theme }) => {
   //console.log(children)
   return (
     <StyledCopySection columns={columns} theme={theme}>
-      <ReactMarkdown
-        children={children.replaceAll("\\", "")}
-        remarkPlugins={[remarkGfm]}
-      />
+      {parseMarkdown({ inputMarkdown: children })}
     </StyledCopySection>
   )
 }

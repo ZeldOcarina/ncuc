@@ -65,7 +65,7 @@ const CtaSection = ({
   const realImage = backgroundImage?.localFiles[0]?.publicURL
 
   return (
-    <StyledCtaSection image={realImage}>
+    <StyledCtaSection image={realImage} id="cta">
       <div className="container">
         <IntroSection
           superheading={superheading}

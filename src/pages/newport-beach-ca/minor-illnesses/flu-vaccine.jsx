@@ -15,7 +15,38 @@ import CtaSection from "../../../components/CtaSection"
 import Faqs from "../../../components/Faqs"
 import CardsSection from "../../../components/CardsSection"
 
-const StyledFluVaccine = styled.main``
+const StyledFluVaccine = styled.main`
+  #cta {
+    padding: 11rem 0;
+
+    ul {
+      list-style-position: inside;
+      list-style: none;
+      text-align: center;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    a {
+      font-weight: 500;
+    }
+
+    .buttons-container {
+      gap: 0;
+    }
+
+    .button {
+      width: 100% !important;
+      a {
+        min-width: max-content;
+        padding: 2rem 3rem;
+        display: block;
+      }
+    }
+  }
+`
 
 const FluVaccine = ({
   data: {
