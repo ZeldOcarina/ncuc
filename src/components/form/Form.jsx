@@ -216,6 +216,7 @@ const Form = ({ title, cta }) => {
           <option value="Testing (COVID, Flu, Pregnancy, UTI, STD)">
             Testing (Flu, Pregnancy, UTI, STD)
           </option>
+          <option value="Flu Vaccine">Flu Vaccine</option>
         </select>
         <span className="error-message">{formState?.service?.error}</span>
       </div>
