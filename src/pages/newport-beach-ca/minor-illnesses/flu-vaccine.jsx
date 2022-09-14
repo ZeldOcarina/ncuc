@@ -14,6 +14,8 @@ import PingPong from "../../../components/PingPong"
 import CtaSection from "../../../components/CtaSection"
 import Faqs from "../../../components/Faqs"
 import CardsSection from "../../../components/CardsSection"
+import Form from "../../../components/vaccine-form/Form"
+import respond from "../../../styles/abstracts/mediaqueries"
 
 const StyledFluVaccine = styled.main`
   #cta {
@@ -39,10 +41,36 @@ const StyledFluVaccine = styled.main`
 
     .button {
       width: 100% !important;
-      a {
-        min-width: max-content;
-        padding: 2rem 3rem;
-        display: block;
+      background-color: var(--color-primary);
+      min-width: max-content;
+      padding: 2rem 3rem;
+      display: block;
+    }
+  }
+
+  .form-container {
+    padding: var(--section-gutter) 0 0 0;
+    width: 40%;
+    margin: 0 auto;
+
+    ${respond("laptop", "width: 50%;")}
+    ${respond("tab-land", "width: 70%;")}
+    ${respond("tab-port", "width: 100%;")}
+    ${respond("phone-port", "width: 90%;")}
+
+    .form {
+      h3 {
+        margin-bottom: var(--gutter);
+        font-family: var(--title-font);
+        font-weight: 200;
+        text-transform: uppercase;
+        font-size: 3.5rem;
+        color: var(--grey500);
+      }
+
+      .privacy-container {
+        margin-top: var(--gutter);
+        margin-bottom: var(--gutter);
       }
     }
   }
@@ -86,6 +114,18 @@ const FluVaccine = ({
       />
       <StyledFluVaccine>
         <InnerHero data={heroData} />
+        <CtaSection
+          heading={ctaSectionData.Heading}
+          subheading={ctaSectionData.Subheading}
+          copy={ctaSectionData.Copy}
+          buttonLabel={ctaSectionData.Button_Label}
+          backgroundImage={ctaSectionData.Media}
+          buttonLink={ctaSectionData.Button_Link}
+          useButtonLink
+        />
+        <div className="form-container" id="vaccine-form">
+          <Form title="Schedule your vaccine today!" cta="submit" />
+        </div>
         <TextSection
           superheading={textData.Superheader}
           subheading={textData.Subheading}
@@ -93,14 +133,6 @@ const FluVaccine = ({
           copy={textData.Copy}
         />
         {setPingPong()}
-        <CtaSection
-          heading={ctaSectionData.Heading}
-          subheading={ctaSectionData.Subheading}
-          copy={ctaSectionData.Copy}
-          buttonLabel={ctaSectionData.Button_Label}
-          backgroundImage={ctaSectionData.Media}
-        />
-
         <Faqs
           superheading={faqsTitleData.Superheader}
           subheading={faqsTitleData.Subheading}
@@ -221,6 +253,7 @@ export const query = graphql`
         Heading
         Copy
         Button_Label
+        Button_Link
         Media {
           localFiles {
             publicURL

@@ -61,6 +61,8 @@ const CtaSection = ({
   copy,
   buttonLabel,
   backgroundImage,
+  buttonLink,
+  useButtonLink,
 }) => {
   const realImage = backgroundImage?.localFiles[0]?.publicURL
 
@@ -79,14 +81,20 @@ const CtaSection = ({
           {copy}
         </CopySection>
         <div className="buttons-container">
-          <Button
-            color="primary"
-            type="internal"
-            width="35rem"
-            url="/contact-us"
-          >
-            {buttonLabel}
-          </Button>
+          {useButtonLink ? (
+            <a className="button" href={buttonLink}>
+              {buttonLabel}
+            </a>
+          ) : (
+            <Button
+              color="primary"
+              type="internal"
+              width="35rem"
+              url="/contact-us"
+            >
+              {buttonLabel}
+            </Button>
+          )}
         </div>
       </div>
       {realImage && (

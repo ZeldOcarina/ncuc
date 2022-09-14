@@ -4,7 +4,7 @@ import { navigate } from "gatsby"
 import PhoneInput from "react-phone-input-2"
 import "react-phone-input-2/lib/style.css"
 
-import StyledForm from "./formStyles"
+import StyledForm from "../form/formStyles"
 
 import FormHandler from "./FormHandler"
 import PuffLoader from "react-spinners/PuffLoader"
@@ -15,10 +15,6 @@ const Form = ({ title, cta }) => {
     last_name: { value: "", error: "" },
     email: { value: "", error: "" },
     phone_number: { value: "", country_code: "", error: "" },
-    visit_type: { value: "", error: "" },
-    preferred_appointment_date: { value: "", error: "" },
-    service: { value: "", error: "" },
-    message: { value: "", error: "" },
     privacy_accepted: { value: false, error: "" },
   }
 
@@ -86,24 +82,9 @@ const Form = ({ title, cta }) => {
 
     if (validationErrorKeys.length !== 0) return
 
-    const date = formHandler.parseDate(
-      formState.preferred_appointment_date.value
-    )
-    const newFormState = {
-      ...formState,
-      preferred_appointment_date: {
-        ...formState.preferred_appointment_date,
-        value: date,
-      },
-    }
-
     setLoading(true)
 
     try {
-      if (formState.service.value === "COVID Testing") {
-        await formHandler.submitForm(newFormState, true)
-        return window.location.assign("https://occctesting.com/")
-      }
       await formHandler.submitForm(formState)
 
       setIsSubmitted(true)
@@ -126,7 +107,7 @@ const Form = ({ title, cta }) => {
   }
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledForm onSubmit={handleSubmit} className="form">
       {formTitle()}
       <div className="name-container">
         <div className="input-container">
@@ -179,75 +160,6 @@ const Form = ({ title, cta }) => {
             {formState?.phone_number?.error}
           </span>
         )}
-      </div>
-      <div className="input-container">
-        <select
-          name="visit_type"
-          id="visit_type"
-          onChange={handleInputChange}
-          value={formState?.visit_type?.value}
-          className={formState?.visit_type?.error ? "error" : ""}
-        >
-          <option value="">
-            Do you prefer an in person or a virtual visit?
-          </option>
-          <option value="in_person">In Person Visit</option>
-          <option value="virtual">Telemedicine Virtual Visit</option>
-        </select>
-        <span className="error-message">{formState?.visit_type?.error}</span>
-      </div>
-      <div className="input-container">
-        <select
-          name="service"
-          id="service"
-          onChange={handleInputChange}
-          value={formState?.service?.value}
-          className={formState?.service?.error ? "error" : ""}
-        >
-          <option value="">
-            What type of appointment are you looking for?
-          </option>
-          <option value="Sick Visit">Sick Visit</option>
-          <option value="Minor Injury">Minor Injury</option>
-          <option value="Wellness Exam or Pre-Op">
-            Wellness Exam or Pre-Op
-          </option>
-          <option value="COVID Testing">COVID Testing</option>
-          <option value="Testing (COVID, Flu, Pregnancy, UTI, STD)">
-            Testing (Flu, Pregnancy, UTI, STD)
-          </option>
-        </select>
-        <span className="error-message">{formState?.service?.error}</span>
-      </div>
-      <div className="input-container">
-        <label className="form-label" htmlFor="preferred_appointment_date">
-          Preferred Appointment Date
-        </label>
-        <input
-          type="date"
-          name="preferred_appointment_date"
-          id="preferred_appointment_date"
-          onChange={handleInputChange}
-          value={formState?.preferred_appointment_date?.value}
-          className={
-            formState?.preferred_appointment_date?.error ? "error" : ""
-          }
-        />
-        {formState.preferred_appointment_date.error && (
-          <span className="error-message">
-            {formState?.preferred_appointment_date?.error}
-          </span>
-        )}
-      </div>
-      <div className="input-container">
-        <textarea
-          name="message"
-          placeholder="Please include any additional details here"
-          className={formState?.message?.error ? "error" : ""}
-          onChange={handleInputChange}
-          value={formState?.message?.value}
-        />
-        <span className="error-message">{formState?.message?.error}</span>
       </div>
       <div className="privacy-container">
         <input
