@@ -32,19 +32,22 @@ app.post("/api/submit-form", async (req, res) => {
             return res.status(201).send("Lead Successfully Created");
         }
 
+        const isFluVaccine = req.body.service === "Flu Vaccine";
+
         const promises = [];
 
         promises.push(sendEmail({
-            to: "frontdesk@newportbeachuc.com",
+            //to: isFluVaccine ? "vaccineclinics@orangecountycovidclinic.com" : "frontdesk@newportbeachuc.com",
+            to: isFluVaccine ? "mattia@adyproduction.com" : "frontdesk@newportbeachuc.com",
             cc: "mattia@monarchy.io",
-            subject: "We have a new contact request from the website!",
-            text: `Contact request incoming.\n\n${JSON.stringify(req.body)}`,
-            html: leadHtml(lead)
+            subject: isFluVaccine ? "We have a new flu vaccine inquiry!" : "We have a new contact request from the website!",
+            text: isFluVaccine ? `Flu vaccine request incoming.\n\n${JSON.stringify(req.body)}` : `Contact request incoming.\n\n${JSON.stringify(req.body)}`,
+            html: leadHtml(lead, isFluVaccine)
         }));
 
         promises.push(salesJetConnector.connectLeadWithSalesJet());
 
-        await Promise.all(promises);
+        // await Promise.all(promises);
 
         res.status(201).send("Lead Successfully Created");
     } catch (err) {

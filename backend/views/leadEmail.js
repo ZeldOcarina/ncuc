@@ -1,6 +1,6 @@
 module.exports = function ({
     first_name, last_name, email, phone_number, visit_type, service, message, preferred_appointment_date
-}) {
+}, isFluVaccine) {
     return `<!DOCTYPE html>
     <html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
     
@@ -118,7 +118,7 @@ module.exports = function ({
                                                                     <div style="font-family: sans-serif">
                                                                         <div class="txtTinyMce-wrapper" style="font-size: 12px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #ffffff; line-height: 1.2;">
                                                                             <p style="margin: 0; text-align: center;"><span style="font-size:42px;">We Have a New </span></p>
-                                                                            <p style="margin: 0; text-align: center;"><span style="font-size:42px;">Contact Request!</span></p>
+                                                                            <p style="margin: 0; text-align: center;"><span style="font-size:42px;">${isFluVaccine ? "Flu Vaccine" : "Contact"} Request!</span></p>
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -154,7 +154,7 @@ module.exports = function ({
                                                                         <div class="txtTinyMce-wrapper" style="font-size: 12px; mso-line-height-alt: 18px; color: #5d5d5d; line-height: 1.5; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;">
                                                                             <p style="margin: 0; mso-line-height-alt: 24px;"><span style="font-size:16px;">Hello!</span></p>
                                                                             <p style="margin: 0; mso-line-height-alt: 18px;">&nbsp;</p>
-                                                                            <p style="margin: 0; mso-line-height-alt: 24px;"><span style="font-size:16px;">We just got a new contact request from the website!</span></p>
+                                                                            <p style="margin: 0; mso-line-height-alt: 24px;"><span style="font-size:16px;">We just got a new ${isFluVaccine ? "flu vaccine" : "contact"} request from the website!</span></p>
                                                                             <p style="margin: 0; mso-line-height-alt: 18px;">&nbsp;</p>
                                                                             <p style="margin: 0; mso-line-height-alt: 24px;"><span style="font-size:16px;">Please call this potential patient as soon as possible. </span></p>
                                                                             <p style="margin: 0; mso-line-height-alt: 18px;">&nbsp;</p>
@@ -162,9 +162,9 @@ module.exports = function ({
                                                                             <p style="margin: 0; mso-line-height-alt: 18px;">&nbsp;</p>
                                                                             <p style="margin: 0; mso-line-height-alt: 24px;"><span style="font-size:16px;">First Name:&nbsp;${first_name}</span><br><span style="font-size:16px;">Last Name:&nbsp;${last_name}</span><br><span style="font-size:16px;">Email:&nbsp;${email}</span><br><span style="font-size:16px;">Phone Number:&nbsp;${phone_number}</span></p>
                                                                             <p style="margin: 0; mso-line-height-alt: 24px;"><span style="font-size:16px;">Service:&nbsp;${service}</span></p>
-                                                                            <p style="margin: 0; mso-line-height-alt: 24px;"><span style="font-size:16px;">Visit Type:&nbsp;${visit_type}</span></p>
+                                                                            ${!isFluVaccine ? `<p style="margin: 0; mso-line-height-alt: 24px;"><span style="font-size:16px;">Visit Type:&nbsp;${visit_type}</span></p>
                                                                             <p style="margin: 0; mso-line-height-alt: 24px;"><span style="font-size:16px;">Preferred Appointment Date:&nbsp;${preferred_appointment_date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span></p>
-                                                                            <p style="margin: 0; mso-line-height-alt: 24px;"><span style="font-size:16px;">Message:&nbsp;${message}</span></p>
+                                                                            <p style="margin: 0; mso-line-height-alt: 24px;"><span style="font-size:16px;">Message:&nbsp;${message}</span></p>` : ''}
                                                                         </div>
                                                                     </div>
                                                                 </td>
