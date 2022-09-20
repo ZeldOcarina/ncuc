@@ -146,7 +146,7 @@ const IntroSection = ({
       centerSubHeading={centerSubHeading}
       whiteSuperTitle={whiteSuperTitle}
       subheading={!!subheading}
-      className={className || ""}
+      className={className || "intro-section"}
     >
       {superheading && <h3>{superheading}</h3>}
       <h2>{heading}</h2>

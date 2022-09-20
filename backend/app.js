@@ -37,8 +37,8 @@ app.post("/api/submit-form", async (req, res) => {
         const promises = [];
 
         promises.push(sendEmail({
-            //to: isFluVaccine ? "vaccineclinics@orangecountycovidclinic.com" : "frontdesk@newportbeachuc.com",
-            to: isFluVaccine ? "mattia@adyproduction.com" : "frontdesk@newportbeachuc.com",
+            to: isFluVaccine ? "vaccineclinics@orangecountycovidclinic.com" : "frontdesk@newportbeachuc.com",
+            //to: isFluVaccine ? "mattia@adyproduction.com" : "frontdesk@newportbeachuc.com",
             cc: "mattia@monarchy.io",
             subject: isFluVaccine ? "We have a new flu vaccine inquiry!" : "We have a new contact request from the website!",
             text: isFluVaccine ? `Flu vaccine request incoming.\n\n${JSON.stringify(req.body)}` : `Contact request incoming.\n\n${JSON.stringify(req.body)}`,
