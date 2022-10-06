@@ -10,7 +10,7 @@ import downArrow from "../../images/icons/down-arrow.svg"
 import Button from "../../components/Button"
 
 const StyledHero = styled.header`
-  min-height: 90vh;
+  min-height: 81vh;
   background-color: var(--background-dark);
   position: relative;
   z-index: 1;
