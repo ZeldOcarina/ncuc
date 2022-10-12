@@ -1,6 +1,5 @@
 import React from "react"
 import styled, { css } from "styled-components"
-import { GatsbyImage } from "gatsby-plugin-image"
 
 const StyledBackgroundImage = styled.div`
   position: absolute;
@@ -37,15 +36,11 @@ const StyledBackgroundImage = styled.div`
   }
 `
 
-const BackgroundImage = ({ image, alt, overlay, isPlainImg }) => {
+const BackgroundImage = ({ image, alt, overlay }) => {
   return (
     <StyledBackgroundImage background={overlay}>
       {overlay && <div className="overlay" />}
-      {isPlainImg ? (
-        <img src={image} alt={alt} className="bg-image" />
-      ) : (
-        <GatsbyImage className="bg-image" image={image} alt={alt} />
-      )}
+      <img src={image} alt={alt} className="bg-image" />
     </StyledBackgroundImage>
   )
 }

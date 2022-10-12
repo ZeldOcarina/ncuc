@@ -7,6 +7,7 @@
   "license": "unlicensed",
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.14.3",
+    "@img-comparison-slider/react": "^7.7.0",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
     "axios": "^0.27.2",
@@ -32,6 +33,7 @@
     "google-libphonenumber": "^3.2.29",
     "html-react-parser": "^3.0.4",
     "normalize.css": "^8.0.1",
+    "portfinder": "^1.0.32",
     "prop-types": "^15.7.2",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
@@ -47,7 +49,8 @@
     "remark-rehype": "^10.1.0",
     "styled-components": "^5.3.5",
     "swiper": "^8.2.5",
-    "unified": "^10.1.2"
+    "unified": "^10.1.2",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.9.2",
@@ -62,12 +65,12 @@
     "gatsby"
   ],
   "scripts": {
-    "build": "NODE_OPTIONS=--max-old-space-size=8192 gatsby build",
+    "build": "NODE_ENV=production node gatsby-prebuild.js && gatsby build",
     "start:dev": "npm-run-all -p dev:*",
     "dev:frontend": "gatsby develop",
     "dev:backend": "nodemon server/app.js",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "start": "gatsby develop",
+    "start": "NODE_ENV=development node gatsby-prebuild.js && gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"

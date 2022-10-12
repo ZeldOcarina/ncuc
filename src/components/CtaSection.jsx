@@ -60,24 +60,22 @@ const CtaSection = ({
   subheading,
   copy,
   buttonLabel,
-  backgroundImage,
+  image,
   buttonLink,
   useButtonLink,
 }) => {
-  const realImage = backgroundImage?.localFiles[0]?.publicURL
-
   return (
-    <StyledCtaSection image={realImage} id="cta">
+    <StyledCtaSection image={image} id="cta">
       <div className="container">
         <IntroSection
           superheading={superheading}
           heading={heading}
           subheading={subheading}
-          theme={realImage ? "light" : "dark"}
-          noPaddingTop={!!realImage}
+          theme={image ? "light" : "dark"}
+          noPaddingTop={!!image}
           whiteSuperTitle
         />
-        <CopySection columns={1} theme={realImage ? "light" : "dark"}>
+        <CopySection columns={1} theme={image ? "light" : "dark"}>
           {copy}
         </CopySection>
         <div className="buttons-container">
@@ -97,8 +95,8 @@ const CtaSection = ({
           )}
         </div>
       </div>
-      {realImage && (
-        <img className="bg-image" src={realImage} alt="" role="presentation" />
+      {image && (
+        <img className="bg-image" src={image} alt="" role="presentation" />
       )}
     </StyledCtaSection>
   )

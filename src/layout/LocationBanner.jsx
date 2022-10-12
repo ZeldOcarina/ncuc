@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled, { css } from "styled-components"
 import respond from "../styles/abstracts/mediaqueries"
+import AppContext from "../context/AppContext"
 
 const StyledLocationBanner = styled.div`
   background-color: var(--color-secondary);
@@ -47,8 +48,9 @@ const StyledLocationBanner = styled.div`
 `
 
 const LocationBanner = ({ phone, tel, state, city, address, zip }) => {
+  const { locationBarRef } = useContext(AppContext)
   return (
-    <StyledLocationBanner>
+    <StyledLocationBanner ref={locationBarRef}>
       <div className="content-container">
         <p>
           Located at{" "}

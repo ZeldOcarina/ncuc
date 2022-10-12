@@ -80,18 +80,18 @@ const StyledCard = styled.article`
   }
 `
 
-const Card = ({ copy, heading, icon, linkLabel, link }) => {
+const Card = ({ Copy, Heading, Media, ButtonLabel, ButtonLink, AltText }) => {
   return (
-    <StyledCard link={link}>
+    <StyledCard link={ButtonLink}>
       <div className="icon-container">
-        <img src={icon?.localFiles[0]?.publicURL} alt={heading} />
+        <img src={Media?.localFiles[0]?.publicURL} alt={AltText || Heading} />
       </div>
 
-      <h5>{heading}</h5>
-      <p>{copy}</p>
-      {link && (
-        <Link className="link" to={link}>
-          {linkLabel}
+      <h5>{Heading}</h5>
+      <p>{Copy}</p>
+      {ButtonLink && (
+        <Link className="link" to={ButtonLink}>
+          {ButtonLabel}
         </Link>
       )}
     </StyledCard>

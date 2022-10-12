@@ -8,6 +8,7 @@ const StyledVideoSection = styled.section`
 `
 
 const VideoSection = ({ superheading, heading, video, mimeType, autoplay }) => {
+  // console.log({ video, mimeType })
   return (
     <StyledVideoSection id="video">
       <IntroSection superheading={superheading} heading={heading} padding={0} />

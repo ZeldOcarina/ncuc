@@ -15,6 +15,7 @@ const StyledVideoPlayer = styled.div`
 `
 
 const VideoPlayer = ({ video, mimeType, autoplay }) => {
+  //console.log({ video, mimeType })
   return (
     <StyledVideoPlayer>
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}

@@ -1,6 +1,7 @@
 import React, { useContext } from "react"
 import styled, { css } from "styled-components"
 import { graphql } from "gatsby"
+import { v4 as uuidv4 } from "uuid"
 
 import AppContext from "../../../context/AppContext"
 
@@ -11,7 +12,6 @@ import CopySection from "../../../components/CopySection"
 import TextSection from "../../../components/TextSection"
 import MobilePingPong from "../../../components/MobilePingPong"
 import PingPong from "../../../components/PingPong"
-import CtaSection from "../../../components/CtaSection"
 import Faqs from "../../../components/Faqs"
 import CardsSection from "../../../components/CardsSection"
 import Form from "../../../components/vaccine-form/Form"
@@ -250,8 +250,8 @@ const FluVaccine = ({
               src={heroData.Media.localFiles[0].publicURL}
               alt={heroData.AltText}
             />
-            <a className="hero__btn" href={heroData.Button_Link}>
-              {heroData.Button_Label}
+            <a className="hero__btn" href={heroData.ButtonLink}>
+              {heroData.ButtonLabel}
             </a>
           </div>
         </header>
@@ -267,8 +267,8 @@ const FluVaccine = ({
               {ctaSectionData.Copy}
             </CopySection>
             <div className="buttons-container">
-              <a className="button" href={ctaSectionData.Button_Link}>
-                {ctaSectionData.Button_Label}
+              <a className="button" href={ctaSectionData.ButtonLink}>
+                {ctaSectionData.ButtonLabel}
               </a>
             </div>
           </div>
@@ -296,7 +296,7 @@ const FluVaccine = ({
           heading={faqsTitleData.Heading}
           faqs={faqsData.map(item => {
             return {
-              id: item?.id,
+              id: uuidv4(),
               data: { question: item.data.Heading, answer: item.data.Copy },
             }
           })}
@@ -307,13 +307,13 @@ const FluVaccine = ({
           subheading={cardsTitleData.Subheading}
           cards={cardsData.map(cardDatum => {
             return {
-              id: cardDatum?.id,
+              id: uuidv4(),
               data: {
                 heading: cardDatum.data.Heading,
                 copy: cardDatum.data.Copy,
                 icon: cardDatum.data.Media,
-                linkLabel: cardDatum.data.Button_Label,
-                link: cardDatum.data.Button_Link,
+                linkLabel: cardDatum.data.ButtonLabel,
+                link: cardDatum.data.ButtonLink,
               },
             }
           })}
@@ -350,8 +350,8 @@ export const query = graphql`
     ) {
       heroData: data {
         Heading
-        Button_Label
-        Button_Link
+        ButtonLabel
+        ButtonLink
         Overlay
         Media {
           localFiles {
@@ -367,7 +367,7 @@ export const query = graphql`
       data: { Block: { eq: "Text" } }
     ) {
       textData: data {
-        Superheader
+        Superheading
         Heading
         Subheading
         Copy
@@ -380,7 +380,7 @@ export const query = graphql`
       pingPongTitle: data {
         Subheading
         Heading
-        Superheader
+        Superheading
       }
     }
     pingPongItems: allAirtable(
@@ -395,9 +395,7 @@ export const query = graphql`
           Copy
           Media {
             localFiles {
-              childImageSharp {
-                gatsbyImageData
-              }
+              publicURL
             }
           }
         }
@@ -412,8 +410,8 @@ export const query = graphql`
         Subheading
         Heading
         Copy
-        Button_Label
-        Button_Link
+        ButtonLabel
+        ButtonLink
         Media {
           localFiles {
             publicURL
@@ -426,7 +424,7 @@ export const query = graphql`
       data: { Block: { eq: "FAQ" } }
     ) {
       faqsTitleData: data {
-        Superheader
+        Superheading
         Subheading
         Heading
       }
@@ -450,7 +448,7 @@ export const query = graphql`
       data: { Block: { eq: "Cards" } }
     ) {
       cardsTitleData: data {
-        Superheader
+        Superheading
         Subheading
         Heading
       }
@@ -465,8 +463,8 @@ export const query = graphql`
         data {
           Heading
           Copy
-          Button_Label
-          Button_Link
+          ButtonLabel
+          ButtonLink
           Media {
             localFiles {
               publicURL

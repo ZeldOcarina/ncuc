@@ -118,7 +118,7 @@ const ThankYou = ({
           heading={ctaSectionData.Heading}
           subheading={ctaSectionData.Subheading}
           copy={ctaSectionData.Copy}
-          buttonLabel={ctaSectionData.Button_Label}
+          buttonLabel={ctaSectionData.ButtonLabel}
           backgroundImage={ctaSectionData.Media}
         />
         {imageTextData?.Heading && imageTextData?.Copy && (
@@ -141,7 +141,7 @@ export const query = graphql`
       data: { Block: { eq: "Text" } }
     ) {
       textData: data {
-        Superheader
+        Superheading
         Heading
         Subheading
         Copy
@@ -154,7 +154,7 @@ export const query = graphql`
       pingPongTitle: data {
         Subheading
         Heading
-        Superheader
+        Superheading
       }
     }
     pingPongItems: allAirtable(
@@ -169,9 +169,7 @@ export const query = graphql`
           Copy
           Media {
             localFiles {
-              childImageSharp {
-                gatsbyImageData
-              }
+              publicURL
             }
           }
         }
@@ -186,7 +184,7 @@ export const query = graphql`
         Subheading
         Heading
         Copy
-        Button_Label
+        ButtonLabel
         Media {
           localFiles {
             publicURL
@@ -201,7 +199,7 @@ export const query = graphql`
       imageTextData: data {
         Copy
         Heading
-        Superheader
+        Superheading
         Subheading
       }
     }

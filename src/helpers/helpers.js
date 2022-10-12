@@ -34,3 +34,7 @@ export const parseMarkdown = ({ inputMarkdown, businessName, businessAddress, zi
     const markdownParser = new MarkdownParser({ inputMarkdown, businessName, businessAddress, zipCode, city, state, businessEmail, tel, phone, siteUrl });
     return markdownParser.parseHtml();
 }
+
+export const findNextItem = (itemsArray, currentRowNumber) => {
+    return itemsArray.find(item => item.data.rowNumber === currentRowNumber + 1)
+}

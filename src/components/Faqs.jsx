@@ -20,8 +20,8 @@ function Faqs({ faqs, superheading, heading, subheading, noPaddingTop }) {
           subheading={subheading}
           noPaddingTop={noPaddingTop}
         ></IntroSection>
-        {faqs.map(({ id, data: { question, answer } }) => (
-          <FaqItem {...{ question, answer }} key={id} />
+        {faqs.map(({ id, data: { Heading, Copy } }) => (
+          <FaqItem {...{ question: Heading, answer: Copy }} key={id} />
         ))}
       </div>
     </StyledFaqs>

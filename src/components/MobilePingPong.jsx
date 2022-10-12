@@ -1,6 +1,5 @@
 import React from "react"
 import styled, { css } from "styled-components"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import respond from "../styles/abstracts/mediaqueries"
 import { parseMarkdown } from "../helpers/helpers"
 
@@ -51,8 +50,8 @@ const MobilePingPong = ({
       {items.map(({ id, data }) => {
         return (
           <article className="ping-pong-card" key={id}>
-            <GatsbyImage
-              image={getImage(data.Media.localFiles[0])}
+            <img
+              src={data.Media.localFiles[0].publicURL}
               alt={data.Heading}
               className="ping-pong-card__image"
             />

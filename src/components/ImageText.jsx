@@ -95,7 +95,7 @@ const StyledImageText = styled.section`
   }
 `
 
-const ImageText = ({ superheading, heading, copy, AltText, mediaDrop }) => {
+const ImageText = ({ superheading, heading, copy, altText, image }) => {
   return (
     <StyledImageText id="dr-doonan-bio">
       <div className="container">
@@ -105,11 +105,7 @@ const ImageText = ({ superheading, heading, copy, AltText, mediaDrop }) => {
             heading={heading}
             className="intro"
           />
-          <img
-            src={mediaDrop.localFiles[0].publicURL}
-            alt={AltText}
-            className="mobile-image"
-          />
+          <img src={image} alt={altText || ""} className="mobile-image" />
           <div
             className="markdown-container"
             dangerouslySetInnerHTML={{
@@ -118,7 +114,7 @@ const ImageText = ({ superheading, heading, copy, AltText, mediaDrop }) => {
           ></div>
         </div>
         <div className="right-container">
-          <img src={mediaDrop.localFiles[0].publicURL} alt={AltText} />
+          <img src={image} alt={altText || ""} />
         </div>
       </div>
     </StyledImageText>

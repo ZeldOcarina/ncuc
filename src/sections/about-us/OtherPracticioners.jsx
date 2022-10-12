@@ -2,6 +2,7 @@ import React from "react"
 import styled, { css } from "styled-components"
 import IntroSection from "../../components/IntroSection"
 import respond from "../../styles/abstracts/mediaqueries"
+import { v4 as uuidv4 } from "uuid"
 
 const StyledOtherPracticioners = styled.section`
   padding-top: 0;
@@ -52,7 +53,7 @@ const OtherPracticioners = ({ practicioners, heading, subheading }) => {
         <ul>
           {practicioners.map(practicioner => {
             return (
-              <li key={practicioner.id} className="practicioner">
+              <li key={uuidv4()} className="practicioner">
                 <article>{practicioner.data.Heading}</article>
               </li>
             )

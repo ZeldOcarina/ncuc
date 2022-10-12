@@ -117,8 +117,8 @@ const Footer = ({
           <h5>QUICK LINKS</h5>
           {quickLinks.map((quickLink, i) => {
             return (
-              <Link key={i} to={quickLink.data.heading}>
-                {quickLink.data.superheading}
+              <Link key={i} to={quickLink.data.Permalink}>
+                {quickLink.data.Page_Title}
               </Link>
             )
           })}

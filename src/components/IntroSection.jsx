@@ -1,7 +1,6 @@
 import React from "react"
 import styled, { css } from "styled-components"
 import respond from "../styles/abstracts/mediaqueries"
-import PropTypes from "prop-types"
 
 const StyledIntroSection = styled.section`
   text-align: center;
@@ -137,6 +136,7 @@ const IntroSection = ({
   centerSubHeading,
   whiteSuperTitle,
   className,
+  makeHeadingH1,
 }) => {
   return (
     <StyledIntroSection
@@ -148,19 +148,15 @@ const IntroSection = ({
       subheading={!!subheading}
       className={className || "intro-section"}
     >
-      {superheading && <h3>{superheading}</h3>}
-      <h2>{heading}</h2>
-      <p>{subheading}</p>
+      {superheading && <h3 className="superheading">{superheading}</h3>}
+      {makeHeadingH1 ? (
+        <h1 className="heading">{heading}</h1>
+      ) : (
+        <h2 className="heading">{heading}</h2>
+      )}
+      <p className="subheading">{subheading}</p>
     </StyledIntroSection>
   )
-}
-
-IntroSection.propTypes = {
-  superheading: PropTypes.string,
-  heading: PropTypes.string.isRequired,
-  subheading: PropTypes.string,
-  padding: PropTypes.number,
-  theme: PropTypes.string,
 }
 
 export default IntroSection

@@ -12,8 +12,50 @@ import Map from "../components/Map"
 import FooterLogoStripe from "../components/FooterLogoStripe"
 import MonarchyStripe from "../components/MonarchyStripe"
 import AdvertisingBanner from "../components/AdvertisingBanner"
+import { isWidthUp } from "@material-ui/core"
 
 function organizeMenu(categoriesData) {
+  // {
+  //   Services: [
+  //      Minor Injuries: [
+  //     { name: "Sports Injuries: ", permalink: "/ncuc..."}
+  //      ]
+  //   ]
+  //   }
+
+  // Loop through categoriesData and create a new object with the SubSection as keys
+  // and the values as an array of objects with the name and permalink
+  // const flatMenuData = categoriesData.reduce((acc, item) => {
+  //   if (item.data) acc.push(item.data)
+  //   return acc
+  // }, [])
+
+  // console.log({ flatMenuData })
+
+  // const menuData = flatMenuData.reduce((acc, item) => {
+  //   if (item.Parent === "Logo") {
+  //     // Skip the Logo category
+  //   }
+  //   if (item.SubSection) {
+  //     acc.add(item.SubSection),
+
+  //   } else if (item.Parent === "Logo") {
+  //     // add a noop
+  //     Function.prototype()
+  //   } else {
+  //     acc.add({
+  //       name: item.Parent,
+  //       children: [],
+  //     })
+  //   }
+
+  //   return acc
+  // }, new Set())
+
+  // console.log({ menuData })
+
+  // If there is no SubSection, add as a main key the Parent
+
   const categories = new Set()
   const organizedMenuData = {}
 
@@ -35,6 +77,8 @@ function organizeMenu(categoriesData) {
     })
   })
 
+  // console.table(organizedMenuData, categoriesData)
+
   const noLogoCategoriesData = categoriesData.filter(
     item => item.data.Parent !== "Logo"
   )
@@ -55,6 +99,7 @@ const Layout = ({ children, innerLayout }) => {
     categoriesData: { categoriesData },
     logoData: { logoData },
     quickLinksData: { quickLinksData },
+    galleryData: { galleryData },
   } = useStaticQuery(query)
 
   const { alertState, setAlertState } = useContext(AppContext)
@@ -83,12 +128,16 @@ const Layout = ({ children, innerLayout }) => {
       <Navbar innerLayout={innerLayout} menuData={menuData} />
 
       {children}
-      <GallerySection />
+      <GallerySection
+        superheading={galleryData.Superheading}
+        heading={galleryData.Heading}
+        images={galleryData.Media.localFiles.map(image => image.publicURL)}
+      />
       <Map lat={lat} long={long} mapName="map" />
       <FooterLogoStripe
         phone={phoneData.Value}
         tel={telData.Value}
-        logo={logoData.Attachments.localFiles[0].publicURL}
+        logo={logoData.File.localFiles[0].publicURL}
       />
       <Footer
         quickLinks={quickLinksData}
@@ -117,6 +166,7 @@ const query = graphql`
       categoriesData: nodes {
         data {
           Parent
+          SubSection
           Child
           Permalink
         }
@@ -222,7 +272,7 @@ const query = graphql`
       table: { eq: "Config" }
     ) {
       logoData: data {
-        Attachments {
+        File {
           localFiles {
             publicURL
           }
@@ -233,14 +283,28 @@ const query = graphql`
     }
     quickLinksData: allAirtable(
       filter: {
-        table: { eq: "Footer (Global)" }
+        table: { eq: "Category" }
         data: { Block: { eq: "QuickLinks" } }
       }
     ) {
       quickLinksData: nodes {
         data {
-          superheading
-          heading
+          Page_Title
+          Permalink
+        }
+      }
+    }
+    galleryData: airtable(
+      table: { eq: "Footer (Global)" }
+      data: { Block: { eq: "Slider" } }
+    ) {
+      galleryData: data {
+        Superheading
+        Heading
+        Media {
+          localFiles {
+            publicURL
+          }
         }
       }
     }

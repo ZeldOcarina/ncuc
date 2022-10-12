@@ -235,6 +235,7 @@ const Wrapper = styled.nav`
 `
 
 const Navbar = ({ innerPage, innerLayout, menuData }) => {
+  const { navbarRef } = useContext(AppContext)
   const [isNavbarScrolled, setIsNavbarScrolled] = useState(false)
   const { isMobileMenuOpen, setIsMobileMenuOpen, isBigLaptop } =
     useContext(AppContext)
@@ -259,7 +260,11 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
   })
 
   return (
-    <Wrapper scrolled={isNavbarScrolled} innerLayout={innerLayout}>
+    <Wrapper
+      scrolled={isNavbarScrolled}
+      innerLayout={innerLayout}
+      ref={navbarRef}
+    >
       <div className={isBigLaptop ? "navbar-notebook-container" : "container"}>
         <Link to={logo?.nodes[0]?.data?.Permalink}>
           {<img src={logoUrl} alt="NCUC Logo" className="logo" />}

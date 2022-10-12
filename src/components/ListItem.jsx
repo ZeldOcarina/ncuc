@@ -1,6 +1,5 @@
 import React from "react"
 import styled, { css } from "styled-components"
-import PropTypes from "prop-types"
 import respond from "../styles/abstracts/mediaqueries"
 
 const StyledListItem = styled.li`
@@ -26,18 +25,16 @@ const StyledListItem = styled.li`
  * @param {string} icon
  ********************/
 
-const ListItem = ({ item, icon }) => {
+const ListItem = ({ item }) => {
   return (
     <StyledListItem>
-      <img src={icon} alt="checkmark" />
-      <span>{item}</span>
+      <img
+        src={item.Media.localFiles[0].publicURL}
+        alt={item.AltText || "list symbol"}
+      />
+      <span>{item.Heading}</span>
     </StyledListItem>
   )
-}
-
-ListItem.propTypes = {
-  item: PropTypes.string.isRequired,
-  icon: PropTypes.string,
 }
 
 export default ListItem

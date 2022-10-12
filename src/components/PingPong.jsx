@@ -1,6 +1,5 @@
 import React from "react"
 import styled, { css } from "styled-components"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import respond from "../styles/abstracts/mediaqueries"
 import { parseMarkdown } from "../helpers/helpers"
 
@@ -9,129 +8,128 @@ import IntroSection from "./IntroSection"
 const StyledPingPong = styled.section`
   background-color: var(--background-dark);
 
-  .ping-pong-card {
+  .container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 70vh;
-    align-content: center;
-    justify-content: center;
-    position: relative;
-    transform: translateX(5rem) scale(1.03);
-    margin-bottom: 15rem;
+    gap: 10rem;
 
     ${respond(
-      "notebook",
+      1000,
       css`
-        height: 80vh;
-        margin-bottom: 15rem;
+        gap: 5rem;
       `
     )}
-    ${("ipad-pro-12.9-land",
-    css`
-      height: 70vh;
-      margin-bottom: 10rem;
-    `)}    
+  }
 
-    &:nth-child(2) {
-      margin-top: 10rem;
+  .ping-pong-card {
+    display: flex;
+    align-items: center;
+    position: relative;
 
-      ${("ipad-pro-12.9-land",
+    ${respond(
+      1000,
       css`
-        margin-top: 0;
-      `)}
-    }
-
-    &:not(:nth-child(2n)) {
-      //grid-template-columns: 1.2fr 1.2fr;
-      transform: translateX(-5rem) scale(1.03);
-
-      .ping-pong-card__image {
-        grid-column: 2 / 3;
-        z-index: 1;
-        position: relative;
-      }
-      .ping-pong-card__content {
-        grid-column: 1 / 2;
-        z-index: 10;
-        transform: translateX(10rem) translateY(-50%);
-        position: absolute;
-      }
-    }
+        display: block;
+      `
+    )}
 
     &__image {
+      width: 60%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center;
+
+      ${respond(
+        1000,
+        css`
+          position: static;
+          width: 100%;
+          transform: none;
+          aspect-ratio: unset;
+        `
+      )}
     }
 
     &__content {
       position: absolute;
       top: 50%;
       right: 0;
-      max-width: 65rem;
+      transform: translateY(-50%);
+      width: 65rem;
+      height: 65rem;
       background-color: var(--white);
-      height: 60vh;
+      aspect-ratio: 1 / 1;
       padding: 5rem;
-      transform: translateX(-10rem) translateY(-50%);
-      overflow-y: auto;
 
       ${respond(
-        "notebook",
+        1410,
         css`
-          transform: translateX(-10rem) translateY(-50%) scale(1.05);
-          max-width: 55rem;
-          font-size: 1.8rem;
-          height: 75vh;
+          width: 55rem;
+          height: 55rem;
         `
       )}
-
-      ${("ipad-pro-12.9-land",
-      css`
-        max-height: 55vh;
-      `)}
-
-      ${("ipad-pro-11-land",
-      css`
-        max-height: 60vh;
-        transform: translateX(0) translateY(-50%) scale(1);
-        font-size: 1.6rem;
-      `)}
       ${respond(
-        "big-desktop",
+        1200,
         css`
-          transform: translateX(-20rem) translateY(-50%) scale(1.05);
-          max-width: 100rem;
+          width: 48rem;
+          height: 48rem;
         `
       )}
+      ${respond(
+        1000,
+        css`
+          position: static;
+          width: 100%;
+          transform: none;
+          aspect-ratio: unset;
+        `
+      )}
+    }
 
-      h5 {
-        text-transform: uppercase;
-        text-align: center;
-        color: var(--color-tertiary);
-        align-self: center;
-        margin-bottom: var(--gutter);
-        font-size: 2.5rem;
+    // Select all uneven childs
+    &:nth-child(odd) {
+      flex-direction: row-reverse;
+
+      .ping-pong-card__content {
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+
+        ${respond(
+          1000,
+          css`
+            transform: unset;
+          `
+        )}
       }
+    }
+
+    h5 {
+      text-transform: uppercase;
+      text-align: center;
+      color: var(--color-tertiary);
+      align-self: center;
+      margin-bottom: var(--gutter);
+      font-size: 2.5rem;
     }
   }
 `
 
-const PingPong = ({
-  titleData: { Heading, Subheading, Superheader },
-  items,
-}) => {
+const PingPong = ({ superheading, heading, subheading, items }) => {
   return (
     <StyledPingPong>
       <div className="container">
         <IntroSection
-          superheading={Superheader}
-          subheading={Subheading}
-          heading={Heading}
+          superheading={superheading}
+          subheading={subheading}
+          heading={heading}
         />
         {items.map(({ id, data }) => {
-          const image = getImage(data?.Media?.localFiles[0])
+          const image = data?.Media?.localFiles[0].publicURL
           return (
             <article className="ping-pong-card" key={id}>
               {image ? (
-                <GatsbyImage
-                  image={image}
+                <img
+                  src={image}
                   alt={data.Heading}
                   className="ping-pong-card__image"
                 />

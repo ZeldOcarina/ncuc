@@ -2,8 +2,8 @@ import React, { useContext } from "react"
 import styled, { css } from "styled-components"
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import respond from "../styles/abstracts/mediaqueries"
+import { v4 as uuidv4 } from "uuid"
 
 import { MdViewCarousel } from "react-icons/md"
 
@@ -99,11 +99,11 @@ const SwiperComponent = ({ images }) => {
         // onSwiper={swiper => console.log(swiper)}
         className="swiper-container"
       >
-        {images?.localFiles?.map(image => {
+        {images.map(image => {
           return (
-            <SwiperSlide key={image?.id}>
-              <GatsbyImage
-                image={getImage(image)}
+            <SwiperSlide key={uuidv4()}>
+              <img
+                src={image}
                 className="image"
                 alt="internal and external spaces"
               />

@@ -4,58 +4,38 @@ import html from "remark-html"
 import parse from "html-react-parser"
 
 export default class MarkdownParser {
-    constructor({ inputMarkdown, businessName, businessAddress, zipCode, city, state, businessEmail, tel, phone, siteUrl }) {
+    constructor({ inputMarkdown, shortcodes }) {
         this.inputMarkdown = inputMarkdown;
-        this.businessName = businessName;
-        this.businessAddress = businessAddress;
-        this.zipCode = zipCode;
-        this.city = city;
-        this.state = state;
-        this.businessEmail = businessEmail;
-        this.tel = tel;
-        this.phone = phone;
-        this.siteUrl = siteUrl;
+        this.shortcodes = shortcodes
+        this.parsedMarkdown = inputMarkdown;
 
         this.parseMarkdown();
-        if (this.businessName) this.replaceBusinessName();
-        if (this.businessAddress) this.replaceBusinessAddress();
-        if (this.zipCode) this.replaceZipCode();
-        if (this.city && this.state) this.replaceCityState();
-        if (this.businessEmail) this.replaceBusinessEmail();
-        if (this.tel && this.phone) this.replacePhoneNumbers();
-        if (this.siteUrl) this.replaceSiteUrl();
+        if (this.shortcodes) {
+            this.replacePhoneNumbers();
+            this.replaceShortcodes();
+        }
     }
 
     parseMarkdown() {
         this.parsedMarkdown = unified().use(markdown).use(html).processSync(this.inputMarkdown).value;
     }
 
-    replaceBusinessName() {
-        this.parsedMarkdown = this.parsedMarkdown.replaceAll("{{ business-name }}", this.businessName)
-    }
-
-    replaceBusinessAddress() {
-        this.parsedMarkdown = this.parsedMarkdown.replaceAll("{{ business-address }}", this.businessAddress)
-    }
-
-    replaceZipCode() {
-        this.parsedMarkdown = this.parsedMarkdown.replaceAll("{{ business-zipcode }}", this.zipCode)
-    }
-
-    replaceCityState() {
-        this.parsedMarkdown = this.parsedMarkdown.replaceAll("{{ city-state }}", `${this.city}, ${this.state}`)
-    }
-
-    replaceBusinessEmail() {
-        this.parsedMarkdown = this.parsedMarkdown.replaceAll("{{ business-email }}", this.businessEmail);
+    replaceShortcodes() {
+        // console.log(this.shortcodes);
+        this.shortcodes.forEach(shortcode => {
+            this.parsedMarkdown = this.parsedMarkdown.replaceAll(shortcode.shortcode, shortcode.data);
+        });
     }
 
     replacePhoneNumbers() {
-        this.parsedMarkdown = this.parsedMarkdown.replaceAll("{{ tel-component }}", `<a href="tel:${this.tel}">${this.phone}</a>`)
-    }
+        // console.log("Replacing phone numbers");
+        // console.log(this.shortcodes);
 
-    replaceSiteUrl() {
-        this.parsedMarkdown = this.parsedMarkdown.replaceAll("{{ site-url }}", this.siteUrl)
+        const tel = this.shortcodes.find(item => item.shortcode === "{{ tel }}")?.data
+        const phone = this.shortcodes.find(item => item.shortcode === "{{ phone }}")?.data
+
+        if (!tel || !phone) return "";
+        this.parsedMarkdown = this.parsedMarkdown.replaceAll("{{ tel-component }}", `<a href="tel:${tel}">${phone}</a>`)
     }
 
     parseHtml() {
