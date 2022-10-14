@@ -74,7 +74,6 @@ const StyledMobileNavbar = styled.div`
     margin: 5rem 0;
     padding-bottom: 7rem;
     padding-right: 0;
-    transform: scaleX(1.09);
     width: 100%;
 
     ${respond(
@@ -97,6 +96,7 @@ const StyledMobileNavbar = styled.div`
 
     &__top-ul {
       list-style: none;
+      padding: 0 1rem;
     }
     &__top-li {
       &:not(:last-child) {
@@ -131,6 +131,36 @@ const StyledMobileNavbar = styled.div`
       )}
     }
   }
+
+  .nav-button {
+    display: block;
+    height: 100%;
+    padding: 1.5rem;
+    color: var(--white);
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-align: center;
+    font-size: 2.5rem;
+
+    &--primary {
+      background-color: var(--color-tertiary);
+    }
+    &--secondary {
+      background-color: var(--color-primary);
+    }
+    &--green {
+      background-color: var(--green);
+    }
+  }
+
+  .buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gutter);
+    width: max-content;
+    justify-content: center;
+    margin: 0 auto;
+  }
 `
 
 const MobileNavbar = ({ menuData: { categories, menuData } }) => {
@@ -141,18 +171,26 @@ const MobileNavbar = ({ menuData: { categories, menuData } }) => {
       <nav className="mobile-navbar">
         <ul className="mobile-navbar__top-ul">
           <li className="mobile-navbar__top-li">
-            <Button
-              color="var(--color-tertiary)"
-              width={"2rem"}
-              navButton
-              mobileNavButton
-              type="link"
-              url="https://occctesting.com/"
-            >
-              BOOK COVID TEST
-              <br />
-              <span className="subline">Multiple Locations</span>
-            </Button>
+            <div className="buttons-container">
+              <Link
+                className="nav-button nav-button--green"
+                to="/newport-beach-ca/minor-illnesses/flu-vaccine/"
+              >
+                GET A FLU VACCINE
+              </Link>
+              <a
+                href="https://occctesting.com/"
+                className="nav-button nav-button--primary"
+              >
+                BOOK COVID TEST
+              </a>
+              <Link
+                to="/contact-us"
+                className="nav-button nav-button--secondary"
+              >
+                REQUEST A VISIT
+              </Link>
+            </div>
           </li>
           {categories.map((category, i) => {
             const categoryItems = menuData.filter(

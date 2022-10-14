@@ -1,7 +1,6 @@
 import React, { useContext } from "react"
 import styled, { css } from "styled-components"
 import { graphql } from "gatsby"
-import { v4 as uuidv4 } from "uuid"
 
 import AppContext from "../../../context/AppContext"
 
@@ -214,8 +213,8 @@ const FluVaccine = ({
     pingPongTitle: { pingPongTitle },
     pingPongItems: { pingPongItems },
     ctaSectionData: { ctaSectionData },
-    faqsTitleData: { faqsTitleData },
-    faqsData: { faqsData },
+    faqTitleData: { faqTitleData },
+    faqItemsData: { faqItemsData },
     cardsTitleData: { cardsTitleData },
     cardsData: { cardsData },
   },
@@ -291,32 +290,19 @@ const FluVaccine = ({
         />
         {setPingPong()}
         <Faqs
-          superheading={faqsTitleData.Superheader}
-          subheading={faqsTitleData.Subheading}
-          heading={faqsTitleData.Heading}
-          faqs={faqsData.map(item => {
-            return {
-              id: uuidv4(),
-              data: { question: item.data.Heading, answer: item.data.Copy },
-            }
-          })}
+          id="faq"
+          superheading={faqTitleData.Superheading}
+          heading={faqTitleData.Heading}
+          subheading={faqTitleData.Subheading}
+          faqs={faqItemsData}
+          backgroundOverride={faqTitleData.BgColorOverride}
         />
         <CardsSection
-          superheading={cardsTitleData.Superheader}
           heading={cardsTitleData.Heading}
+          superheading={cardsTitleData.Superheading}
           subheading={cardsTitleData.Subheading}
-          cards={cardsData.map(cardDatum => {
-            return {
-              id: uuidv4(),
-              data: {
-                heading: cardDatum.data.Heading,
-                copy: cardDatum.data.Copy,
-                icon: cardDatum.data.Media,
-                linkLabel: cardDatum.data.ButtonLabel,
-                link: cardDatum.data.ButtonLink,
-              },
-            }
-          })}
+          cards={cardsData}
+          backgroundOverride={cardsTitleData.BgColorOverride}
         />
       </StyledFluVaccine>
     </Layout>
@@ -346,7 +332,7 @@ export const query = graphql`
     }
     heroData: airtable(
       table: { eq: "Flu Vaccine" }
-      data: { Block: { eq: "Hero" } }
+      data: { Block: { eq: "Hero" }, isActive: { eq: true } }
     ) {
       heroData: data {
         Heading
@@ -364,7 +350,7 @@ export const query = graphql`
     }
     textData: airtable(
       table: { eq: "Flu Vaccine" }
-      data: { Block: { eq: "Text" } }
+      data: { Block: { eq: "Text" }, isActive: { eq: true } }
     ) {
       textData: data {
         Superheading
@@ -375,7 +361,7 @@ export const query = graphql`
     }
     pingPongTitle: airtable(
       table: { eq: "Flu Vaccine" }
-      data: { Block: { eq: "PingPong" } }
+      data: { Block: { eq: "PingPong" }, isActive: { eq: true } }
     ) {
       pingPongTitle: data {
         Subheading
@@ -386,7 +372,7 @@ export const query = graphql`
     pingPongItems: allAirtable(
       filter: {
         table: { eq: "Flu Vaccine" }
-        data: { Block: { eq: "PingPongItem" } }
+        data: { Block: { eq: "PingPongItem" }, isActive: { eq: true } }
       }
     ) {
       pingPongItems: nodes {
@@ -404,7 +390,7 @@ export const query = graphql`
     }
     ctaSectionData: airtable(
       table: { eq: "Flu Vaccine" }
-      data: { Block: { eq: "CTA" } }
+      data: { Block: { eq: "CTA" }, isActive: { eq: true } }
     ) {
       ctaSectionData: data {
         Subheading
@@ -419,44 +405,53 @@ export const query = graphql`
         }
       }
     }
-    faqsTitleData: airtable(
+    faqTitleData: airtable(
       table: { eq: "Flu Vaccine" }
-      data: { Block: { eq: "FAQ" } }
+      data: { Block: { eq: "FAQ" }, isActive: { eq: true } }
     ) {
-      faqsTitleData: data {
+      faqTitleData: data {
         Superheading
-        Subheading
         Heading
+        Subheading
+        BgColorOverride
+        rowNumber
       }
+      id
     }
-    faqsData: allAirtable(
+    faqItemsData: allAirtable(
       filter: {
         table: { eq: "Flu Vaccine" }
-        data: { Block: { eq: "FaqItem" } }
+        data: { Block: { eq: "FaqItem" }, isActive: { eq: true } }
       }
+      sort: { fields: data___rowNumber, order: ASC }
     ) {
-      faqsData: nodes {
+      faqItemsData: nodes {
         data {
           Heading
           Copy
+          Name
+          rowNumber
         }
         id
       }
     }
     cardsTitleData: airtable(
       table: { eq: "Flu Vaccine" }
-      data: { Block: { eq: "Cards" } }
+      data: { Block: { eq: "Cards" }, isActive: { eq: true } }
     ) {
       cardsTitleData: data {
         Superheading
-        Subheading
         Heading
+        Subheading
+        BgColorOverride
+        rowNumber
       }
+      id
     }
     cardsData: allAirtable(
       filter: {
         table: { eq: "Flu Vaccine" }
-        data: { Block: { eq: "CardsItem" } }
+        data: { Block: { eq: "CardsItem" }, isActive: { eq: true } }
       }
     ) {
       cardsData: nodes {

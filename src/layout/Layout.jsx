@@ -13,7 +13,7 @@ import GallerySection from "./GallerySection"
 import Map from "../components/Map"
 import FooterLogoStripe from "../components/FooterLogoStripe"
 import MonarchyStripe from "../components/MonarchyStripe"
-import AdvertisingBanner from "../components/AdvertisingBanner"
+// import AdvertisingBanner from "../components/AdvertisingBanner"
 
 function organizeMenu(categoriesData) {
   const categories = new Set()
@@ -76,7 +76,7 @@ const Layout = ({ children, innerLayout }) => {
 
   return (
     <>
-      <AdvertisingBanner />
+      {/* <AdvertisingBanner /> */}
       <LocationBanner
         phone={phoneData.Value}
         tel={telData.Value}

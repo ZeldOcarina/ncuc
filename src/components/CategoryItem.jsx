@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext } from "react"
 import { Link } from "gatsby"
 import styled, { css } from "styled-components"
 import AppContext from "../context/AppContext"
@@ -77,10 +77,6 @@ const CategoryItem = ({ category, categoryItems }) => {
   function handleSecondaryHover(subCategory) {
     setSecondaryHoveredCategory(subCategory)
   }
-
-  useEffect(() => {
-    console.log(secondaryHoveredCategory)
-  }, [secondaryHoveredCategory])
 
   return (
     <StyledCategoryItem

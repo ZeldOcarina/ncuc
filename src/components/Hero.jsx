@@ -1,5 +1,6 @@
 import React, { useContext } from "react"
 import styled, { css } from "styled-components"
+import respond from "../styles/abstracts/mediaqueries"
 
 import BackgroundImage from "./BackgroundImage"
 import BackgroundVideo from "./BackgroundVideo"
@@ -7,7 +8,6 @@ import BackgroundVideo from "./BackgroundVideo"
 import AppContext from "../context/AppContext"
 
 import IntroSection from "./IntroSection"
-
 import ShortcodeParser from "../helpers/ShortcodesParser"
 
 const StyledHero = styled.header`
@@ -27,22 +27,62 @@ const StyledHero = styled.header`
     width: 50%;
     margin: 0 auto;
 
+    ${respond(
+      900,
+      css`
+        width: 80%;
+      `
+    )}
+    ${respond(
+      500,
+      css`
+        width: 90%;
+      `
+    )}
+
     &--inner-page {
       position: absolute;
       bottom: 0;
       left: 0;
-      transform: translateY(-10rem) translateX(10rem);
-      width: 60%;
+      transform: translateY(-10rem) translateX(20rem);
+      width: max-content;
+      max-width: 50%;
+
+      ${respond(
+        900,
+        css`
+          transform: translateY(-50%) translateX(-50%);
+          max-width: 100%;
+          top: 50%;
+          left: 50%;
+          width: 100%;
+        `
+      )}
 
       .intro-section .heading {
         text-align: left;
         font-weight: 400;
+
+        ${respond(
+          900,
+          css`
+            text-align: center;
+          `
+        )}
       }
 
       .intro-section .subheading {
         text-align: left;
         margin: var(--gutter) 0 0 0;
         font-weight: 400;
+
+        ${respond(
+          900,
+          css`
+            text-align: center;
+            margin: var(--gutter) auto 0 auto;
+          `
+        )}
       }
     }
   }
@@ -54,6 +94,7 @@ const StyledHero = styled.header`
     text-align: center;
     margin: 0 auto;
     padding: 0;
+    max-height: max-content;
 
     .heading {
       margin: 0px;
@@ -61,10 +102,22 @@ const StyledHero = styled.header`
       position: relative;
       text-align: center;
       text-transform: uppercase;
-
       font-size: 5rem;
       line-height: 1.2;
       font-weight: 500;
+
+      ${respond(
+        900,
+        css`
+          font-size: 4rem;
+        `
+      )}
+      ${respond(
+        500,
+        css`
+          font-size: 3rem;
+        `
+      )}
     }
 
     .heading,

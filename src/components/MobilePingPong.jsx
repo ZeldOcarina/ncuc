@@ -49,7 +49,7 @@ const MobilePingPong = ({
       />
       {items.map(({ id, data }) => {
         return (
-          <article className="ping-pong-card" key={id}>
+          <article className="ping-pong-card ping-pong-card__mobile" key={id}>
             <img
               src={data.Media.localFiles[0].publicURL}
               alt={data.Heading}

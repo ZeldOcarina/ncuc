@@ -31,6 +31,7 @@ const Seo = ({
     dentalOfferButtonHoverColorData: { dentalOfferButtonHoverColorData },
     mobileMenuColorData: { mobileMenuColorData },
     mobileMenuCategoryColorData: { mobileMenuCategoryColorData },
+    greenData: { greenData },
     blackData: { blackData },
     whiteData: { whiteData },
     bodyFontWeightData: { bodyFontWeightData },
@@ -71,6 +72,7 @@ const Seo = ({
           --super-light-grey: ${superLightGreyData.Value};
           --black: ${blackData.Value};
           --white: ${whiteData.Value};
+          --green: ${greenData.Value};
           --body-font-weight: ${bodyFontWeightData.Value};
           --superheading-font-weight: ${superheadingFontWeightData.Value};
           --heading-font-weight: ${headingFontWeightData.Value};
@@ -209,6 +211,14 @@ const query = graphql`
       data: { Label: { eq: "grey500" } }
     ) {
       grey500Data: data {
+        Value
+      }
+    }
+    greenData: airtable(
+      table: { eq: "Config" }
+      data: { Label: { eq: "green" } }
+    ) {
+      greenData: data {
         Value
       }
     }

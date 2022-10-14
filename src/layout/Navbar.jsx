@@ -68,7 +68,7 @@ const Wrapper = styled.nav`
     `
   )}
 
-  .navbar-notebook-container {
+  .navbar-container {
     max-width: 95%;
     margin: 0 auto;
 
@@ -111,7 +111,7 @@ const Wrapper = styled.nav`
   }
 
   .container,
-  .navbar-notebook-container {
+  .navbar-container {
     width: 100%;
     height: 100%;
     display: flex;
@@ -126,7 +126,7 @@ const Wrapper = styled.nav`
     height: 100%;
 
     ${respond(
-      1550,
+      1420,
       css`
         display: none;
       `
@@ -179,7 +179,7 @@ const Wrapper = styled.nav`
     display: none;
 
     ${respond(
-      1550,
+      1420,
       css`
         display: block;
         color: var(--color-secondary);
@@ -231,13 +231,48 @@ const Wrapper = styled.nav`
     margin: 0;
     padding: 0;
   }
+
+  .left-part {
+    display: flex;
+    align-items: center;
+    gap: var(--gutter);
+
+    .logo {
+      margin-right: var(--big-gutter);
+    }
+  }
+
+  .nav-button {
+    display: block;
+    height: 100%;
+    padding: 1.5rem;
+    color: var(--white);
+    font-weight: 500;
+    letter-spacing: 1px;
+
+    ${respond(
+      1040,
+      css`
+        display: none;
+      `
+    )}
+
+    &--primary {
+      background-color: var(--color-primary);
+    }
+    &--secondary {
+      background-color: var(--color-secondary);
+    }
+    &--green {
+      background-color: var(--green);
+    }
+  }
 `
 
 const Navbar = ({ innerPage, innerLayout, menuData }) => {
   const { navbarRef } = useContext(AppContext)
   const [isNavbarScrolled, setIsNavbarScrolled] = useState(false)
-  const { isMobileMenuOpen, setIsMobileMenuOpen, isBigLaptop } =
-    useContext(AppContext)
+  const { isMobileMenuOpen, setIsMobileMenuOpen } = useContext(AppContext)
 
   const { logo } = useStaticQuery(query)
 
@@ -258,7 +293,7 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
     }
   })
 
-  console.log(menuData)
+  // console.log(menuData)
 
   return (
     <Wrapper
@@ -266,10 +301,27 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
       innerLayout={innerLayout}
       ref={navbarRef}
     >
-      <div className={isBigLaptop ? "navbar-notebook-container" : "container"}>
-        <Link to={logo?.nodes[0]?.data?.Permalink}>
-          {<img src={logoUrl} alt="NCUC Logo" className="logo" />}
-        </Link>
+      <div className={"navbar-container"}>
+        <div className="left-part">
+          <Link to={logo?.nodes[0]?.data?.Permalink}>
+            {<img src={logoUrl} alt="NCUC Logo" className="logo" />}
+          </Link>
+          <Link
+            className="nav-button nav-button--green"
+            to="/newport-beach-ca/minor-illnesses/flu-vaccine/"
+          >
+            GET A FLU VACCINE
+          </Link>
+          <a
+            href="https://occctesting.com/"
+            className="nav-button nav-button--primary"
+          >
+            BOOK COVID TEST
+          </a>
+          <Link to="/contact-us" className="nav-button nav-button--secondary">
+            REQUEST A VISIT
+          </Link>
+        </div>
 
         <div
           className={

@@ -59,6 +59,13 @@ const StyledPingPong = styled.section`
       background-color: var(--white);
       aspect-ratio: 1 / 1;
       padding: 5rem;
+      overflow-y: scroll;
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
 
       ${respond(
         1410,
@@ -81,6 +88,8 @@ const StyledPingPong = styled.section`
           width: 100%;
           transform: none;
           aspect-ratio: unset;
+          overflow: unset;
+          height: auto;
         `
       )}
     }

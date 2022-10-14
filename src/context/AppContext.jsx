@@ -2,24 +2,6 @@ import React, { useState } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { useMediaQuery } from "react-responsive"
 
-function setNavbarBreakpoint(businessName) {
-  switch (businessName) {
-    case "ICO Dental":
-      return 1728
-    default:
-      return 1366
-  }
-}
-
-function setIsTextJustified(businessName) {
-  switch (businessName) {
-    case "ICO Dental":
-      return true
-    default:
-      return false
-  }
-}
-
 const AppContext = React.createContext({})
 
 function ContextProvider(props) {
@@ -29,15 +11,6 @@ function ContextProvider(props) {
   const navbarRef = React.useRef(null)
   const locationBarRef = React.useRef(null)
   const anchorRef = React.useRef(null)
-
-  const appVariables = {
-    mobileNavbarBreakpoint: setNavbarBreakpoint(
-      data?.businessData?.businessData?.Value || ""
-    ),
-    isTextJustified: setIsTextJustified(
-      data?.businessData?.businessData?.Value || ""
-    ),
-  }
 
   const globalShortcodes = data.globalShortcodesData.globalShortcodesData
 
@@ -55,6 +28,7 @@ function ContextProvider(props) {
     colorTertiary: data.colorTertiaryData.colorTertiaryData.Value,
     grey: data.greyData.greyData.Value,
     grey500: data.grey500Data.grey500Data.Value,
+    green: data.greenData.greenData.Value,
     locationBannerBgColor:
       data.locationBarBgColorData.locationBarBgColorData.Value,
     appointmentButtonColor:
@@ -141,7 +115,6 @@ function ContextProvider(props) {
         isNavbarOpen,
         setIsNavbarOpen,
         colors,
-        appVariables,
       }}
     >
       {props.children}
@@ -212,6 +185,14 @@ const query = graphql`
       data: { Label: { eq: "grey500" } }
     ) {
       grey500Data: data {
+        Value
+      }
+    }
+    greenData: airtable(
+      table: { eq: "Config" }
+      data: { Label: { eq: "green" } }
+    ) {
+      greenData: data {
         Value
       }
     }
