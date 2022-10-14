@@ -263,6 +263,9 @@ const Wrapper = styled.nav`
     &--secondary {
       background-color: var(--color-secondary);
     }
+    &--tertiary {
+      background-color: var(--color-tertiary);
+    }
     &--green {
       background-color: var(--green);
     }
@@ -314,7 +317,7 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
           </Link>
           <a
             href="https://occctesting.com/"
-            className="nav-button nav-button--primary"
+            className="nav-button nav-button--tertiary"
           >
             BOOK COVID TEST
           </a>
