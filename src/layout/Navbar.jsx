@@ -3,12 +3,11 @@ import styled, { css } from "styled-components"
 import { graphql, Link, useStaticQuery } from "gatsby"
 import respond from "../styles/abstracts/mediaqueries"
 import { GiHamburgerMenu } from "react-icons/gi"
+import { v4 as uuidv4 } from "uuid"
 
 import AppContext from "../context/AppContext"
 
 import CategoryItem from "../components/CategoryItem"
-
-import Button from "../components/Button"
 
 const Wrapper = styled.nav`
   position: static;
@@ -239,7 +238,7 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
   const [isNavbarScrolled, setIsNavbarScrolled] = useState(false)
   const { isMobileMenuOpen, setIsMobileMenuOpen, isBigLaptop } =
     useContext(AppContext)
-  //const { params } = useContext(LocationContext)
+
   const { logo } = useStaticQuery(query)
 
   const logoUrl = logo.nodes[0].data.logo[0].url
@@ -259,6 +258,8 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
     }
   })
 
+  console.log(menuData)
+
   return (
     <Wrapper
       scrolled={isNavbarScrolled}
@@ -277,31 +278,30 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
               : "links-container"
           }
         >
-          {menuData.categories.map((category, i) => {
-            let locationsPage =
-              category === "COVID Testing" &&
-              menuData.menuData.find(item => item.data.Child === "Locations")
+          {Object.entries(menuData).map(([key, value]) => {
+            // value.forEach(item => {
+            //   console.log(item)
+            //   console.log(!!item.children)
+            // })
 
-            const categoryItems = menuData.menuData.filter(
-              item =>
-                item.data.Parent === category && item.data.Child !== "Locations"
-            )
-            locationsPage && categoryItems.push(locationsPage)
-            //const linkString = createLinkWithParams(data?.Permalink, params)
-            return (
-              //<Link to={linkString} className="nav-link" key={id}>
-              <CategoryItem
-                category={category}
-                key={i}
-                categoryItems={categoryItems}
-              />
-              //</Link>
-            )
+            if (value.length > 1)
+              return (
+                <CategoryItem
+                  category={key}
+                  key={uuidv4()}
+                  categoryItems={value}
+                />
+              )
+            if (value.length === 1) {
+              return (
+                <Link to={value[0].link} key={uuidv4()}>
+                  <p className="nav-link">{value[0].item}</p>
+                </Link>
+              )
+            }
+            return ""
           })}
-          <Link className="nav-link" to="/newport-beach-ca/about-us/">
-            ABOUT US
-          </Link>
-          <Button
+          {/* <Button
             color="var(--color-tertiary)"
             navButton
             type="link"
@@ -310,7 +310,7 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
             BOOK COVID TEST
             <br />
             <span className="subline">Multiple Locations</span>
-          </Button>
+          </Button> */}
         </div>
         <GiHamburgerMenu
           className="mobile-menu-activator"

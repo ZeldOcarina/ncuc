@@ -8,7 +8,7 @@ import AppContext from "../context/AppContext"
 import Button from "../components/Button"
 
 const StyledMobileNavbar = styled.div`
-  width: 100vw;
+  width: 103vw;
   position: fixed;
   height: 100vh;
   top: 0;
@@ -75,6 +75,7 @@ const StyledMobileNavbar = styled.div`
     padding-bottom: 7rem;
     padding-right: 0;
     transform: scaleX(1.09);
+    width: 100%;
 
     ${respond(
       "phone-land",

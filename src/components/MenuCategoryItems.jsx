@@ -39,6 +39,7 @@ const MenuCategoryItems = ({ category, children }) => {
     <StyledMenuCategoryItems
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      role="presentation"
     >
       {children}
     </StyledMenuCategoryItems>

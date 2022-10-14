@@ -104,6 +104,7 @@ function ContextProvider(props) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isNavbarOpen, setIsNavbarOpen] = useState(false)
   const [hoveredCategory, setHoveredCategory] = useState("")
+  const [secondaryHoveredCategory, setSecondaryHoveredCategory] = useState("")
 
   const [isMobile, setIsMobile] = React.useState(false)
 
@@ -135,6 +136,8 @@ function ContextProvider(props) {
         isBrowser,
         hoveredCategory,
         setHoveredCategory,
+        secondaryHoveredCategory,
+        setSecondaryHoveredCategory,
         isNavbarOpen,
         setIsNavbarOpen,
         colors,

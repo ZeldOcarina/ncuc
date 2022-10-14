@@ -97,7 +97,7 @@ const ThankYou = ({
               Newport Center Urgent Care & Covid Clinic
             </h1>
             <p>
-              We got your request and we will get back to you as soon as soon as
+              We got your request and we will get back to you as soon as
               possible.
             </p>
             <p>

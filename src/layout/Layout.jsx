@@ -1,6 +1,8 @@
 import React, { useContext } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
+import { MenuOrganizer } from "../helpers/MenuOrganizer"
+
 import AppContext from "../context/AppContext"
 import LocationBanner from "./LocationBanner"
 import Navbar from "./Navbar"
@@ -12,50 +14,8 @@ import Map from "../components/Map"
 import FooterLogoStripe from "../components/FooterLogoStripe"
 import MonarchyStripe from "../components/MonarchyStripe"
 import AdvertisingBanner from "../components/AdvertisingBanner"
-import { isWidthUp } from "@material-ui/core"
 
 function organizeMenu(categoriesData) {
-  // {
-  //   Services: [
-  //      Minor Injuries: [
-  //     { name: "Sports Injuries: ", permalink: "/ncuc..."}
-  //      ]
-  //   ]
-  //   }
-
-  // Loop through categoriesData and create a new object with the SubSection as keys
-  // and the values as an array of objects with the name and permalink
-  // const flatMenuData = categoriesData.reduce((acc, item) => {
-  //   if (item.data) acc.push(item.data)
-  //   return acc
-  // }, [])
-
-  // console.log({ flatMenuData })
-
-  // const menuData = flatMenuData.reduce((acc, item) => {
-  //   if (item.Parent === "Logo") {
-  //     // Skip the Logo category
-  //   }
-  //   if (item.SubSection) {
-  //     acc.add(item.SubSection),
-
-  //   } else if (item.Parent === "Logo") {
-  //     // add a noop
-  //     Function.prototype()
-  //   } else {
-  //     acc.add({
-  //       name: item.Parent,
-  //       children: [],
-  //     })
-  //   }
-
-  //   return acc
-  // }, new Set())
-
-  // console.log({ menuData })
-
-  // If there is no SubSection, add as a main key the Parent
-
   const categories = new Set()
   const organizedMenuData = {}
 
@@ -112,6 +72,7 @@ const Layout = ({ children, innerLayout }) => {
     ?.data.Value
 
   const menuData = organizeMenu(categoriesData)
+  const organizedMenu = new MenuOrganizer(categoriesData)
 
   return (
     <>
@@ -125,7 +86,7 @@ const Layout = ({ children, innerLayout }) => {
         city={cityData.Value}
       />
 
-      <Navbar innerLayout={innerLayout} menuData={menuData} />
+      <Navbar innerLayout={innerLayout} menuData={organizedMenu} />
 
       {children}
       <GallerySection

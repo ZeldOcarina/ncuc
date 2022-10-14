@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useState } from "react"
+import React, { useContext } from "react"
 import styled, { css } from "styled-components"
 
 import BackgroundImage from "./BackgroundImage"
