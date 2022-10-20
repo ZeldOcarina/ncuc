@@ -249,6 +249,7 @@ const Wrapper = styled.nav`
     color: var(--white);
     font-weight: 500;
     letter-spacing: 1px;
+    border-radius: 10px;
 
     ${respond(
       1040,

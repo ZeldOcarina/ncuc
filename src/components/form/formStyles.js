@@ -116,6 +116,8 @@ position: relative;
     letter-spacing: 5px;
     cursor: pointer;
     transition: all .2s ease-in-out;
+    border-radius: 10px;
+    
     ${respond(
               "nexus-7",
               css`
@@ -214,5 +216,15 @@ position: relative;
 
   .red {
     color: red;
+  }
+
+  .form__title--vaccine {
+    margin-bottom: 0 !important;
+  }
+
+  .form__description {
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: var(--gutter);
   }
 `;

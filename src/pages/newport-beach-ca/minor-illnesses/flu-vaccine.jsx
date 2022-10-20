@@ -45,6 +45,71 @@ const StyledFluVaccine = styled.main`
       padding: 2rem 3rem;
       display: block;
       color: var(--white);
+      border-radius: 10px;
+    }
+  }
+
+  .cta-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    ${respond(
+      1040,
+      css`
+        grid-template-columns: 1fr;
+      `
+    )}
+
+    .form-container {
+      width: 80%;
+      display: flex;
+      align-items: center;
+
+      ${respond(
+        1300,
+        css`
+          width: 90%;
+        `
+      )}
+      ${respond(
+        1040,
+        css`
+          width: 80%;
+          padding: var(--section-gutter) 0;
+          grid-row: 2 / 3;
+        `
+      )}
+      ${respond(
+        500,
+        css`
+          width: 97%;
+        `
+      )}
+    }
+
+    #cta {
+      .container {
+        width: 80%;
+
+        ${respond(
+          1300,
+          css`
+            width: 90%;
+          `
+        )}
+        ${respond(
+          1040,
+          css`
+            grid-row: 1 / 2;
+          `
+        )}
+        ${respond(
+          500,
+          css`
+            width: 97%;
+          `
+        )}
+      }
     }
   }
 
@@ -136,6 +201,7 @@ const StyledFluVaccine = styled.main`
       min-width: max-content;
       display: inline-block;
       margin: 0 auto;
+      border-radius: 10px;
     }
   }
 
@@ -254,34 +320,40 @@ const FluVaccine = ({
             </a>
           </div>
         </header>
-        <section className="cta" id="cta">
-          <div className="container">
-            <h2 className="cta__title">{ctaSectionData.Heading}</h2>
-            <h5 className="cta__phone">
-              Call now: <a href="tel:19496687383">(949) 668-7383</a>
-            </h5>
-            <p className="cta__subtitle">{ctaSectionData.Subheading}</p>
-
-            <CopySection columns={1} theme={"light"}>
-              {ctaSectionData.Copy}
-            </CopySection>
-            <div className="buttons-container">
-              <a className="button" href={ctaSectionData.ButtonLink}>
-                {ctaSectionData.ButtonLabel}
-              </a>
-            </div>
+        <div className="cta-container">
+          <div className="form-container" id="vaccine-form">
+            <Form
+              title="Schedule your vaccine today!"
+              cta="submit"
+              isFluVaccineForm
+            />
           </div>
-          <img
-            className="cta__bg-image"
-            src={ctaSectionData.Media.localFiles[0].publicURL}
-            alt=""
-            role="presentation"
-          />
-        </section>
+          <section className="cta" id="cta">
+            <div className="container">
+              <h2 className="cta__title">{ctaSectionData.Heading}</h2>
+              <h5 className="cta__phone">
+                Call now: <a href="tel:19496687383">(949) 668-7383</a>
+              </h5>
+              <p className="cta__subtitle">{ctaSectionData.Subheading}</p>
 
-        <div className="form-container" id="vaccine-form">
-          <Form title="Schedule your vaccine today!" cta="submit" />
+              <CopySection columns={1} theme={"light"}>
+                {ctaSectionData.Copy}
+              </CopySection>
+              <div className="buttons-container">
+                <a className="button" href={ctaSectionData.ButtonLink}>
+                  {ctaSectionData.ButtonLabel}
+                </a>
+              </div>
+            </div>
+            <img
+              className="cta__bg-image"
+              src={ctaSectionData.Media.localFiles[0].publicURL}
+              alt=""
+              role="presentation"
+            />
+          </section>
         </div>
+
         <TextSection
           superheading={textData.Superheader}
           subheading={textData.Subheading}

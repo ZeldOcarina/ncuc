@@ -9,7 +9,7 @@ import StyledForm from "../form/formStyles"
 import FormHandler from "./FormHandler"
 import PuffLoader from "react-spinners/PuffLoader"
 
-const Form = ({ title, cta }) => {
+const Form = ({ title, cta, isFluVaccineForm }) => {
   const initialState = {
     first_name: { value: "", error: "" },
     last_name: { value: "", error: "" },
@@ -99,16 +99,25 @@ const Form = ({ title, cta }) => {
     }
   }
 
-  const formTitle = function setTitleString() {
+  const formTitle = function setTitleString(isFluVaccineForm) {
     if (submitted) return <h3 className="green">Form Submitted</h3>
     if (isSubmittionFailed)
       return <h3 className="red">Form Submittion Failed</h3>
-    return <h3>{title}</h3>
+    return (
+      <h3 className={isFluVaccineForm ? "form__title--vaccine" : ""}>
+        {title}
+      </h3>
+    )
   }
 
   return (
     <StyledForm onSubmit={handleSubmit} className="form">
-      {formTitle()}
+      {formTitle(isFluVaccineForm)}
+      {isFluVaccineForm && (
+        <p className="form__description">
+          Or call us at <a href="tel:19496687383">(949) 668-7383</a>
+        </p>
+      )}
       <div className="name-container">
         <div className="input-container">
           <input

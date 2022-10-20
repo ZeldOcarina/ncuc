@@ -141,6 +141,7 @@ const StyledMobileNavbar = styled.div`
     letter-spacing: 1px;
     text-align: center;
     font-size: 2.5rem;
+    border-radius: 10px;
 
     &--primary {
       background-color: var(--color-tertiary);

@@ -18,6 +18,7 @@ const buttonCss = css`
   font-weight: 400;
   transition: all 0.2s ease-in-out;
   background-color: var(--color-primary);
+  border-radius: 10px;
 
   &:hover {
     background-color: #222b5f;
@@ -49,6 +50,7 @@ const navButtonCss = css`
   width: 21.5rem;
   line-height: 1.3;
   transition: all 0.2s ease-in-out;
+  border-radius: 10px;
 
   &:hover {
     background-color: ${shadeColor(Colors.colorTertiary, -30)} !important;
@@ -96,6 +98,7 @@ const StyledButton = styled.button`
       css`
         ${color}
       `};
+    border-radius: 10px;
   }
 `
 

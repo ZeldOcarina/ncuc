@@ -244,8 +244,8 @@ const query = graphql`
     }
     quickLinksData: allAirtable(
       filter: {
-        table: { eq: "Category" }
-        data: { Block: { eq: "QuickLinks" } }
+        table: { eq: "Sitemap" }
+        data: { Category: { eq: "QuickLinks" } }
       }
     ) {
       quickLinksData: nodes {
