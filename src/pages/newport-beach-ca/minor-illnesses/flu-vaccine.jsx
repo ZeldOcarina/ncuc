@@ -321,13 +321,6 @@ const FluVaccine = ({
           </div>
         </header>
         <div className="cta-container">
-          <div className="form-container" id="vaccine-form">
-            <Form
-              title="Schedule your vaccine today!"
-              cta="submit"
-              isFluVaccineForm
-            />
-          </div>
           <section className="cta" id="cta">
             <div className="container">
               <h2 className="cta__title">{ctaSectionData.Heading}</h2>
@@ -339,11 +332,6 @@ const FluVaccine = ({
               <CopySection columns={1} theme={"light"}>
                 {ctaSectionData.Copy}
               </CopySection>
-              <div className="buttons-container">
-                <a className="button" href={ctaSectionData.ButtonLink}>
-                  {ctaSectionData.ButtonLabel}
-                </a>
-              </div>
             </div>
             <img
               className="cta__bg-image"
@@ -352,6 +340,13 @@ const FluVaccine = ({
               role="presentation"
             />
           </section>
+          <div className="form-container" id="vaccine-form">
+            <Form
+              title="Schedule your vaccine today!"
+              cta="submit"
+              isFluVaccineForm
+            />
+          </div>
         </div>
 
         <TextSection
