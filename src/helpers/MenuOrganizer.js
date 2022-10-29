@@ -10,7 +10,7 @@ export class MenuOrganizer {
         this.addServicesToThirdLevel();
 
         // console.log({ menuData: this.menuData });
-        console.log({ parsedMenuData: this.parsedMenuData });
+        // console.log({ parsedMenuData: this.parsedMenuData });
         return this.parsedMenuData;
     }
 

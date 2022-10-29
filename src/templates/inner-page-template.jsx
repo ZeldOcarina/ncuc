@@ -62,7 +62,7 @@ const InnerPageTemplate = ({
     businessNameData: { businessNameData },
   },
 }) => {
-  console.log(pageContext)
+  // console.log(pageContext)
   const pageComponents = []
 
   if (
