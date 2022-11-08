@@ -5,7 +5,6 @@ import { Link } from "gatsby"
 import respond from "../styles/abstracts/mediaqueries"
 
 import AppContext from "../context/AppContext"
-import Button from "../components/Button"
 
 const StyledMobileNavbar = styled.div`
   width: 103vw;
