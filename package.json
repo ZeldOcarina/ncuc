@@ -56,24 +56,26 @@
     "@emotion/babel-plugin": "^11.9.2",
     "copy-webpack-plugin": "^11.0.0",
     "express": "^4.18.1",
+    "node-ssh": "^13.0.0",
     "nodemon": "^2.0.19",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
-    "sass": "^1.53.0"
+    "sass": "^1.53.0",
+    "tar": "^6.1.12"
   },
   "keywords": [
     "gatsby"
   ],
   "scripts": {
-    "build": "NODE_ENV=production node gatsby-prebuild.js && gatsby build",
-    "start:dev": "npm-run-all -p dev:*",
-    "dev:frontend": "gatsby develop",
-    "dev:backend": "nodemon server/app.js",
+    "develop": "gatsby develop",
+    "build": "NODE_ENV=production node scripts/gatsby-prebuild.js && gatsby build",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "start": "NODE_ENV=development node gatsby-prebuild.js && gatsby develop",
+    "start": "NODE_ENV=development node scripts/gatsby-prebuild.js && gatsby develop",
+    "prebuild": "NODE_ENV=production node scripts/gatsby-prebuild.js",
+    "deploy-env": "NODE_ENV=production node scripts/deploy-env.js",
+    "deploy": "NODE_ENV=production node scripts/deploy-site.js",
     "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "clean": "gatsby clean"
   },
   "repository": {
     "type": "git",

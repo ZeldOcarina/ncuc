@@ -278,9 +278,11 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
   const [isNavbarScrolled, setIsNavbarScrolled] = useState(false)
   const { isMobileMenuOpen, setIsMobileMenuOpen } = useContext(AppContext)
 
-  const { logo } = useStaticQuery(query)
+  const {
+    logoData: { logoData },
+  } = useStaticQuery(query)
 
-  const logoUrl = logo.nodes[0].data.logo[0].url
+  const logoUrl = logoData?.logo.localFiles[0]?.publicURL
 
   useEffect(() => {
     // Make navbar fixed on scroll
@@ -307,7 +309,7 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
     >
       <div className={"navbar-container"}>
         <div className="left-part">
-          <Link to={logo?.nodes[0]?.data?.Permalink}>
+          <Link to={logoData.Permalink}>
             {<img src={logoUrl} alt="NCUC Logo" className="logo" />}
           </Link>
           <Link
@@ -381,16 +383,15 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
 
 const query = graphql`
   {
-    logo: allAirtable(
-      filter: { table: { eq: "Menu" }, data: { Parent: { regex: "/Logo/" } } }
+    logoData: airtable(
+      table: { eq: "Menu" }
+      data: { Child: { eq: "Logo Wide" } }
     ) {
-      nodes {
-        id
-        data {
-          Child
-          Permalink
-          logo {
-            url
+      logoData: data {
+        Permalink
+        logo {
+          localFiles {
+            publicURL
           }
         }
       }

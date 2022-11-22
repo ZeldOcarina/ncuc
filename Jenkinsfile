@@ -1,3 +1,6 @@
+// Declare a variable business_name
+def business_name = "staging-ncuc"
+
 pipeline {
     agent any
     parameters{
@@ -6,13 +9,16 @@ pipeline {
     stages {
         stage("Check Environment"){
             steps {
-                echo "PATH is: ${env.PATH}"
-                echo "current environment is located at ${env.WORKSPACE}"
-                sh "node -v"
-                sh "yarn -v"
-                sh "npm -v"
-                sh "whoami"
-                sh "ls -lsa"
+                script {
+                    echo "Currently built business is ${business_name}"
+                    echo "PATH is: ${env.PATH}"
+                    echo "current environment is located at ${env.WORKSPACE}"
+                    sh "node -v"
+                    sh "yarn -v"
+                    sh "npm -v"
+                    sh "whoami"
+                    sh "ls -lsa"
+                }
             }
         }
         stage("Clean Up"){
@@ -30,41 +36,65 @@ pipeline {
             }
         }
         stage("Install Dependencies"){
+            environment {
+                NPM_TOKEN = credentials('NPM_TOKEN')
+            }
             steps {
-                sh "yarn install"   
+                sh 'export NPM_TOKEN=${NPM_TOKEN}'
+                script {
+                    if(params.CLEAN_DEPLOYMENT != true) {
+                        // Upgrade all packages
+                        sh "yarn install"
+                        sh "yarn upgrade"
+                    } else {
+                        sh "yarn install"
+                    }
+                }
                 dir("backend") {
                     sh "yarn install"
                 }                    
             }
         }
         stage("Build"){
+            environment {
+                NPM_TOKEN = credentials('NPM_TOKEN')
+            }
             steps {
-                sh "cp /var/lib/jenkins/workspace/secrets/staging-ncuc/.env.production ."
-                dir("backend") {
-                    sh "sudo cp /var/lib/jenkins/workspace/secrets/staging-ncuc/.env ."
-                }
-                dir("${env.WORKSPACE}") {
-                    script {
+                script {
+                    sh 'export NPM_TOKEN=${NPM_TOKEN}'
+                    sh "cp /var/lib/jenkins/workspace/secrets/${business_name}/.env.production ."
+                    sh "sudo chmod 776 .env.production"
+                    sh "sudo chown jenkins:jenkins .env.production"
+                    dir("backend") {
+                        sh "sudo cp /var/lib/jenkins/workspace/secrets/${business_name}/.env ."
+                        sh "sudo chmod 776 .env"
+                        sh "sudo chown jenkins:jenkins .env"
+                    }
+                    dir("${env.WORKSPACE}") {
                         if (params.CLEAN_DEPLOYMENT == true) {
                             sh "yarn clean"
                         }
-                    }
                     sh "yarn build"
-                }                
+                    }                
+                }
             }
         }
         stage("Move Assets"){
             steps {   
+                script {
                 sh """
-                    sudo rm -rf /var/www/html/staging-ncuc/*
-                    sudo cp -r public /var/www/html/staging-ncuc/
-                    sudo cp -r backend /var/www/html/staging-ncuc/
-                    sudo mkdir /var/www/html/staging-ncuc/backend/logs
-                    sudo chown -R mattiarasulo:www-data /var/www/html/staging-ncuc/
-                    sudo chown -R mattiarasulo:www-data /var/www/html/staging-ncuc/*
-                    sudo chmod -R 776 /var/www/html/staging-ncuc/
-                    sudo chmod -R 776 /var/www/html/staging-ncuc/*
+                    sudo rm -rf /var/www/html/${business_name}/*
+                    sudo cp -r public /var/www/html/${business_name}/
+                    sudo cp -r backend /var/www/html/${business_name}/
+                    sudo mkdir /var/www/html/${business_name}/backend/logs
+                    sudo chown -R mattiarasulo:www-data /var/www/html/${business_name}/
+                    sudo chown -R mattiarasulo:www-data /var/www/html/${business_name}/*
+                    sudo chmod -R 776 /var/www/html/${business_name}/
+                    sudo chmod -R 776 /var/www/html/${business_name}/*
+                    sudo -u mattiarasulo /home/mattiarasulo/.nvm/versions/node/v18.6.0/bin/pm2 reload /var/www/html/${business_name}/backend/ecosystem.config.js
                 """                        
+                }
+                
             }
         }
     }
