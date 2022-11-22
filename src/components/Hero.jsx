@@ -2,6 +2,8 @@ import React, { useContext } from "react"
 import styled, { css } from "styled-components"
 import respond from "../styles/abstracts/mediaqueries"
 
+import { Link } from "gatsby"
+
 import BackgroundImage from "./BackgroundImage"
 import BackgroundVideo from "./BackgroundVideo"
 
@@ -177,33 +179,91 @@ const Hero = ({
     )
   }
 
+  const StyledButtonsStripe = styled.div`
+    background-color: #afdfe4;
+    color: var(--color-secondary);
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 2rem 0;
+
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    place-items: center;
+    place-content: center;
+    gap: 2rem;
+
+    ${respond(
+      500,
+      css`
+        grid-template-columns: 1fr;
+      `
+    )}
+
+    .button {
+      display: block;
+      height: 100%;
+      padding: 1.5rem;
+      color: var(--white);
+      font-weight: 500;
+      letter-spacing: 1px;
+      border-radius: 10px;
+
+      &--primary {
+        background-color: var(--color-primary);
+      }
+      &--secondary {
+        background-color: var(--color-secondary);
+      }
+      &--tertiary {
+        background-color: var(--color-tertiary);
+      }
+      &--green {
+        background-color: var(--green);
+      }
+    }
+  `
+
   return (
-    <StyledHero colors={colors}>
-      <div
-        className={
-          isHomePage ? "text-content" : "text-content text-content--inner-page"
-        }
-      >
-        <IntroSection
-          superheading={superheading}
-          heading={heading}
-          subheading={subheading}
-          makeHeadingH1
-        />
-        {buttonContainer}
-      </div>
-      {isVideo ? (
-        <BackgroundVideo video={image} mimeType={mimeType} overlay={overlay} />
-      ) : (
-        <BackgroundImage
-          image={image}
-          mobileImage={mobileImage}
-          altText={parsedAltText}
-          isPlainImg
-          overlay={overlay}
-        />
-      )}
-    </StyledHero>
+    <>
+      <StyledHero colors={colors}>
+        <div
+          className={
+            isHomePage
+              ? "text-content"
+              : "text-content text-content--inner-page"
+          }
+        >
+          <IntroSection
+            superheading={superheading}
+            heading={heading}
+            subheading={subheading}
+            makeHeadingH1
+          />
+          {buttonContainer}
+        </div>
+        {isVideo ? (
+          <BackgroundVideo
+            video={image}
+            mimeType={mimeType}
+            overlay={overlay}
+          />
+        ) : (
+          <BackgroundImage
+            image={image}
+            mobileImage={mobileImage}
+            altText={parsedAltText}
+            isPlainImg
+            overlay={overlay}
+          />
+        )}
+      </StyledHero>
+      <StyledButtonsStripe>
+        We Accept all insurance!
+        <Link to="/contact-us/" className="button button--primary">
+          Request a visit
+        </Link>
+      </StyledButtonsStripe>
+    </>
   )
 }
 

@@ -4,35 +4,30 @@ import styled, { css } from "styled-components"
 import respond from "../styles/abstracts/mediaqueries"
 
 const StyledCard = styled.article`
-  background-color: var(--white);
-  padding: 8rem 4rem ${({ link }) => (link ? "10rem" : "8rem")} 4rem;
+  padding: 0;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  grid-template-rows: 1fr 1fr;
 
-  ${respond(
-    "big-desktop",
-    css`
-      padding: 10rem 6rem 12rem 6rem;
-      padding: 10rem 6rem ${({ link }) => (link ? "12rem" : "10rem")} 4rem;
-    `
-  )}
-
-  .icon-container {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: var(--background-dark);
-    padding: 1rem;
-    border-radius: 50%;
-    width: 12rem;
-    height: 12rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .top-section {
+    background-color: transparent;
+    margin-bottom: 1rem;
+    height: 30rem;
   }
 
+  .bottom-section {
+    position: relative;
+    background-color: var(--white);
+    height: auto;
+    padding: 4rem 4rem ${({ link }) => (link ? "10rem" : "6rem")} 4rem;
+    flex-grow: 1;
+  }
   img {
-    width: 40%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
   }
 
   h5 {
@@ -83,17 +78,18 @@ const StyledCard = styled.article`
 const Card = ({ Copy, Heading, Media, ButtonLabel, ButtonLink, AltText }) => {
   return (
     <StyledCard link={ButtonLink}>
-      <div className="icon-container">
+      <div className="top-section">
         <img src={Media?.localFiles[0]?.publicURL} alt={AltText || Heading} />
       </div>
-
-      <h5>{Heading}</h5>
-      <p>{Copy}</p>
-      {ButtonLink && (
-        <Link className="link" to={ButtonLink}>
-          {ButtonLabel}
-        </Link>
-      )}
+      <div className="bottom-section">
+        <h5>{Heading}</h5>
+        <p>{Copy}</p>
+        {ButtonLink && (
+          <Link className="link" to={ButtonLink}>
+            {ButtonLabel}
+          </Link>
+        )}
+      </div>
     </StyledCard>
   )
 }
