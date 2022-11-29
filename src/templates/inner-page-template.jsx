@@ -43,6 +43,8 @@ const InnerPageTemplate = ({
     imageTextData,
     ctaData,
     heroData,
+    heroItemsData,
+    heroStripeData,
     anchorItemsData,
     textData,
     faqTitleData,
@@ -89,6 +91,8 @@ const InnerPageTemplate = ({
           button2Label={heroData.heroData.Button2Label}
           button2Link={heroData.heroData.Button2Link}
           isHomePage={pageContext.pageTitle === "Home"}
+          heroItems={heroItemsData?.heroItemsData}
+          heroStripe={heroStripeData?.heroStripeData}
         />
       ),
       index: heroData.heroData.rowNumber,
@@ -498,6 +502,32 @@ export const query = graphql`
         ButtonLink
       }
       id
+    }
+    heroItemsData: allAirtable(
+      filter: { table: { eq: $pageTitle }, data: { Block: { eq: "HeroItem" } } }
+      sort: { fields: data___rowNumber, order: ASC }
+    ) {
+      heroItemsData: nodes {
+        id
+        data {
+          Heading
+          Media {
+            localFiles {
+              publicURL
+            }
+          }
+        }
+      }
+    }
+    heroStripeData: airtable(
+      table: { eq: $pageTitle }
+      data: { Block: { eq: "HeroStripe" } }
+    ) {
+      heroStripeData: data {
+        ButtonLabel
+        ButtonLink
+        Heading
+      }
     }
     anchorItemsData: allAirtable(
       filter: {

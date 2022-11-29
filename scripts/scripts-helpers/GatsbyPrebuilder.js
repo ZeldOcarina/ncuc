@@ -129,64 +129,23 @@ class GatsbyPrebuilder {
 
     async fetchAirtableTables() {
         try {
-            const firstResponse = await axios({
-                baseURL: `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Metadata?maxRecords=5000`,
-                headers: { Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}` },
+            const response = await axios({
+                baseURL: `https://api.airtable.com/v0/meta/bases/${process.env.AIRTABLE_BASE_ID}/tables`,
+                headers: { Authorization: `Bearer ${process.env.MATTIA_AIRTABLE_KEY}` },
             });
 
-            // Chain a new request to fetch the next page of records using the offset parameter until the offset parameter is null
-            const allResponses = [firstResponse];
-            let offset = firstResponse.data.offset;
-            while (offset) {
-                const response = await axios({
-                    baseURL: `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Metadata?maxRecords=5000&offset=${offset}`,
-                    headers: { Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}` },
-                });
-                allResponses.push(response);
-                offset = response.data.offset;
-            }
-
-            console.log(chalk.green("success ") + allResponses.length + " pages of Airtable tables successfully fetched");
-
-            // Flatten all responses into one array
-            const responsesData = allResponses.map((response) => response.data.records);
-            const allRecords = responsesData.flat();
-
-            console.log(chalk.green("success ") + allRecords.length + " records successfully fetched");
-
-            const categories = new Set();
-            allRecords.forEach(
-                (record) => {
-                    categories.add(record.fields.tableName);
-                }
-            );
-
-            const tableArray = []
-            categories.forEach((category) => {
-                tableArray.push({
+            const tableArray = response.data.tables.map((table) => {
+                return ({
                     baseId: process.env.AIRTABLE_BASE_ID,
-                    tableName: category,
-                    mapping: createMapping(category),
-                })
+                    tableName: table.name,
+                    mapping: createMapping(table.name),
+                });
             });
-
-            // Check if a config folder exists and create one if it doesn't
-            const configFolderPath = path.join(process.cwd(), "config");
-            if (!fs.existsSync(configFolderPath)) {
-                await fsPromises.mkdir(configFolderPath);
-            }
-
-            // Check if a config/airtable-tables.json file exists and create an empty one if it doesn't
-            const airtableTablesFilePath = path.join(configFolderPath, "airtable-tables.json");
-            if (!fs.existsSync(airtableTablesFilePath)) {
-                await fsPromises.writeFile(airtableTablesFilePath, JSON.stringify([]));
-            }
 
             // Save table array in config/airtable-tables.json
             const airtableTablesPath = path.join(process.cwd(), "config", "airtable-tables.json");
             fs.writeFileSync(airtableTablesPath, JSON.stringify(tableArray), "utf8");
             console.log(chalk.green("success ") + `Airtable tables successfully fetched and saved in airtable-tables.json`);
-
         } catch (err) {
             console.error(chalk.red("error " + "Error fetching Airtable tables"));
             console.error(err.message);
@@ -344,7 +303,6 @@ class GatsbyPrebuilder {
         } catch (err) {
             console.error(chalk.red("error ") + "Error changing backend ecosystem.config.js");
             console.error(chalk.red("error " + err.message));
-            console.error(err);
             console.error(err.stack);
             process.exit(1);
         }

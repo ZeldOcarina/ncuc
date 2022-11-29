@@ -2,8 +2,6 @@ import React, { useContext } from "react"
 import styled, { css } from "styled-components"
 import respond from "../styles/abstracts/mediaqueries"
 
-import { Link } from "gatsby"
-
 import BackgroundImage from "./BackgroundImage"
 import BackgroundVideo from "./BackgroundVideo"
 
@@ -12,33 +10,75 @@ import AppContext from "../context/AppContext"
 import IntroSection from "./IntroSection"
 import ShortcodeParser from "../helpers/ShortcodesParser"
 
+import HeroButtonsStripe from "./HeroButtonsStripe"
+import HeroItem from "./HeroItem"
+
 const StyledHero = styled.header`
   min-height: 55vh;
-  display: grid;
-  place-items: center;
   position: relative;
   background-color: ${({ backgroundColor }) =>
     backgroundColor || css`var(--white)`};
 
+  ${respond(
+    1130,
+    css`
+      min-height: 75vh;
+    `
+  )}
+  ${respond(
+    500,
+    css`
+      min-height: 64vh;
+    `
+  )}
+  ${respond(
+    380,
+    css`
+      min-height: 80vh;
+    `
+  )}
+  ${respond(
+    320,
+    css`
+      min-height: 135vh;
+    `
+  )}
+
   .text-content {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: translate(-35%, -5rem);
     z-index: 100;
     text-align: center;
     z-index: 1;
     display: grid;
     justify-items: center;
-    width: 50%;
+    max-width: 50%;
     margin: 0 auto;
 
     ${respond(
-      900,
+      1500,
       css`
-        width: 80%;
+        transform: translate(-25%, -5rem);
       `
     )}
     ${respond(
-      500,
+      1300,
       css`
-        width: 90%;
+        transform: translate(-10%, -5rem);
+      `
+    )}
+    ${respond(
+      1130,
+      css`
+        max-width: 90%;
+        width: 100%;
+        left: 50%;
+        right: unset;
+        transform: translateX(-50%);
+        bottom: 5rem;
+        place-content: center;
       `
     )}
 
@@ -104,7 +144,7 @@ const StyledHero = styled.header`
       position: relative;
       text-align: center;
       text-transform: uppercase;
-      font-size: 5rem;
+      font-size: 4rem;
       line-height: 1.2;
       font-weight: 500;
 
@@ -136,6 +176,34 @@ const StyledHero = styled.header`
       display: none;
     }
   }
+
+  .hero-items {
+    margin-top: var(--big-gutter);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--gutter);
+    row-gap: calc(var(--gutter) * 2.5);
+
+    ${respond(
+      1130,
+      css`
+        width: 100%;
+      `
+    )}
+    ${respond(
+      400,
+      css`
+        column-gap: 1rem;
+        row-gap: 4rem;
+      `
+    )}
+    ${respond(
+      320,
+      css`
+        grid-template-columns: 1fr;
+      `
+    )}
+  }
 `
 
 const Hero = ({
@@ -148,12 +216,11 @@ const Hero = ({
   overlay,
   isVideo,
   mimeType,
-  button1Label,
-  button1Link,
-  button2Label,
-  button2Link,
   isHomePage,
+  heroItems,
+  heroStripe,
 }) => {
+  console.log(heroItems)
   const { globalShortcodesData, colors } = useContext(AppContext)
 
   const parsedAltText = new ShortcodeParser(
@@ -161,71 +228,25 @@ const Hero = ({
     globalShortcodesData
   ).parseShortcodes()
 
-  let buttonContainer = ""
-  if ((button1Label && button1Link) || (button2Label && button2Link)) {
-    buttonContainer = (
-      <div className="button-container">
-        {button1Label && button1Link && (
-          <a href={button1Link} className="btn btn--primary">
-            {button1Label}
-          </a>
-        )}
-        {button2Label && button2Link && (
-          <a href={button2Link} className="btn btn--secondary">
-            {button2Label}
-          </a>
-        )}
-      </div>
-    )
-  }
-
-  const StyledButtonsStripe = styled.div`
-    background-color: #afdfe4;
-    color: var(--color-secondary);
-    font-weight: 500;
-    text-transform: uppercase;
-    padding: 2rem 0;
-
-    display: grid;
-    grid-template-columns: repeat(2, max-content);
-    place-items: center;
-    place-content: center;
-    gap: 2rem;
-
-    ${respond(
-      500,
-      css`
-        grid-template-columns: 1fr;
-      `
-    )}
-
-    .button {
-      display: block;
-      height: 100%;
-      padding: 1.5rem;
-      color: var(--white);
-      font-weight: 500;
-      letter-spacing: 1px;
-      border-radius: 10px;
-
-      &--primary {
-        background-color: var(--color-primary);
-      }
-      &--secondary {
-        background-color: var(--color-secondary);
-      }
-      &--tertiary {
-        background-color: var(--color-tertiary);
-      }
-      &--green {
-        background-color: var(--green);
-      }
-    }
-  `
+  const heroCards = (
+    <div className="hero-items">
+      {heroItems.map(item => {
+        console.log(item)
+        return (
+          <HeroItem
+            key={item.id}
+            {...item.data}
+            bgImage={image}
+            overlay={overlay}
+          />
+        )
+      })}
+    </div>
+  )
 
   return (
     <>
-      <StyledHero colors={colors}>
+      <StyledHero colors={colors} image={image} overlay={overlay}>
         <div
           className={
             isHomePage
@@ -239,7 +260,7 @@ const Hero = ({
             subheading={subheading}
             makeHeadingH1
           />
-          {buttonContainer}
+          {heroItems && heroItems.length > 0 ? heroCards : null}
         </div>
         {isVideo ? (
           <BackgroundVideo
@@ -257,12 +278,16 @@ const Hero = ({
           />
         )}
       </StyledHero>
-      <StyledButtonsStripe>
-        We Accept all insurance!
-        <Link to="/contact-us/" className="button button--primary">
-          Request a visit
-        </Link>
-      </StyledButtonsStripe>
+      {heroStripe &&
+      heroStripe.Heading &&
+      heroStripe.ButtonLabel &&
+      heroStripe.ButtonLink ? (
+        <HeroButtonsStripe
+          title={heroStripe.Heading}
+          link={heroStripe.ButtonLink}
+          cta={heroStripe.ButtonLabel}
+        />
+      ) : null}
     </>
   )
 }
