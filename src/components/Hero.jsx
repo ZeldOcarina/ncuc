@@ -89,6 +89,7 @@ const StyledHero = styled.header`
       transform: translateY(-10rem) translateX(20rem);
       width: max-content;
       max-width: 50%;
+      right: unset;
 
       ${respond(
         900,
@@ -220,7 +221,6 @@ const Hero = ({
   heroItems,
   heroStripe,
 }) => {
-  console.log(heroItems)
   const { globalShortcodesData, colors } = useContext(AppContext)
 
   const parsedAltText = new ShortcodeParser(
