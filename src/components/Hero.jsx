@@ -19,6 +19,16 @@ const StyledHero = styled.header`
   background-color: ${({ backgroundColor }) =>
     backgroundColor || css`var(--white)`};
 
+  /* Target not tall devices */
+  @media (max-height: 790px) {
+    min-height: 70vh;
+  }
+  @media (max-height: 640px) {
+    min-height: 80vh;
+  }
+  @media (max-height: 550px) {
+    min-height: 100vh;
+  }
   ${respond(
     1130,
     css`
