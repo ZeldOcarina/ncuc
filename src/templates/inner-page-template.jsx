@@ -510,6 +510,7 @@ export const query = graphql`
       heroItemsData: nodes {
         id
         data {
+          ButtonLink
           Heading
           Media {
             localFiles {

@@ -1,3 +1,4 @@
+import { Link } from "gatsby"
 import React from "react"
 import { useRef } from "react"
 import { useEffect } from "react"
@@ -57,11 +58,23 @@ const StyledHeroItem = styled.article`
   }
 `
 
+const CardLink = ({ children, ButtonLink }) => {
+  if (!ButtonLink) return <div>{children}</div>
+  if (ButtonLink.startsWith("http"))
+    return (
+      <a href={ButtonLink} rel="external" target="_blank">
+        {children}
+      </a>
+    )
+  return <Link to={ButtonLink}>{children}</Link>
+}
+
 const HeroItem = ({
   Heading,
   Media,
   AltText,
   BgColorOverride,
+  ButtonLink,
   bgImage,
   overlay,
 }) => {
@@ -94,18 +107,24 @@ const HeroItem = ({
     icon.style.transform = `translate(${iconOffsetX}px, ${iconOffsetY}px)`
   }, [cardRef, iconRef])
 
-  return (
-    <StyledHeroItem
-      white={colors.white}
-      bgColorOverride={BgColorOverride}
-      bgImage={bgImage}
-    >
+  const innerContent = (
+    <>
       <div className="icon-container" ref={iconRef}>
         <img className="icon" src={icon} alt={AltText ?? Heading} />
       </div>
       <div className="card" ref={cardRef}>
         <h3 className="heading">{Heading}</h3>
       </div>
+    </>
+  )
+
+  return (
+    <StyledHeroItem
+      white={colors.white}
+      bgColorOverride={BgColorOverride}
+      bgImage={bgImage}
+    >
+      <CardLink ButtonLink={ButtonLink}>{innerContent}</CardLink>
     </StyledHeroItem>
   )
 }

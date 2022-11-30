@@ -241,7 +241,6 @@ const Hero = ({
   const heroCards = (
     <div className="hero-items">
       {heroItems.map(item => {
-        console.log(item)
         return (
           <HeroItem
             key={item.id}
