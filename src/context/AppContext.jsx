@@ -14,6 +14,8 @@ function ContextProvider(props) {
 
   const globalShortcodes = data.globalShortcodesData.globalShortcodesData
 
+  console.log({ globalShortcodes })
+
   const businessPhoneData = {
     phone: data.phoneData.phoneData.Value,
     tel: data.telData.telData.Value,
@@ -361,7 +363,7 @@ const query = graphql`
     globalShortcodesData: allAirtable(
       filter: {
         table: { eq: "Config" }
-        data: { Shortcodes: { ne: null }, Category: { eq: "Details" } }
+        data: { Shortcodes: { ne: null }, Name: { eq: "Details" } }
       }
     ) {
       globalShortcodesData: nodes {

@@ -64,7 +64,6 @@ const InnerPageTemplate = ({
     businessNameData: { businessNameData },
   },
 }) => {
-  // console.log(pageContext)
   const pageComponents = []
 
   if (
@@ -505,7 +504,7 @@ export const query = graphql`
     }
     heroItemsData: allAirtable(
       filter: { table: { eq: $pageTitle }, data: { Block: { eq: "HeroItem" } } }
-      sort: { fields: data___rowNumber, order: ASC }
+      sort: { data: { rowNumber: ASC } }
     ) {
       heroItemsData: nodes {
         id
@@ -535,7 +534,7 @@ export const query = graphql`
         table: { eq: $pageTitle }
         data: { isActive: { eq: true }, Block: { eq: "AnchorItem" } }
       }
-      sort: { fields: data___rowNumber, order: ASC }
+      sort: { data: { rowNumber: ASC } }
     ) {
       anchorItemsData: nodes {
         id
@@ -568,7 +567,7 @@ export const query = graphql`
         table: { eq: $pageTitle }
         data: { Block: { eq: "PingPongItem" }, isActive: { eq: true } }
       }
-      sort: { order: ASC, fields: data___rowNumber }
+      sort: { data: { rowNumber: ASC } }
     ) {
       pingPongItemsData: nodes {
         data {
@@ -605,7 +604,7 @@ export const query = graphql`
         table: { eq: $pageTitle }
         data: { Block: { eq: "PingPong2Item" }, isActive: { eq: true } }
       }
-      sort: { order: ASC, fields: data___rowNumber }
+      sort: { data: { rowNumber: ASC } }
     ) {
       pingPong2ItemsData: nodes {
         data {
@@ -639,7 +638,7 @@ export const query = graphql`
         table: { eq: $pageTitle }
         data: { Block: { eq: "CardsItem" }, isActive: { eq: true } }
       }
-      sort: { fields: data___rowNumber, order: ASC }
+      sort: { data: { rowNumber: ASC } }
     ) {
       cardsData: nodes {
         data {
@@ -676,7 +675,7 @@ export const query = graphql`
         table: { eq: $pageTitle }
         data: { Block: { eq: "Cards2Item" }, isActive: { eq: true } }
       }
-      sort: { order: ASC, fields: data___rowNumber }
+      sort: { data: { rowNumber: ASC } }
     ) {
       cards2Data: nodes {
         data {
@@ -724,7 +723,7 @@ export const query = graphql`
         table: { eq: $pageTitle }
         data: { Block: { eq: "Text" }, isActive: { eq: true } }
       }
-      sort: { fields: data___rowNumber, order: ASC }
+      sort: { data: { rowNumber: ASC } }
     ) {
       textData: nodes {
         data {
@@ -777,7 +776,7 @@ export const query = graphql`
         table: { eq: $pageTitle }
         data: { Block: { eq: "FaqItem" }, isActive: { eq: true } }
       }
-      sort: { fields: data___rowNumber, order: ASC }
+      sort: { data: { rowNumber: ASC } }
     ) {
       faqItemsData: nodes {
         data {
@@ -838,7 +837,7 @@ export const query = graphql`
         table: { eq: $pageTitle }
         data: { Block: { eq: "HTML" }, isActive: { eq: true } }
       }
-      sort: { fields: data___rowNumber, order: ASC }
+      sort: { data: { rowNumber: ASC } }
     ) {
       htmlData: nodes {
         data {

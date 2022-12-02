@@ -7,27 +7,31 @@ import BackgroundVideo from "./BackgroundVideo"
 
 import AppContext from "../context/AppContext"
 
-import IntroSection from "./IntroSection"
-import ShortcodeParser from "../helpers/ShortcodesParser"
+import ShortcodesParser from "../helpers/ShortcodesParser"
 
 import HeroButtonsStripe from "./HeroButtonsStripe"
 import HeroItem from "./HeroItem"
+import MarkdownParser from "../helpers/MarkdownParser"
+import useShortcodes from "../hooks/useShortcodes"
 
 const StyledHero = styled.header`
-  min-height: 55vh;
+  min-height: 60vh;
   position: relative;
   background-color: ${({ backgroundColor }) =>
     backgroundColor || css`var(--white)`};
 
   /* Target not tall devices */
   @media (max-height: 790px) {
-    min-height: 70vh;
-  }
-  @media (max-height: 640px) {
     min-height: 80vh;
   }
+  @media (max-height: 640px) {
+    min-height: 90vh;
+  }
   @media (max-height: 550px) {
-    min-height: 100vh;
+    min-height: 110vh;
+  }
+  @media (max-height: 450px) {
+    min-height: 150vh;
   }
   ${respond(
     1130,
@@ -38,13 +42,13 @@ const StyledHero = styled.header`
   ${respond(
     500,
     css`
-      min-height: 64vh;
+      min-height: 72vh;
     `
   )}
   ${respond(
     380,
     css`
-      min-height: 80vh;
+      min-height: 90vh;
     `
   )}
   ${respond(
@@ -176,12 +180,21 @@ const StyledHero = styled.header`
     .heading,
     .subheading {
       color: var(--white);
-      text-transform: uppercase;
       font-weight: 300;
+    }
+
+    .heading {
+      text-transform: uppercase;
     }
 
     .subheading {
       font-size: 2rem;
+      margin-top: 0.5rem;
+      font-weight: 400;
+
+      a {
+        color: var(--white);
+      }
     }
     &::after {
       display: none;
@@ -231,11 +244,17 @@ const Hero = ({
   heroItems,
   heroStripe,
 }) => {
-  const { globalShortcodesData, colors } = useContext(AppContext)
+  const { colors } = useContext(AppContext)
+  const shortcodes = useShortcodes()
 
-  const parsedAltText = new ShortcodeParser(
+  const parsedSubheading = new MarkdownParser({
+    inputMarkdown: subheading,
+    shortcodes,
+  }).parseHtml()
+
+  const parsedAltText = new ShortcodesParser(
     altText,
-    globalShortcodesData
+    shortcodes
   ).parseShortcodes()
 
   const heroCards = (
@@ -263,12 +282,10 @@ const Hero = ({
               : "text-content text-content--inner-page"
           }
         >
-          <IntroSection
-            superheading={superheading}
-            heading={heading}
-            subheading={subheading}
-            makeHeadingH1
-          />
+          <div className="intro-section">
+            <h1 className="heading">{heading}</h1>
+            <div className="subheading">{parsedSubheading}</div>
+          </div>
           {heroItems && heroItems.length > 0 ? heroCards : null}
         </div>
         {isVideo ? (

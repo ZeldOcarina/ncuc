@@ -490,7 +490,7 @@ export const query = graphql`
         table: { eq: "Flu Vaccine" }
         data: { Block: { eq: "FaqItem" }, isActive: { eq: true } }
       }
-      sort: { fields: data___rowNumber, order: ASC }
+      sort: { data: { rowNumber: ASC } }
     ) {
       faqItemsData: nodes {
         data {

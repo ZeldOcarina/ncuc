@@ -62,6 +62,7 @@ const CardLink = ({ children, ButtonLink }) => {
   if (!ButtonLink) return <div>{children}</div>
   if (ButtonLink.startsWith("http"))
     return (
+      // eslint-disable-next-line react/jsx-no-target-blank
       <a href={ButtonLink} rel="external" target="_blank">
         {children}
       </a>

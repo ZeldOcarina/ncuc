@@ -30,9 +30,10 @@ export default class MarkdownParser {
     replacePhoneNumbers() {
         // console.log("Replacing phone numbers");
         // console.log(this.shortcodes);
-
         const tel = this.shortcodes.find(item => item.shortcode === "{{ tel }}")?.data
         const phone = this.shortcodes.find(item => item.shortcode === "{{ phone }}")?.data
+
+        // console.log({ tel, phone });
 
         if (!tel || !phone) return "";
         this.parsedMarkdown = this.parsedMarkdown.replaceAll("{{ tel-component }}", `<a href="tel:${tel}">${phone}</a>`)
