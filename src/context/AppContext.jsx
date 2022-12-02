@@ -14,7 +14,7 @@ function ContextProvider(props) {
 
   const globalShortcodes = data.globalShortcodesData.globalShortcodesData
 
-  console.log({ globalShortcodes })
+  // console.log({ globalShortcodes })
 
   const businessPhoneData = {
     phone: data.phoneData.phoneData.Value,
