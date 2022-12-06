@@ -43,12 +43,26 @@ const StyledContactUs = styled.main`
     font-weight: 300;
     color: var(--body-color);
     text-align: center;
+    margin-bottom: 1rem;
   }
 
   .disclaimer {
     margin-top: var(--gutter);
     text-align: center;
     font-weight: 700;
+  }
+
+  .subheading {
+    text-align: center;
+    margin-bottom: var(--gutter);
+    color: var(--color-tertiary);
+    font-weight: 500;
+
+    a {
+      color: var(--color-tertiary);
+      font-weight: 500;
+      text-decoration: underline;
+    }
   }
 `
 
@@ -64,6 +78,10 @@ const ContactUs = ({
       <StyledContactUs>
         <div className="container">
           <h1>REQUEST A VISIT</h1>
+          <p className="subheading">
+            For immediate assistance call{" "}
+            <a href={`tel:${telData.Value}`}>{phoneData.Value}</a>
+          </p>
           <Form cta="Submit" />
           <p className="disclaimer">
             Appointment Requests are typically responded to within 24 business

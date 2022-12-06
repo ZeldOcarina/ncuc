@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import styled, { css } from "styled-components"
 import respond from "../styles/abstracts/mediaqueries"
-import useShortcodes from "../hooks/useShortcodes"
+// import useShortcodes from "../hooks/useShortcodes"
 
 const StyledHeroButtonsStripe = styled.div`
   background-color: #afdfe4;
@@ -18,10 +18,11 @@ const StyledHeroButtonsStripe = styled.div`
   gap: 2rem;
 
   ${respond(
-    500,
+    800,
     css`
       grid-template-columns: 1fr;
       gap: 1rem;
+      text-align: center;
     `
   )}
 
@@ -54,12 +55,12 @@ const StyledHeroButtonsStripe = styled.div`
 `
 
 const HeroButtonsStripe = ({ title, link, cta }) => {
-  const shortcodes = useShortcodes()
+  // const shortcodes = useShortcodes()
 
-  const phone = shortcodes.find(
-    ({ shortcode }) => shortcode === "{{ phone }}"
-  ).data
-  const tel = shortcodes.find(({ shortcode }) => shortcode === "{{ tel }}").data
+  // const phone = shortcodes.find(
+  //   ({ shortcode }) => shortcode === "{{ phone }}"
+  // ).data
+  // const tel = shortcodes.find(({ shortcode }) => shortcode === "{{ tel }}").data
 
   return (
     <StyledHeroButtonsStripe>
@@ -67,11 +68,11 @@ const HeroButtonsStripe = ({ title, link, cta }) => {
       <Link to={link} className="button button--primary">
         {cta}
       </Link>
-      <div className="call">
+      {/* <div className="call">
         <a className="button button--tertiary" href={`tel:${tel}`}>
           Call Now Immediately!
         </a>
-      </div>
+      </div> */}
     </StyledHeroButtonsStripe>
   )
 }

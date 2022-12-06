@@ -1,4 +1,3 @@
-import { Link } from "gatsby"
 import React from "react"
 import { useRef } from "react"
 import { useEffect } from "react"
@@ -59,15 +58,16 @@ const StyledHeroItem = styled.article`
 `
 
 const CardLink = ({ children, ButtonLink }) => {
-  if (!ButtonLink) return <div>{children}</div>
-  if (ButtonLink.startsWith("http"))
-    return (
-      // eslint-disable-next-line react/jsx-no-target-blank
-      <a href={ButtonLink} rel="external" target="_blank">
-        {children}
-      </a>
-    )
-  return <Link to={ButtonLink}>{children}</Link>
+  return <div>{children}</div>
+  // if (!ButtonLink) return <div>{children}</div>
+  // if (ButtonLink.startsWith("http"))
+  //   return (
+  //     // eslint-disable-next-line react/jsx-no-target-blank
+  //     <a href={ButtonLink} rel="external" target="_blank">
+  //       {children}
+  //     </a>
+  //   )
+  // return <Link to={ButtonLink}>{children}</Link>
 }
 
 const HeroItem = ({
