@@ -312,18 +312,19 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
           <Link to={logoData.Permalink}>
             {<img src={logoUrl} alt="NCUC Logo" className="logo" />}
           </Link>
-          <Link
-            className="nav-button nav-button--green"
-            to="/newport-beach-ca/minor-illnesses/flu-vaccine/"
-          >
-            GET A FLU VACCINE
-          </Link>
           <a
             href="https://occctesting.com/"
             className="nav-button nav-button--tertiary"
           >
             BOOK COVID TEST
           </a>
+          <Link
+            className="nav-button nav-button--green"
+            to="/newport-beach-ca/minor-illnesses/flu-vaccine/"
+          >
+            GET A FLU VACCINE
+          </Link>
+
           <Link to="/contact-us" className="nav-button nav-button--secondary">
             REQUEST A VISIT
           </Link>

@@ -79,7 +79,7 @@ const ContactUs = ({
         <div className="container">
           <h1>REQUEST A VISIT</h1>
           <p className="subheading">
-            For immediate assistance call{" "}
+            For faster assistance call{" "}
             <a href={`tel:${telData.Value}`}>{phoneData.Value}</a>
           </p>
           <Form cta="Submit" />
