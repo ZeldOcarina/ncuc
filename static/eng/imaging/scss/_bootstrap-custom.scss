@@ -1,0 +1,31 @@
+// custom variables and override bootstrap variables
+
+$body-bg: #fff;
+
+
+$black:				#000;
+$white:				#fff;
+$color1:			#1c1c1c;
+$color2:			#292929;
+$color3:			#999;
+$color4:			#777;
+$color5:			#333;
+$color6:			#eee;
+$color7:			#ccc;
+$color8:			#f8f8f8;
+$color9:			#212121;
+$color10:			#fafafa;
+
+
+
+//== Scaffolding
+$text-color:	$color3;
+$link-color:	#698cf0;
+$link-hover-decoration: none;
+$link-hover-color:	darken(#698cf0, 15%);
+
+//== Typography
+$font-family-sans-serif:	"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-ubuntu:	"Ubuntu", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-size-base:	14px;
+$line-height-base:	1.714;

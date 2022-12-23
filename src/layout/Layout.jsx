@@ -13,6 +13,7 @@ import GallerySection from "./GallerySection"
 import Map from "../components/Map"
 import FooterLogoStripe from "../components/FooterLogoStripe"
 import MonarchyStripe from "../components/MonarchyStripe"
+import ChristmasModal from "../components/ChristmasModal"
 // import AdvertisingBanner from "../components/AdvertisingBanner"
 
 function organizeMenu(categoriesData) {
@@ -109,6 +110,7 @@ const Layout = ({ children, innerLayout }) => {
         city={cityData.Value}
       />
       <MonarchyStripe />
+      <ChristmasModal />
       <MobileNavbar menuData={menuData} />
 
       <AlertMessage

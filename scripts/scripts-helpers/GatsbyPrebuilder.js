@@ -18,6 +18,27 @@ class GatsbyPrebuilder {
         this.siteUrl;
     }
 
+    static copyFolderSync(src, dest) {
+        // Check if the source is a directory
+        const srcStats = fs.statSync(src);
+        if (srcStats.isDirectory()) {
+            // Create the destination directory if it doesn't exist
+            if (!fs.existsSync(dest)) {
+                fs.mkdirSync(dest);
+            }
+
+            // Recursively copy the contents of the source directory
+            for (let file of fs.readdirSync(src)) {
+                const fileSrc = path.join(src, file);
+                const fileDest = path.join(dest, file);
+                this.copyFolderSync(fileSrc, fileDest);
+            }
+        } else {
+            // If the source is not a directory, just copy the file
+            fs.copyFileSync(src, dest);
+        }
+    }
+
     static async askQuestion(question) {
         const answer = await new Promise((resolve) => {
             const rl = readline.createInterface({
@@ -51,8 +72,11 @@ class GatsbyPrebuilder {
                     await fsPromises.rm(staticFolderPath, { recursive: true });
                     await fsPromises.mkdir(staticFolderPath);
                 } else await fsPromises.mkdir(staticFolderPath);
+
                 promises.push(this.donwloadAndMoveFavicons());
                 promises.push(this.fetchAirTableStaticFiles());
+
+                this.moveLandings(staticFolderPath);
                 // Check if we are in a ci environment
                 promises.push(this.changeEnvData());
                 if (!process.env.CI) {
@@ -94,6 +118,28 @@ class GatsbyPrebuilder {
         } catch (err) {
             console.error(err);
             // Exit process with status 1
+            process.exit(1);
+        }
+    }
+
+    async moveLandings(staticFolderPath) {
+        try {
+            // Copy all folders from the src/landing-pages folder to the static folder
+            const landingPagesFolderPath = path.join(process.cwd(), "src", "landing-pages");
+            const landingPagesFolderContent = await fsPromises.readdir(landingPagesFolderPath);
+
+            for (let folder of landingPagesFolderContent) {
+                const folderPath = path.join(landingPagesFolderPath, folder);
+                const folderStats = await fsPromises.stat(folderPath);
+                if (folderStats.isDirectory()) {
+                    this.constructor.copyFolderSync(folderPath, path.join(staticFolderPath, folder));
+                    console.log(chalk.green("success") + " Successfully copied folder " + folder + " to static folder");
+                }
+            }
+
+        } catch (err) {
+            console.error(err);
+            console.error(chalk.red("error ") + err);
             process.exit(1);
         }
     }
