@@ -178,16 +178,6 @@ const ChristmasModal = () => {
           <div className="schedule">
             <div>
               <p>
-                12/24 Christmas Eve
-                <br />
-                <span className="big">8am to 4pm</span>
-              </p>
-              <p>
-                12/25 Christmas Day
-                <br />
-                <span className="big">8am to 1pm</span>
-              </p>
-              <p>
                 12/31 New Year’s Eve
                 <br />
                 <span className="big">8am to 6pm</span>
