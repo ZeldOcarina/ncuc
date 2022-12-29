@@ -74,7 +74,6 @@ const ContactUs = ({
 }) => {
   return (
     <Layout>
-      <Seo title="Newport Urgent Care | Contact Us" />
       <StyledContactUs>
         <div className="container">
           <h1>REQUEST A VISIT</h1>
@@ -99,6 +98,8 @@ const ContactUs = ({
     </Layout>
   )
 }
+
+export const Head = () => <Seo title="Newport Urgent Care | Contact Us" />
 
 export const query = graphql`
   query ContactUs {

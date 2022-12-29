@@ -71,7 +71,6 @@ const config = {
         ],
       },
     },
-    `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     `gatsby-plugin-styled-components`,
     {

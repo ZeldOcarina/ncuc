@@ -15,6 +15,7 @@ import Faqs from "../../../components/Faqs"
 import CardsSection from "../../../components/CardsSection"
 import Form from "../../../components/vaccine-form/Form"
 import respond from "../../../styles/abstracts/mediaqueries"
+import { parseShortcodes } from "../../../helpers/parseShortcodes"
 
 const StyledFluVaccine = styled.main`
   #cta {
@@ -272,8 +273,6 @@ const StyledFluVaccine = styled.main`
 
 const FluVaccine = ({
   data: {
-    pageTitleData: { pageTitleData },
-    keywordsData: { keywordsData },
     heroData: { heroData },
     textData: { textData },
     pingPongTitle: { pingPongTitle },
@@ -302,10 +301,6 @@ const FluVaccine = ({
 
   return (
     <Layout>
-      <Seo
-        title={`NCUC | ${pageTitleData.Page_Title}`}
-        keywords={`${keywordsData.Main_Keyword} ${keywordsData.Relative_Keywords}`}
-      />
       <StyledFluVaccine>
         <header className="hero">
           <div className="hero__content">
@@ -373,6 +368,28 @@ const FluVaccine = ({
         />
       </StyledFluVaccine>
     </Layout>
+  )
+}
+
+export const Head = ({
+  data: {
+    pageTitleData: { pageTitleData },
+    keywordsData: { keywordsData },
+    pageShortcodesData,
+    globalShortcodesData: { globalShortcodesData },
+  },
+}) => {
+  const shortcodes = parseShortcodes(
+    pageShortcodesData?.pageShortcodesData,
+    globalShortcodesData
+  )
+
+  return (
+    <Seo
+      title={`NCUC | ${pageTitleData.Page_Title}`}
+      keywords={`${keywordsData.Main_Keyword} ${keywordsData.Relative_Keywords}`}
+      shortcodes={shortcodes}
+    />
   )
 }
 
@@ -534,6 +551,36 @@ export const query = graphql`
           }
         }
         id
+      }
+    }
+    pageShortcodesData: allAirtable(
+      filter: {
+        table: { eq: "Shortcodes" }
+        data: { Shortcodes: { ne: null }, Category: { eq: "Flu Vaccine" } }
+      }
+    ) {
+      pageShortcodesData: nodes {
+        data {
+          Label
+          Shortcodes
+          Value
+          Category
+        }
+      }
+    }
+    globalShortcodesData: allAirtable(
+      filter: {
+        table: { eq: "Config" }
+        data: { Shortcodes: { ne: null }, Name: { eq: "Details" } }
+      }
+    ) {
+      globalShortcodesData: nodes {
+        data {
+          Label
+          Shortcodes
+          Value
+          Category
+        }
       }
     }
   }

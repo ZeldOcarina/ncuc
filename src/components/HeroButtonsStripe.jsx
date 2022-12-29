@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import styled, { css } from "styled-components"
 import respond from "../styles/abstracts/mediaqueries"
+import useParams from "../hooks/useParams"
 // import useShortcodes from "../hooks/useShortcodes"
 
 const StyledHeroButtonsStripe = styled.div`
@@ -55,6 +56,7 @@ const StyledHeroButtonsStripe = styled.div`
 `
 
 const HeroButtonsStripe = ({ title, link, cta }) => {
+  const params = useParams()
   // const shortcodes = useShortcodes()
 
   // const phone = shortcodes.find(
@@ -65,7 +67,7 @@ const HeroButtonsStripe = ({ title, link, cta }) => {
   return (
     <StyledHeroButtonsStripe>
       {title}
-      <Link to={link} className="button button--primary">
+      <Link to={link + params} className="button button--primary">
         {cta}
       </Link>
       {/* <div className="call">

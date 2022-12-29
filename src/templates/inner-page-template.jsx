@@ -31,7 +31,6 @@ const InnerPageTemplate = ({
   location,
   pageContext,
   data: {
-    pageMetadata: { pageMetadata },
     pingPongTitleData,
     pingPongItemsData,
     pingPong2TitleData,
@@ -60,8 +59,6 @@ const InnerPageTemplate = ({
     testimonialsData,
     listTitleData,
     listItemsData,
-    pageShortcodesData: { pageShortcodesData },
-    businessNameData: { businessNameData },
   },
 }) => {
   const pageComponents = []
@@ -447,21 +444,34 @@ const InnerPageTemplate = ({
 
   return (
     <ShortcodesContext.Provider
-      value={{ pageShortcodes: pageShortcodesData || null }}
+      value={{ pageShortcodes: pageContext.pageShortcodesData || null }}
     >
       <Layout>
-        <Seo
-          title={`${businessNameData.Value} | ${pageMetadata.SEOTitle}`}
-          description={pageMetadata.Description}
-          mainKeyword={pageMetadata.Main_Keyword}
-          relativeKeywords={pageMetadata.Relative_Keywords}
-          pathname={location.pathname}
-        />
         <StyledInnerPageTemplate>
           {sortedPageComponents.map(({ component }) => component)}
         </StyledInnerPageTemplate>
       </Layout>
     </ShortcodesContext.Provider>
+  )
+}
+
+export const Head = ({
+  data: {
+    pageMetadata: { pageMetadata },
+    businessNameData: { businessNameData },
+  },
+  location,
+  pageContext: { shortcodes },
+}) => {
+  return (
+    <Seo
+      title={`${businessNameData.Value} | ${pageMetadata.SEOTitle}`}
+      description={pageMetadata.Description}
+      mainKeyword={pageMetadata.Main_Keyword}
+      relativeKeywords={pageMetadata.Relative_Keywords}
+      pathname={location.pathname}
+      shortcodes={shortcodes}
+    />
   )
 }
 
@@ -946,21 +956,6 @@ export const query = graphql`
     ) {
       businessNameData: data {
         Value
-      }
-    }
-    pageShortcodesData: allAirtable(
-      filter: {
-        table: { eq: "Shortcodes" }
-        data: { Shortcodes: { ne: null }, Category: { eq: $pageTitle } }
-      }
-    ) {
-      pageShortcodesData: nodes {
-        data {
-          Label
-          Shortcodes
-          Value
-          Category
-        }
       }
     }
     listTitleData: airtable(

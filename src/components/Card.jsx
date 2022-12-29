@@ -3,6 +3,8 @@ import React from "react"
 import styled, { css } from "styled-components"
 import respond from "../styles/abstracts/mediaqueries"
 
+import useParams from "../hooks/useParams"
+
 const StyledCard = styled.article`
   padding: 0;
   position: relative;
@@ -76,6 +78,7 @@ const StyledCard = styled.article`
 `
 
 const Card = ({ Copy, Heading, Media, ButtonLabel, ButtonLink, AltText }) => {
+  const params = useParams()
   return (
     <StyledCard link={ButtonLink}>
       <div className="top-section">
@@ -85,7 +88,7 @@ const Card = ({ Copy, Heading, Media, ButtonLabel, ButtonLink, AltText }) => {
         <h5>{Heading}</h5>
         <p>{Copy}</p>
         {ButtonLink && (
-          <Link className="link" to={ButtonLink}>
+          <Link className="link" to={ButtonLink + params}>
             {ButtonLabel}
           </Link>
         )}

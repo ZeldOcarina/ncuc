@@ -7,6 +7,7 @@ import respond from "../styles/abstracts/mediaqueries"
 import MenuCategoryItems from "./MenuCategoryItems"
 import { BiChevronDown } from "react-icons/bi"
 import { MdChevronRight } from "react-icons/md"
+import useParams from "../hooks/useParams"
 
 const StyledCategoryItem = styled.div`
   position: relative;
@@ -66,6 +67,8 @@ const CategoryItem = ({ category, categoryItems }) => {
     setSecondaryHoveredCategory,
   } = useContext(AppContext)
 
+  const params = useParams()
+
   function handleMouseEnter(category) {
     setHoveredCategory(category)
   }
@@ -110,7 +113,7 @@ const CategoryItem = ({ category, categoryItems }) => {
                         {item.children.map((child, i) => {
                           return (
                             <Link
-                              to={child.link}
+                              to={child.link + params}
                               key={i}
                               className="second-level__link"
                             >
@@ -122,7 +125,7 @@ const CategoryItem = ({ category, categoryItems }) => {
                     ) : null}
                   </li>
                 ) : (
-                  <Link role="link" to={item.link || "/"}>
+                  <Link role="link" to={item.link + params || "/" + params}>
                     {item.item || ""}
                   </Link>
                 )}

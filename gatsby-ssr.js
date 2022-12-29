@@ -5,20 +5,29 @@
  */
 
 // gatsby-ssr.js
-const React = require("react")
-require("./src/scss/index.scss")
-const GlobalStyles = require("./src/styles/global-styles").default
-const { ContextProvider } = require("./src/context/AppContext")
+import React from "react"
+import "./src/scss/index.scss"
+import GlobalStyles from "./src/styles/global-styles"
+import { ContextProvider } from "./src/context/AppContext"
+import { LocationContext } from "./src/context/LocationContext"
+import { parseParams } from "./src/utils/utils"
 
-exports.wrapRootElement = ({ element }) => {
+export const wrapRootElement = ({ element }) => {
   return <ContextProvider>{element}</ContextProvider>
 }
 
-exports.wrapPageElement = ({ element }) => {
+export const wrapPageElement = ({ element }) => {
+  const params = parseParams(element.props.location.search)
   return (
     <>
-      <GlobalStyles />
-      {element}
+      <LocationContext.Provider value={{ params }}>
+        <GlobalStyles />
+        {element}
+      </LocationContext.Provider>
     </>
   )
+}
+
+export const onRenderBody = ({ setHtmlAttributes }) => {
+  setHtmlAttributes({ lang: "en" })
 }

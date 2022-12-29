@@ -1,5 +1,4 @@
 const path = require("path");
-const slugify = require("slugify");
 const { fetchGatsbyNodeDynamicConfigData, buildLink } = require("./src/helpers/nodeHelpers");
 
 exports.onCreateWebpackConfig = ({ stage, actions }) => {
@@ -41,6 +40,9 @@ exports.onPreInit = async ({ actions, store, reporter }) => {
 };
 
 exports.createPages = async function ({ actions, graphql, reporter }) {
+    // const shortcodes = pageShortcodesData: { pageShortcodesData },
+
+
     const { data } = await graphql(`
       query {
         dynamicPagesData: allAirtable(
@@ -54,6 +56,7 @@ exports.createPages = async function ({ actions, graphql, reporter }) {
             }
           }
         }
+        
       }
     `)
 
@@ -67,11 +70,51 @@ exports.createPages = async function ({ actions, graphql, reporter }) {
         reporter
     });
 
-    data.dynamicPagesData.dynamicPagesData.forEach(node => {
+    for (const node of data.dynamicPagesData.dynamicPagesData) {
         if (!node.data.Permalink || !node.data.Page_Title) {
             reporter.warn("Page not created because Permalink or Page_Title is not available. Please check your base.");
             return;
         }
+
+        const pageShortcodes = await graphql(`
+            query pageShortcodes {
+                pageShortcodesData: allAirtable(
+                    filter: {
+                      table: { eq: "Shortcodes" }
+                      data: { Shortcodes: { ne: null }, Category: { eq: "${node.data.Page_Title}" } }
+                    }
+                  ) {
+                    pageShortcodesData: nodes {
+                      data {
+                        Label
+                        Shortcodes
+                        Value
+                        Category
+                      }
+                    }
+                  }
+                  globalShortcodesData: allAirtable(
+                    filter: {
+                      table: { eq: "Config" }
+                      data: { Shortcodes: { ne: null }, Name: { eq: "Details" } }
+                    }
+                  ) {
+                    globalShortcodesData: nodes {
+                      data {
+                        Label
+                        Shortcodes
+                        Value
+                        Category
+                      }
+                    }
+                  }
+            }
+        `)
+
+        const { parseShortcodes } = await import(path.join(__dirname, "./src/helpers/parseShortcodes.cjs"));
+
+        const parsedShortcodes = parseShortcodes(pageShortcodes.data.pageShortcodesData.pageShortcodesData, pageShortcodes.data.globalShortcodesData.globalShortcodesData)
+
         actions.createPage({
             path: buildLink(node.data.Permalink, cityState),
             component: path.resolve(`./src/templates/inner-page-template.jsx`),
@@ -79,8 +122,9 @@ exports.createPages = async function ({ actions, graphql, reporter }) {
                 pageTitle: node.data.Page_Title,
                 permalink: node.data.Permalink,
                 offer: node.data.offerHeading,
-                form: node.data.Form
+                form: node.data.Form,
+                shortcodes: parsedShortcodes,
             },
         })
-    })
+    }
 }

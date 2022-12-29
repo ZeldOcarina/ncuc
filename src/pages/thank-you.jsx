@@ -87,7 +87,6 @@ const ThankYou = ({
 
   return (
     <Layout>
-      <Seo title={`NCUC | Thank You`} />
       <StyledThankYou>
         <div className="thank-you-container">
           <div className="container">
@@ -133,6 +132,8 @@ const ThankYou = ({
     </Layout>
   )
 }
+
+export const Head = () => <Seo title={`NCUC | Thank You`} />
 
 export const query = graphql`
   query ThankYou {

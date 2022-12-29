@@ -6,6 +6,8 @@ import respond from "../styles/abstracts/mediaqueries"
 
 import AppContext from "../context/AppContext"
 
+import useParams from "../hooks/useParams"
+
 const StyledMobileNavbar = styled.div`
   width: 103vw;
   position: fixed;
@@ -166,6 +168,8 @@ const StyledMobileNavbar = styled.div`
 const MobileNavbar = ({ menuData: { categories, menuData } }) => {
   const { isMobileMenuOpen, setIsMobileMenuOpen } = useContext(AppContext)
 
+  const params = useParams()
+
   return (
     <StyledMobileNavbar open={isMobileMenuOpen}>
       <nav className="mobile-navbar">
@@ -174,7 +178,7 @@ const MobileNavbar = ({ menuData: { categories, menuData } }) => {
             <div className="buttons-container">
               <Link
                 className="nav-button nav-button--green"
-                to="/newport-beach-ca/minor-illnesses/flu-vaccine/"
+                to={"/newport-beach-ca/minor-illnesses/flu-vaccine/" + params}
               >
                 GET A FLU VACCINE
               </Link>
@@ -185,7 +189,7 @@ const MobileNavbar = ({ menuData: { categories, menuData } }) => {
                 BOOK COVID TEST
               </a>
               <Link
-                to="/contact-us"
+                to={"/contact-us" + params}
                 className="nav-button nav-button--secondary"
               >
                 REQUEST A VISIT
@@ -212,7 +216,7 @@ const MobileNavbar = ({ menuData: { categories, menuData } }) => {
                       <li className="categories-subitems__item" key={i}>
                         <Link
                           className="categories-subitems__link"
-                          to={item.data.Permalink}
+                          to={item.data.Permalink + params}
                           onClick={() => {
                             setIsMobileMenuOpen(false)
                           }}

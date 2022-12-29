@@ -33,15 +33,10 @@ const Styledlocations = styled.main`
 const Locations = ({
   data: {
     locationsData: { locationsData },
-    keywordsData: { keywordsData },
   },
 }) => {
   return (
     <Layout>
-      <Seo
-        title="NCUC | COVID Testing Locations"
-        keywords={`${keywordsData.Main_Keyword} ${keywordsData.Relative_Keywords}`}
-      />
       <Styledlocations>
         <div className="container">
           <IntroSection
@@ -85,6 +80,17 @@ const Locations = ({
     </Layout>
   )
 }
+
+export const Head = ({
+  data: {
+    keywordsData: { keywordsData },
+  },
+}) => (
+  <Seo
+    title="NCUC | COVID Testing Locations"
+    keywords={`${keywordsData.Main_Keyword} ${keywordsData.Relative_Keywords}`}
+  />
+)
 
 export const query = graphql`
   query Locations {

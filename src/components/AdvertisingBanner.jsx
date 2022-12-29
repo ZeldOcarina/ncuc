@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
+import useParams from "../hooks/useParams"
 
 const StyledAdvertisingBanner = styled.div`
   background-color: var(--color-tertiary);
@@ -33,6 +34,7 @@ const StyledAdvertisingBanner = styled.div`
 `
 
 const AdvertisingBanner = () => {
+  const params = useParams()
   return (
     <StyledAdvertisingBanner>
       <div className="content-container">
@@ -40,7 +42,7 @@ const AdvertisingBanner = () => {
           Flu vaccines are now available at all of our locations.
         </h5>
         <Link
-          to="/newport-beach-ca/minor-illnesses/flu-vaccine"
+          to={"/newport-beach-ca/minor-illnesses/flu-vaccine" + params}
           className="btn"
         >
           Schedule Today!

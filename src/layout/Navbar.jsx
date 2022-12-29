@@ -8,6 +8,8 @@ import { v4 as uuidv4 } from "uuid"
 import AppContext from "../context/AppContext"
 
 import CategoryItem from "../components/CategoryItem"
+import { LocationContext } from "../context/LocationContext"
+import useParams from "../hooks/useParams"
 
 const Wrapper = styled.nav`
   position: static;
@@ -299,7 +301,7 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
     }
   })
 
-  // console.log(menuData)
+  const params = useParams()
 
   return (
     <Wrapper
@@ -309,23 +311,26 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
     >
       <div className={"navbar-container"}>
         <div className="left-part">
-          <Link to={logoData.Permalink}>
+          <Link to={logoData.Permalink + params}>
             {<img src={logoUrl} alt="NCUC Logo" className="logo" />}
           </Link>
           <a
-            href="https://occctesting.com/"
+            href={"https://occctesting.com/" + params}
             className="nav-button nav-button--tertiary"
           >
             BOOK COVID TEST
           </a>
           <Link
             className="nav-button nav-button--green"
-            to="/newport-beach-ca/minor-illnesses/flu-vaccine/"
+            to={"/newport-beach-ca/minor-illnesses/flu-vaccine/" + params}
           >
             GET A FLU VACCINE
           </Link>
 
-          <Link to="/contact-us" className="nav-button nav-button--secondary">
+          <Link
+            to={"/contact-us" + params}
+            className="nav-button nav-button--secondary"
+          >
             REQUEST A VISIT
           </Link>
         </div>
@@ -353,7 +358,7 @@ const Navbar = ({ innerPage, innerLayout, menuData }) => {
               )
             if (value.length === 1) {
               return (
-                <Link to={value[0].link} key={uuidv4()}>
+                <Link to={value[0].link + params} key={uuidv4()}>
                   <p className="nav-link">{value[0].item}</p>
                 </Link>
               )

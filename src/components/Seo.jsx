@@ -1,6 +1,5 @@
 import { useStaticQuery, graphql } from "gatsby"
 import React from "react"
-import { Helmet } from "react-helmet"
 
 import useShortcodes from "../hooks/useShortcodes"
 import ShortcodesParser from "../helpers/ShortcodesParser"
@@ -8,10 +7,10 @@ import ShortcodesParser from "../helpers/ShortcodesParser"
 const Seo = ({
   title,
   description,
-  language,
   mainKeyword,
   relativeKeywords,
   pathname,
+  shortcodes,
 }) => {
   const {
     ogImageData: { ogImageData },
@@ -40,8 +39,6 @@ const Seo = ({
     subheadingFontWeightData: { subheadingFontWeightData },
   } = useStaticQuery(query)
 
-  const shortcodes = useShortcodes()
-
   const parsedMainKeyword = new ShortcodesParser(
     mainKeyword,
     shortcodes
@@ -54,10 +51,14 @@ const Seo = ({
 
   // console.log({ shortcodes, parsedMainKeyword, parsedRelativeKeywords })
   return (
-    <Helmet htmlAttributes={{ lang: language || "en" }}>
+    <>
       <title>{title}</title>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossOrigin="true"
+      />
 
       <style type="text/css">{`
         :root {
@@ -132,7 +133,7 @@ const Seo = ({
       <meta name="msapplication-TileColor" content={colorSecondaryData.Value} />
       <meta name="theme-color" content={whiteData.Value} />
       {/* END FAVICONS */}
-    </Helmet>
+    </>
   )
 }
 

@@ -9,6 +9,8 @@ import { Colors } from "../styles/abstracts/abstracts"
 import { useContext } from "react"
 import AppContext from "../context/AppContext"
 
+import useParams from "../hooks/useParams"
+
 const StyledFooter = styled.footer`
   background-color: ${Colors.colorPrimary700};
   padding: var(--section-gutter) 0;
@@ -110,6 +112,8 @@ const Footer = ({
     item => item.data.Label === "Weekends"
   ).data.Value
 
+  const params = useParams()
+
   return (
     <StyledFooter>
       <div className="container">
@@ -117,7 +121,7 @@ const Footer = ({
           <h5>QUICK LINKS</h5>
           {quickLinks.map((quickLink, i) => {
             return (
-              <Link key={i} to={quickLink.data.Permalink}>
+              <Link key={i} to={quickLink.data.Permalink + params}>
                 {quickLink.data.Page_Title}
               </Link>
             )
@@ -135,9 +139,9 @@ const Footer = ({
           </p>
           <p>&copy; {new Date().getFullYear()} NCUC. All Rights Reserved.</p>
           <p className="copyright">
-            <Link to="/privacy-policy">Privacy Policy</Link>{" "}
+            <Link to={"/privacy-policy" + params}>Privacy Policy</Link>{" "}
             {isiPhone12 ? "" : " | "}
-            <Link to="/terms-of-use">Terms of Use</Link>
+            <Link to={"/terms-of-use" + params}>Terms of Use</Link>
           </p>
         </div>
       </div>

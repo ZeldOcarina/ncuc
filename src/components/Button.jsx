@@ -6,6 +6,7 @@ import respond from "../styles/abstracts/mediaqueries"
 
 import { Colors } from "../styles/abstracts/abstracts"
 import { shadeColor } from "../helpers/helpers"
+import useParams from "../hooks/useParams"
 
 const buttonCss = css`
   display: block;
@@ -134,6 +135,7 @@ const Button = ({
   mobileNavButton,
   className,
 }) => {
+  const params = useParams()
   return (
     <StyledButton
       as={setAs(type)}
@@ -146,7 +148,7 @@ const Button = ({
     >
       {type === "internal" ? (
         <Link
-          to={url}
+          to={url + params}
           className={className ? `button ${className}` : "button"}
           href={url}
           style={{
