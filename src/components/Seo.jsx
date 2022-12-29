@@ -37,6 +37,7 @@ const Seo = ({
     superheadingFontWeightData: { superheadingFontWeightData },
     headingFontWeightData: { headingFontWeightData },
     subheadingFontWeightData: { subheadingFontWeightData },
+    webUrlData: { webUrlData },
   } = useStaticQuery(query)
 
   const parsedMainKeyword = new ShortcodesParser(
@@ -99,12 +100,9 @@ const Seo = ({
       <meta property="og:description" content={description} />
       <meta
         property="og:image"
-        content={`${process.env.GATSBY_SITE_URL}${ogImageData?.File?.localFiles[0].publicURL}`}
+        content={`${webUrlData.Value}${ogImageData?.File?.localFiles[0].publicURL}`}
       />
-      <meta
-        property="og:url"
-        content={`${process.env.GATSBY_SITE_URL}${pathname}`}
-      />
+      <meta property="og:url" content={`${webUrlData.Value}${pathname}`} />
 
       {/* FAVICONS */}
       <link
@@ -332,6 +330,14 @@ const query = graphql`
       data: { Label: { eq: "subheadingFontWeight" } }
     ) {
       subheadingFontWeightData: data {
+        Value
+      }
+    }
+    webUrlData: airtable(
+      table: { eq: "Config" }
+      data: { Label: { eq: "Web URL" } }
+    ) {
+      webUrlData: data {
         Value
       }
     }
