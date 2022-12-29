@@ -100,7 +100,7 @@ const Seo = ({
       <meta property="og:description" content={description} />
       <meta
         property="og:image"
-        content={`${webUrlData.Value}${ogImageData?.File?.localFiles[0].publicURL}`}
+        content={ogImageData?.File?.localFiles[0].publicURL}
       />
       <meta property="og:url" content={`${webUrlData.Value}${pathname}`} />
 
