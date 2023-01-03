@@ -8,7 +8,6 @@ import { v4 as uuidv4 } from "uuid"
 import AppContext from "../context/AppContext"
 
 import CategoryItem from "../components/CategoryItem"
-import { LocationContext } from "../context/LocationContext"
 import useParams from "../hooks/useParams"
 
 const Wrapper = styled.nav`

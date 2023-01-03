@@ -4,7 +4,7 @@ import respond from "../styles/abstracts/mediaqueries"
 import AppContext from "../context/AppContext"
 
 const StyledLocationBanner = styled.div`
-  background-color: var(--color-tertiary);
+  background-color: var(--color-secondary);
   color: var(--white);
   padding: 0.5rem 0;
   font-size: 1.6rem;

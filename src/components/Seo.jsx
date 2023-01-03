@@ -1,7 +1,6 @@
 import { useStaticQuery, graphql } from "gatsby"
 import React from "react"
 
-import useShortcodes from "../hooks/useShortcodes"
 import ShortcodesParser from "../helpers/ShortcodesParser"
 
 const Seo = ({
