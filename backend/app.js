@@ -39,7 +39,6 @@ app.post("/api/submit-form", async (req, res) => {
         promises.push(sendEmail({
             to: isFluVaccine ? "vaccineclinics@orangecountycovidclinic.com" : "frontdesk@newportbeachuc.com",
             //to: isFluVaccine ? "mattia@adyproduction.com" : "frontdesk@newportbeachuc.com",
-            cc: "mattia@monarchy.io",
             subject: isFluVaccine ? "We have a new flu vaccine inquiry!" : "We have a new contact request from the website!",
             text: isFluVaccine ? `Flu vaccine request incoming.\n\n${JSON.stringify(req.body)}` : `Contact request incoming.\n\n${JSON.stringify(req.body)}`,
             html: leadHtml(lead, isFluVaccine)
@@ -51,6 +50,12 @@ app.post("/api/submit-form", async (req, res) => {
 
         res.status(201).send("Lead Successfully Created");
     } catch (err) {
+        await sendEmail({
+            to: "mattia@monarchy.io",
+            //to: isFluVaccine ? "mattia@adyproduction.com" : "frontdesk@newportbeachuc.com",
+            subject: "A service for NCUC is down!",
+            text: JSON.stringify(err)
+        })
         console.error(err);
         res.status(400).send(err.message);
     }
