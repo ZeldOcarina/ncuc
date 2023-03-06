@@ -73,7 +73,7 @@ export default class FormHandler {
 
         if (salesJetOnly) webhookData.salesJetOnly = true;
 
-        const webhookEndpoint = process.env.NODE_ENV === "production" ? `${window.location.origin}/api/submit-form` : "http://localhost:3001/api/submit-form";
+        const webhookEndpoint = "/api/submit-form";
         const response = await axios.post(webhookEndpoint, webhookData);
 
         if (response.status === 201) return true;

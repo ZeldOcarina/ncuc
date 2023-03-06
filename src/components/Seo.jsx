@@ -47,7 +47,10 @@ const Seo = ({
     relativeKeywords,
     shortcodes
   ).parseShortcodes()
-  const parsedDescription = new ShortcodesParser(description, shortcodes)
+  const parsedDescription = new ShortcodesParser(
+    description,
+    shortcodes
+  ).parseShortcodes()
 
   // console.log({ shortcodes, parsedMainKeyword, parsedRelativeKeywords })
   return (
