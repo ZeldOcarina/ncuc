@@ -37,20 +37,20 @@ export default async function submitForm(req, res) {
 
         promises.push(salesJetConnector.connectLeadWithSalesJet());
 
-        // await Promise.all(promises);
+        const responses = await Promise.all(promises);
+
+        console.log(responses)
 
         res.status(201).send("Lead Successfully Created");
     } catch (err) {
-        console.log(err);
-        res.status(400).send(err.message);
-        return;
+        console.error(err);
         await sendEmail({
             to: "mattia@monarchy.io",
             //to: isFluVaccine ? "mattia@adyproduction.com" : "frontdesk@newportbeachuc.com",
             subject: "A service for NCUC is down!",
             text: JSON.stringify(err)
         })
-        console.error(err);
+
         res.status(400).send(err.message);
     }
 }
