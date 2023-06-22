@@ -1,0 +1,26 @@
+{
+  "name": "ncuc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gatsby-config.js",
+  "scripts": {
+    "develop": "gatsby develop",
+    "build": "NODE_ENV=production node scripts/gatsby-prebuild.js && gatsby build",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "start": "NODE_ENV=development node scripts/gatsby-prebuild.js && gatsby develop",
+    "prebuild": "NODE_ENV=production node scripts/gatsby-prebuild.js",
+    "deploy-env": "NODE_ENV=production node scripts/deploy-env.js",
+    "deploy": "NODE_ENV=production node scripts/deploy-site.js",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "author": "Mattia Rasulo <mattia@monarchy.io>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@zeldocarina/gatsby-helpers": "*",
+    "@zeldocarina/gatsby-theme-waves": "*",
+    "gatsby": "^5.11.0",
+    "mongoose": "^7.0.3",
+    "sharp": "^0.32.1"
+  }
+}

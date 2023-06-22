@@ -1,0 +1,7 @@
+setup:
+  - project: waves
+    config: waves_ncuc
+    path: ncuc/
+  - project: waves
+    config: waves_modern-health-u
+    path: modern-health-u/
